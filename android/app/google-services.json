@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "662199185227",
+    "project_id": "pickup-sampah-sukolilo",
+    "storage_bucket": "pickup-sampah-sukolilo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662199185227:android:6d27766e23120dd9eac2ce",
+        "android_client_info": {
+          "package_name": "com.example.aplikasi_sampah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662199185227-pudk45ecsal2252h6tjglbq6jkhqlmj5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ZeY5bH6FlMShbR8bS8xYen1T3DgF5lc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662199185227-pudk45ecsal2252h6tjglbq6jkhqlmj5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

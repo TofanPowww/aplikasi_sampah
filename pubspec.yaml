@@ -1,0 +1,56 @@
+name: aplikasi_sampah
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: ">=2.18.2 <3.0.0"
+
+dependencies:
+  cloud_firestore: ^4.6.0
+  cupertino_icons: ^1.0.2
+  firebase_auth: ^4.5.0
+  firebase_core: ^2.11.0
+  firebase_messaging: ^14.5.0
+  firebase_storage: ^11.1.2
+  flutter:
+    sdk: flutter
+  flutter_barcode_scanner: ^2.0.0
+  flutter_image_compress: ^2.0.2
+  flutter_local_notifications: ^13.0.0
+  get: ^4.6.5
+  http: ^0.13.5
+  image_cropper: ^3.0.3
+  image_picker: ^0.8.7+4
+  intl: ^0.17.0
+  lottie: ^2.3.2
+  notification_permissions: ^0.6.1
+  open_file: ^3.2.1
+  path_provider: ^2.0.11
+  pdf: ^3.7.4
+  printing: ^5.10.4
+  provider: ^6.0.5
+  qr_flutter: ^4.1.0
+
+dev_dependencies:
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/images/
+    - assets/lottie/
+  fonts:
+    - family: Satoshi
+      fonts:
+        - asset: assets/fonts/Satoshi-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Satoshi-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Satoshi-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Satoshi-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Satoshi-Light.ttf
+          weight: 300
+  uses-material-design: true

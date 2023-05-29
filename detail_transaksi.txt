@@ -1,0 +1,117 @@
+tukar['status'] == 'Proses'
+                ? SizedBox(
+                    width: double.infinity,
+                    height: 56,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Get.defaultDialog(
+                              backgroundColor: appBackgroundPrimary,
+                              barrierDismissible: false,
+                              title: "Konfirmasi",
+                              content: const Text(
+                                "Konfirmasi Penukaran?",
+                                style: TextStyle(
+                                    color: appPrimary, fontFamily: "Satoshi"),
+                              ),
+                              titleStyle: const TextStyle(
+                                  color: appPrimary, fontFamily: "Satoshi"),
+                              titlePadding:
+                                  const EdgeInsets.only(top: 16, bottom: 8),
+                              contentPadding: const EdgeInsets.only(
+                                  bottom: 16, left: 16, right: 16),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    child: const Text(
+                                      "Batal",
+                                      style: TextStyle(color: appAccent),
+                                    )),
+                                ElevatedButton(
+                                    style: const ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStatePropertyAll(appAccent),
+                                    ),
+                                    onPressed: () {
+                                      FlutterBarcodeScanner.scanBarcode(
+                                              "#000000",
+                                              "Batal",
+                                              true,
+                                              ScanMode.QR)
+                                          .then((value) {
+                                        control.getTransaksiPoinById(value);
+                                      });
+                                    },
+                                    child: const Text("Iya",
+                                        style: TextStyle(
+                                            color: appBackgroundPrimary)))
+                              ]);
+                        },
+                        style: ButtonStyle(
+                            elevation: const MaterialStatePropertyAll(5),
+                            backgroundColor:
+                                const MaterialStatePropertyAll(appPrimary),
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)))),
+                        child: const Text("Scan QR", style: appFontButton)),
+                  )
+                : const SizedBox(),
+            const SizedBox(height: 8),
+
+
+
+
+//Controller
+
+void meyimpanData(String id) async {
+    CollectionReference tPoinDb = db.collection('transaksiTukar');
+    CollectionReference usersDb = db.collection('users');
+    try {
+      var hasil = await db.collection("transaksiTukar").doc(id).get();
+      //Mengupdate Status Transaksi Pada Collection Transaksi Sampah
+      await tPoinDb.doc(id).update({"status": "Selesai"});
+
+      //Mengambil Email Warga
+      String emailWarga = hasil.get("email");
+
+      //Mengambil Poin Produk
+      int poinP = hasil.get("poin_produk");
+
+      //Mengambil Document Warga
+      // var warga = await usersDb.doc(emailWarga).get();
+
+      //Mengambil Poin Warga
+      // int poinW = warga.get("poin");
+
+      //Mengurangi Poin Warga w/ Poin Produk
+      // var poinAkhir = poinW - poinP;
+
+      //Mengupdate Status Transaksi Tukar Pada Warga
+      await usersDb
+          .doc(emailWarga)
+          .collection("tukar")
+          .doc(id)
+          .update({"status": "Selesai"});
+
+      //Mengupdate Jumlah Poin Warga
+      await usersDb
+          .doc(emailWarga)
+          .update({"poin": FieldValue.increment(-poinP)});
+      Get.offNamed(AppLinks.TRANSAKSI_POIN);
+      Get.snackbar(
+        "Berhasil",
+        "Transaksi Penukaran Poin Berhasil",
+        backgroundColor: appSuccess,
+        snackPosition: SnackPosition.TOP,
+      );
+    } catch (e) {
+      Get.snackbar(
+        "Error",
+        "Gagal Mendapatkan Detail Transaksi",
+        backgroundColor: appDanger,
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+  }

@@ -1,0 +1,22 @@
+{
+    "uid": "",
+    "email": "",
+    "nama_lengkap": "",
+    "nik": "",
+    "kk": "",
+    "wa": "",
+    "rool": "",
+    "password": "",
+    "transaksi_kirim":[
+        {
+            "id": "",
+            "tanggal": ""
+        }
+    ],
+    "transaksi_tukar":[
+        {
+            "id": "",
+            "tanggal":""
+        }
+    ]
+}
