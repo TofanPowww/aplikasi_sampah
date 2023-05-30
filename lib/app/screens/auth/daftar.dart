@@ -71,7 +71,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                                         .imageProfil ==
                                                     null
                                                 ? const AssetImage(
-                                                    "assets/images/user.png")
+                                                    "assets/images/Profile.png")
                                                 : FileImage(File(daftarC
                                                     .imageProfil!
                                                     .path)) as ImageProvider,
