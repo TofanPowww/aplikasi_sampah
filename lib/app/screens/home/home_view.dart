@@ -88,14 +88,14 @@ class _HomeViewState extends State<HomeView> {
                               child: Stack(
                                 children: [
                                   Positioned(
-                                    bottom: -20,
-                                    right: -20,
+                                    bottom: -30,
+                                    right: -10,
                                     child: Opacity(
                                       opacity: 1.0,
                                       // ignore: sized_box_for_whitespace
                                       child: Container(
-                                        width: 160,
-                                        height: 160,
+                                        width: 180,
+                                        height: 180,
                                         child: Image.asset(
                                           "assets/images/woolly_money.png",
                                           fit: BoxFit.contain,
@@ -196,7 +196,8 @@ class _HomeViewState extends State<HomeView> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Riwayat", style: appFontHeding2),
+                                      Text("Riwayat Kirim",
+                                          style: appFontHeding2),
                                       Icon(Icons.arrow_forward_ios_rounded,
                                           color: colorPrimary, size: 30)
                                     ],

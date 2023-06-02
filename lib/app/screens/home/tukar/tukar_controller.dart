@@ -65,6 +65,7 @@ class TukarController extends GetxController {
               DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())
         });
 
+        // Get.offAndToNamed(AppLinks.TUKAR_POIN);
         Get.back();
         Get.snackbar(
             "Penukaran Berhasil", "Silahkan cek di halaman Riwayat Penukaran",

@@ -25,7 +25,7 @@ class _KelolaPetugasState extends State<KelolaPetugas> {
     return Scaffold(
       backgroundColor: colorBackground,
       appBar: AppBar(
-        title: const Text('Kelola Petugas', style: appFontTitlePage),
+        title: const Text('Petugas', style: appFontTitlePage),
         centerTitle: true,
         backgroundColor: colorPrimary,
         leading: IconButton(

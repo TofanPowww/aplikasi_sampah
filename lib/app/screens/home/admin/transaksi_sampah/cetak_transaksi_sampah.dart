@@ -67,7 +67,7 @@ class _CetakTransaksiSampahState extends State<CetakTransaksiSampah> {
       appBar: AppBar(
         backgroundColor: colorPrimary,
         centerTitle: true,
-        title: const Text("Transaksi Sampah", style: appFontTitlePage),
+        title: const Text("Cetak Transaksi", style: appFontTitlePage),
         leading: IconButton(
             onPressed: () {
               Get.back();

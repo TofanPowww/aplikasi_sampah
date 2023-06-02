@@ -27,7 +27,7 @@ class _RiwayatViewState extends State<RiwayatView> {
     return Scaffold(
       backgroundColor: colorBackground,
       appBar: AppBar(
-        title: const Text("Riwayat", style: appFontTitlePage),
+        title: const Text("Riwayat Kirim", style: appFontTitlePage),
         centerTitle: true,
         backgroundColor: colorPrimary,
         leading: IconButton(

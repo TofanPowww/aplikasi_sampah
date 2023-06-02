@@ -1,11 +1,10 @@
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
-// import 'package:aplikasi_sampah/app/screens/auth/auth_controller.dart';
 import 'package:aplikasi_sampah/app/screens/index.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../../../routes/links.dart';
+// import '../../../../routes/links.dart';
 import '../../../constant/color.dart';
 import 'package:get/get.dart';
 // import 'detail_produk.dart';
@@ -84,7 +83,9 @@ class _TukarPoinView extends State<TukarPoinView> {
                                       fontFamily: "Satoshi",
                                       fontWeight: FontWeight.w500,
                                       color: colorPrimary)),
-                              Text(poin["poin"].toString(),
+                              Text(
+                                  // "${authC.user.value.poin}",
+                                  poin["poin"].toString(),
                                   style: const TextStyle(
                                       fontSize: 24,
                                       fontFamily: "Satoshi",
@@ -143,9 +144,15 @@ class _TukarPoinView extends State<TukarPoinView> {
                                         ),
                                         IconButton(
                                           onPressed: () {
-                                            Get.toNamed(
-                                                AppLinks.TUKAR_POIN_PRODUK,
-                                                arguments: data);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DetailProdukView(
+                                                            poinW:
+                                                                poin["poin"]),
+                                                    settings: RouteSettings(
+                                                        arguments: data)));
                                           },
                                           icon: const Icon(
                                               Icons.arrow_forward_ios_rounded),

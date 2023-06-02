@@ -10,20 +10,21 @@ UsersModel usersModelFromJson(String str) =>
 String usersModelToJson(UsersModel data) => json.encode(data.toJson());
 
 class UsersModel {
-  UsersModel({
-    this.uid,
-    this.email,
-    this.namaLengkap,
-    this.rt,
-    this.rw,
-    this.wa,
-    this.rool,
-    this.poin,
-    this.password,
-    this.fotoProfil,
-    // this.kirim,
-    // this.tukar,
-  });
+  UsersModel(
+      {this.uid,
+      this.email,
+      this.namaLengkap,
+      this.rt,
+      this.rw,
+      this.wa,
+      this.rool,
+      this.poin,
+      this.password,
+      this.fotoProfil,
+      this.token
+      // this.kirim,
+      // this.tukar,
+      });
 
   String? email;
   String? uid;
@@ -35,6 +36,7 @@ class UsersModel {
   int? poin;
   String? password;
   String? fotoProfil;
+  String? token;
   // List<Kirim>? kirim;
   // List<Tukar>? tukar;
 
@@ -49,6 +51,7 @@ class UsersModel {
         poin: json["poin"],
         password: json["password"],
         fotoProfil: json["foto_profil"],
+        token: json["token"],
         // kirim: List<Kirim>.from(json["kirim"].map((x) => Kirim.fromJson(x))),
         // tukar: List<Tukar>.from(json["tukar"].map((x) => Tukar.fromJson(x))),
       );
@@ -64,6 +67,7 @@ class UsersModel {
         "poin": poin,
         "password": password,
         "foto_profil": fotoProfil,
+        "token": token,
         // "kirim": List<dynamic>.from(kirim!.map((x) => x.toJson())),
         // "tukar": List<dynamic>.from(tukar!.map((x) => x.toJson())),
       };

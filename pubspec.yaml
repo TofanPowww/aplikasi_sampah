@@ -16,7 +16,9 @@ dependencies:
     sdk: flutter
   flutter_barcode_scanner: ^2.0.0
   flutter_image_compress: ^2.0.2
+  flutter_launcher_icons: ^0.13.1
   flutter_local_notifications: ^13.0.0
+  flutter_native_splash: ^2.3.0
   get: ^4.6.5
   http: ^0.13.5
   image_cropper: ^3.0.3
@@ -36,10 +38,29 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/ok.png"
+  min_sdk_android: 21
+  adaptive_icon_foreground: "assets/icons/okIcon_foreground.png"
+  adaptive_icon_background: "assets/icons/iconAplikasi_background.png"
+
+flutter_native_splash:
+  color: "003D31"
+  image: "assets/icons/Splash.png"
+
+  android_12:
+    image: "assets/icons/Splash.png"
+    color: "003D31"
+
+  web: false
+
 flutter:
   assets:
     - assets/images/
     - assets/lottie/
+    - assets/icons/
   fonts:
     - family: Satoshi
       fonts:
