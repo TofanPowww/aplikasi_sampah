@@ -81,6 +81,7 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                   ],
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   gallery();
                 },
               ),
@@ -95,6 +96,7 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                   ],
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   kamera();
                 },
               )
@@ -278,7 +280,8 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                               );
                               if (pickedDate != null) {
                                 String formattedDate =
-                                    DateFormat("dd-MM-yyyy").format(pickedDate);
+                                    DateFormat("E, dd MMM yyyy")
+                                        .format(pickedDate);
                                 setState(() {
                                   kirimC.dateinput.text =
                                       formattedDate.toString();

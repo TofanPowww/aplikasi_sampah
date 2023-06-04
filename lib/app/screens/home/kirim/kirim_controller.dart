@@ -49,70 +49,75 @@ class KirimController extends GetxController {
   //? Menyimpan Transaksi Kirim Sampah //
   void addNewKirim(String nama, String rt, String rw, String tgl) async {
     User? users = auth.currentUser;
-    try {
-      CollectionReference usersDB = db.collection("users");
-      CollectionReference transaksiDB = db.collection("transaksiSampah");
-      final kirimUser =
-          usersDB.doc(auth.currentUser!.email).collection("kirim");
+    if (dateinput.text.isNotEmpty && foto != null) {
+      try {
+        CollectionReference usersDB = db.collection("users");
+        CollectionReference transaksiDB = db.collection("transaksiSampah");
 
-      final docUser = await usersDB.doc(users!.email).get();
+        final kirimU = usersDB.doc(auth.currentUser!.email).collection("kirim");
+        final docUser = await usersDB.doc(users!.email).get();
 
-      //* Menyimpan Foto Sampah ke Firebase Storage //
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child('foto_data_sampah')
-          .child('${docUser}jpg');
-      await ref.putFile(foto!);
-      imageUrl = await ref.getDownloadURL();
+        //* Menyimpan Foto Sampah ke Firebase Storage //
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('foto_data_sampah')
+            .child('${docUser}jpg');
+        await ref.putFile(foto!);
+        imageUrl = await ref.getDownloadURL();
 
-      //* Menambah Nested Collection Kirim pada Collection User//
-      final dataKirim = await kirimUser.add({
-        "tgl": tgl,
-        "foto_sampah": imageUrl,
-        "jumlah": 0,
-        "poin": 0,
-        "status": status,
-        "creationTime":
-            DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())
-      });
+        //* Menambah Nested Collection Kirim pada Collection User//
+        final dataKirim = await kirimU.add({
+          "tgl": tgl,
+          "foto_sampah": imageUrl,
+          "jumlah": 0,
+          "poin": 0,
+          "status": status,
+          "creationTime":
+              DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())
+        });
 
-      //* Menambah Transaksi Sampah //
-      await transaksiDB.doc(dataKirim.id).set({
-        "id": dataKirim.id,
-        "email": users.email,
-        "nama": nama,
-        "tanggal": tgl,
-        "rt": rt,
-        "rw": rw,
-        "foto_sampah": imageUrl,
-        "jumlah": 0,
-        "poin": 0,
-        "status": status,
-        "creationTime":
-            DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())
-      });
+        //* Menambah Transaksi Sampah //
+        await transaksiDB.doc(dataKirim.id).set({
+          "id": dataKirim.id,
+          "email": users.email,
+          "nama": nama,
+          "tanggal": tgl,
+          "rt": rt,
+          "rw": rw,
+          "foto_sampah": imageUrl,
+          "jumlah": 0,
+          "poin": 0,
+          "status": status,
+          "creationTime":
+              DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())
+        });
 
-      //* Update Users Kirim Model //
-      kirim(UsersKirimModel(
-          tanggal: tgl,
-          fotoSampah: imageUrl,
-          jumlah: 0,
-          poin: 0,
-          status: status,
-          creationTime:
-              DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())));
+        //* Update Users Kirim Model //
+        kirim(UsersKirimModel(
+            tanggal: tgl,
+            fotoSampah: imageUrl,
+            jumlah: 0,
+            poin: 0,
+            status: status,
+            creationTime:
+                DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())));
 
-      Get.snackbar("Berhasil", "Request terkirim",
-          backgroundColor: appSuccess,
-          snackPosition: SnackPosition.TOP,
-          margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
+        Get.snackbar(
+            "Berhasil", "Request terkirim, tunggu konfirmasi dari petugas",
+            backgroundColor: appSuccess,
+            snackPosition: SnackPosition.TOP,
+            margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
 
-      kirim.refresh();
-    } catch (e) {
-      Get.snackbar("Gagal", "Request gagal terkirim",
-          backgroundColor: appDanger,
-          snackPosition: SnackPosition.TOP,
-          margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
+        kirim.refresh();
+      } catch (e) {
+        Get.snackbar("Gagal", "Request gagal terkirim",
+            backgroundColor: appDanger,
+            snackPosition: SnackPosition.TOP,
+            margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
+      }
+    } else {
+      Get.snackbar("Gagal", "Masukkan semua data",
+          backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
     }
   }
 }
