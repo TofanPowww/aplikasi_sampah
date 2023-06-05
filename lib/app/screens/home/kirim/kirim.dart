@@ -30,6 +30,8 @@ class _KirimSampahViewState extends State<KirimSampahView> {
     kirimC.dateinput.text = "";
   }
 
+  RxBool isLoading = false.obs;
+
   Widget bottomSheet(BuildContext context) {
     final picker = ImagePicker();
     //Kamera//
@@ -359,22 +361,34 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                             width: double.infinity,
                             height: 56,
                             child: ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  kirimC.addNewKirim(
+                                onPressed: () async {
+                                  if (isLoading.isFalse) return;
+                                  isLoading(true);
+                                  await kirimC.addNewKirim(
                                     kirimC.nama.text.trim(),
                                     rt.trim(),
                                     rw.trim(),
                                     kirimC.dateinput.text.trim(),
                                   );
-                                });
-                              },
-                              style: btnStylePrimary,
-                              child: const Text(
-                                "Kirim Request",
-                                style: appFontButton,
-                              ),
-                            ),
+                                  isLoading(false);
+                                },
+                                style: btnStylePrimary,
+                                child: Obx(() => isLoading.isFalse
+                                    ? const Text(
+                                        "Kirim Request",
+                                        style: appFontButton,
+                                      )
+                                    : const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircularProgressIndicator(
+                                              color: colorBackground),
+                                          SizedBox(width: 24),
+                                          Text('Sedang memuat...',
+                                              style: appFontButton)
+                                        ],
+                                      ))),
                           ),
                         ],
                       ),

@@ -19,6 +19,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
   final AuthController daftarC = Get.put(AuthController());
   final c = Get.put(DaftarController());
   bool showProgres = false;
+  RxBool isLoading = false.obs;
 
   //Show & Hide Password
   bool _isHidePassword = true;
@@ -337,8 +338,10 @@ class _DaftarScreenState extends State<DaftarScreen> {
                             width: double.infinity,
                             height: 56,
                             child: ElevatedButton(
-                                onPressed: () {
-                                  AuthController.instance
+                                onPressed: () async {
+                                  if (isLoading.isFalse) return;
+                                  isLoading(true);
+                                  await AuthController.instance
                                       .daftar(
                                           daftarC.rool.trim(),
                                           c.emailsignupC.text.trim(),
@@ -357,29 +360,38 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                     c.passwordsignupC.clear();
                                     c.confirmpasswordsignupC.clear();
                                   });
+                                  isLoading(false);
                                 },
                                 style: btnStylePrimary,
-                                child: const Text(
-                                  "Daftar",
-                                  style: appFontButton,
-                                )),
+                                child: Obx(() => isLoading.isFalse
+                                    ? const Text(
+                                        "Daftar",
+                                        style: appFontButton,
+                                      )
+                                    : const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircularProgressIndicator(
+                                              color: colorBackground),
+                                          SizedBox(width: 24),
+                                          Text('Sedang memuat...',
+                                              style: appFontButton)
+                                        ],
+                                      ))),
                           ),
                           const SizedBox(height: 16),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text(
-                                  "Sudah punya akun? ",
-                                  style: appFontNormal,
-                                ),
+                                const Text("Sudah punya akun? ",
+                                    style: appFontNormal),
                                 InkWell(
                                   onTap: () {
                                     daftarC.toLogin();
                                   },
-                                  child: const Text(
-                                    "Masuk",
-                                    style: appFontButtonText,
-                                  ),
+                                  child: const Text("Masuk",
+                                      style: appFontButtonText),
                                 )
                               ])
                         ])))));
@@ -429,6 +441,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                       Text("Gallery", style: appFontFormInput)
                     ]),
                 onTap: () {
+                  Navigator.pop(context);
                   gallery();
                 }),
             const SizedBox(width: 120),
@@ -442,6 +455,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                   ],
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   kamera();
                 })
           ])

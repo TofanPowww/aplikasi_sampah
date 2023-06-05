@@ -17,6 +17,7 @@ class ProfilSayaView extends StatefulWidget {
 
 class _ProfilSayaViewState extends State<ProfilSayaView> {
   final ProfilSayaController profilsayaC = Get.put(ProfilSayaController());
+  RxBool isLoading = false.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,15 +171,30 @@ class _ProfilSayaViewState extends State<ProfilSayaView> {
                                   width: double.infinity,
                                   height: 56,
                                   child: ElevatedButton(
-                                      onPressed: () {
-                                        profilsayaC
+                                      onPressed: () async {
+                                        if (isLoading.isFalse) return;
+                                        isLoading(true);
+                                        await profilsayaC
                                             .updateProfile(data['email']);
+                                        isLoading(false);
                                       },
                                       style: btnStylePrimary,
-                                      child: const Text(
-                                        "Simpan",
-                                        style: appFontButton,
-                                      )))
+                                      child: Obx(() => isLoading.isFalse
+                                          ? const Text(
+                                              "Simpan",
+                                              style: appFontButton,
+                                            )
+                                          : const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                CircularProgressIndicator(
+                                                    color: colorBackground),
+                                                SizedBox(width: 24),
+                                                Text('Sedang memuat...',
+                                                    style: appFontButton)
+                                              ],
+                                            ))))
                             ]))
                       ]);
                 } else {
@@ -242,6 +258,7 @@ class _ProfilSayaViewState extends State<ProfilSayaView> {
                   ],
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   galeri();
                 },
               ),
@@ -256,6 +273,7 @@ class _ProfilSayaViewState extends State<ProfilSayaView> {
                   ],
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   kamera();
                 },
               )

@@ -13,7 +13,8 @@ class ResetPasswordController extends GetxController {
   TextEditingController passKonfirC = TextEditingController();
 
   //Function Reset Password
-  void resetPass(String passLama, String passBaru, String passKonfir) async {
+  Future<void> resetPass(
+      String passLama, String passBaru, String passKonfir) async {
     if (passLamaC.text.isNotEmpty &&
         passBaruC.text.isNotEmpty &&
         passKonfirC.text.isNotEmpty) {

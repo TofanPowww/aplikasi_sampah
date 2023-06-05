@@ -14,6 +14,7 @@ class AddPetugas extends StatefulWidget {
 
 class _AddPetugasState extends State<AddPetugas> {
   final c = Get.put(AddPetugasController());
+  RxBool isLoading = false.obs;
   bool _isHidePassword = true;
   bool showProgres = false;
   void _togglePasswordVisibility() {
@@ -253,8 +254,10 @@ class _AddPetugasState extends State<AddPetugas> {
                               width: double.infinity,
                               height: 56,
                               child: ElevatedButton(
-                                  onPressed: () {
-                                    AddPetugasController.instance
+                                  onPressed: () async {
+                                    if (isLoading.isFalse) return;
+                                    isLoading(true);
+                                    await AddPetugasController.instance
                                         .tambahPetugas(
                                       c.rool.trim(),
                                       c.emailpetugasC.text.trim(),
@@ -270,10 +273,23 @@ class _AddPetugasState extends State<AddPetugas> {
                                       c.passwordPetugasC.clear();
                                       c.confirmpasswordPetugasC.clear();
                                     });
+                                    isLoading(false);
                                   },
                                   style: btnStylePrimary,
-                                  child: const Text("Daftar",
-                                      style: appFontButton)))
+                                  child: Obx(() => isLoading.isFalse
+                                      ? const Text("Daftar",
+                                          style: appFontButton)
+                                      : const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            CircularProgressIndicator(
+                                                color: colorBackground),
+                                            SizedBox(width: 24),
+                                            Text('Sedang memuat...',
+                                                style: appFontButton)
+                                          ],
+                                        ))))
                         ])))));
   }
 }

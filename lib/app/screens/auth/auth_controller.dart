@@ -87,7 +87,7 @@ class AuthController extends GetxController {
   }
 
   //Login//
-  void login(String email, String password) async {
+  Future<void> login(String email, String password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
       toHome();

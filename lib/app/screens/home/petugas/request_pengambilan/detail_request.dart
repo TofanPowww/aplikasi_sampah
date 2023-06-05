@@ -14,6 +14,7 @@ class DetailRequestView extends StatefulWidget {
 }
 
 class _DetailRequestVieqState extends State<DetailRequestView> {
+  RxBool isLoading = false.obs;
   String? status;
   final RequestPengambilanController kirimC =
       Get.put(RequestPengambilanController());
@@ -248,37 +249,44 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                 )),
             const SizedBox(height: 16),
             SizedBox(
-              width: double.infinity,
-              height: 56,
-              child: ElevatedButton(
-                  onPressed: () {
-                    status == "Ditolak"
-                        ? setState(() {
-                            kirimC.updateTransaksi(
-                                request['id'].toString(),
-                                request['email'].toString(),
-                                request['tgl'].toString(),
-                                int.parse(jmlh.text.trim()),
-                                status!.trim(),
-                                kirimC.keteranganC.text.trim());
-                          })
-                        : setState(() {
-                            kirimC.updateTransaksi(
-                                request['id'].toString(),
-                                request['email'].toString(),
-                                request['tgl'].toString(),
-                                int.parse(kirimC.jumlahC.text.trim()),
-                                status!.trim(),
-                                ket.text.trim());
-                          });
-                  },
-                  style: btnStylePrimary,
-                  child: status == "Ditolak"
-                      ? const Text("Konfirmasi Pembatalan",
-                          style: appFontButton)
-                      : const Text("Konfirmasi Pengambilan",
-                          style: appFontButton)),
-            ),
+                width: double.infinity,
+                height: 56,
+                child: ElevatedButton(
+                    onPressed: () async {
+                      if (isLoading.isFalse) return;
+                      isLoading(true);
+                      status == "Ditolak"
+                          ? await kirimC.updateTransaksi(
+                              request['id'].toString(),
+                              request['email'].toString(),
+                              request['tgl'].toString(),
+                              int.parse(jmlh.text.trim()),
+                              status!.trim(),
+                              kirimC.keteranganC.text.trim())
+                          : await kirimC.updateTransaksi(
+                              request['id'].toString(),
+                              request['email'].toString(),
+                              request['tgl'].toString(),
+                              int.parse(kirimC.jumlahC.text.trim()),
+                              status!.trim(),
+                              ket.text.trim());
+                      isLoading(false);
+                    },
+                    style: btnStylePrimary,
+                    child: Obx(() => isLoading.isFalse
+                        ? status == "Ditolak"
+                            ? const Text("Konfirmasi Pembatalan",
+                                style: appFontButton)
+                            : const Text("Konfirmasi Pengambilan",
+                                style: appFontButton)
+                        : const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(color: colorBackground),
+                              SizedBox(width: 24),
+                              Text('Sedang memuat...', style: appFontButton)
+                            ],
+                          )))),
           ],
         ),
       ))),

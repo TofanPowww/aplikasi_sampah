@@ -1,3 +1,5 @@
+// ignore_for_file: await_only_futures
+
 import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
@@ -13,6 +15,7 @@ class EditProdukView extends StatefulWidget {
 }
 
 class _EditProdukViewState extends State<EditProdukView> {
+  RxBool isLoading = false.obs;
   final ProdukController produkC = Get.put(ProdukController());
   @override
   Widget build(BuildContext context) {
@@ -87,17 +90,31 @@ class _EditProdukViewState extends State<EditProdukView> {
                         focusedBorder: focusInputBorder)),
                 const SizedBox(height: 32),
                 SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          produkC
-                              .updateProduk(produkData['produk_id'])
-                              .toString()
-                              .trim();
-                        },
-                        style: btnStylePrimary,
-                        child: const Text("Edit", style: appFontButton))),
+                  width: double.infinity,
+                  height: 56,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        if (isLoading.isFalse) return;
+                        isLoading(true);
+                        await produkC
+                            .updateProduk(produkData['produk_id'])
+                            .toString()
+                            .trim();
+                        isLoading(false);
+                      },
+                      style: btnStylePrimary,
+                      child: Obx(() => isLoading.isFalse
+                          ? const Text("Edit", style: appFontButton)
+                          : const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircularProgressIndicator(
+                                    color: colorBackground),
+                                SizedBox(width: 24),
+                                Text('Sedang memuat...', style: appFontButton)
+                              ],
+                            ))),
+                ),
                 const SizedBox(height: 16),
                 SizedBox(
                     width: double.infinity,

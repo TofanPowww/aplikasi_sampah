@@ -47,7 +47,7 @@ class KirimController extends GetxController {
   }
 
   //? Menyimpan Transaksi Kirim Sampah //
-  void addNewKirim(String nama, String rt, String rw, String tgl) async {
+  Future<void> addNewKirim(String nama, String rt, String rw, String tgl) async {
     User? users = auth.currentUser;
     if (dateinput.text.isNotEmpty && foto != null) {
       try {

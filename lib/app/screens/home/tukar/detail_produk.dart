@@ -21,6 +21,8 @@ class _DetailProdukViewState extends State<DetailProdukView> {
     super.initState();
   }
 
+  RxBool isLoading = false.obs;
+
   final AuthController authC = Get.put(AuthController());
   final TukarController tukarC = Get.put(TukarController());
   @override
@@ -90,12 +92,13 @@ class _DetailProdukViewState extends State<DetailProdukView> {
                 height: 56,
                 child: widget.poinW >= produk['poin']
                     ? ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            tukarC.transaksiTukar(
-                                produk['nama'].toString().trim(),
-                                int.parse(produk['poin'].toString().trim()));
-                          });
+                        onPressed: () async {
+                          if (isLoading.isFalse) return;
+                          isLoading(true);
+                          await tukarC.transaksiTukar(
+                              produk['nama'].toString().trim(),
+                              int.parse(produk['poin'].toString().trim()));
+                          isLoading(false);
                           // Get.defaultDialog(
                           //     backgroundColor: colorBackground2,
                           //     barrierDismissible: false,
@@ -135,7 +138,20 @@ class _DetailProdukViewState extends State<DetailProdukView> {
                           // });
                         },
                         style: btnStylePrimary,
-                        child: const Text("Tukar", style: appFontButton))
+                        child: Obx(() => isLoading.isFalse
+                            ? const Text(
+                                "Tukar",
+                                style: appFontButton,
+                              )
+                            : const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircularProgressIndicator(
+                                      color: colorBackground),
+                                  SizedBox(width: 24),
+                                  Text('Sedang memuat...', style: appFontButton)
+                                ],
+                              )))
                     : ElevatedButton(
                         onPressed: null,
                         style: ButtonStyle(

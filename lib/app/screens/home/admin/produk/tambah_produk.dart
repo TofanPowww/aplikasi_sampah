@@ -14,6 +14,7 @@ class TambahProdukView extends StatefulWidget {
 }
 
 class _TambahProdukViewState extends State<TambahProdukView> {
+  RxBool isLoading = false.obs;
   final ProdukController control = Get.put(ProdukController());
   @override
   Widget build(BuildContext context) {
@@ -87,8 +88,10 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                    onPressed: () {
-                      control
+                    onPressed: () async {
+                      if (isLoading.isFalse) return;
+                      isLoading(true);
+                      await control
                           .tambahProduk(
                         control.namaProdukAdd.text.trim(),
                         control.desProdukAdd.text.trim(),
@@ -99,9 +102,19 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                         control.desProdukAdd.clear();
                         control.poinProdukAdd.clear();
                       });
+                      isLoading(false);
                     },
                     style: btnStylePrimary,
-                    child: const Text("Tambah", style: appFontButton))),
+                    child: Obx(() => isLoading.isFalse
+                        ? const Text("Tambah", style: appFontButton)
+                        : const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(color: colorBackground),
+                              SizedBox(width: 24),
+                              Text('Sedang memuat...', style: appFontButton)
+                            ],
+                          ))))
           ],
         )),
       )),
