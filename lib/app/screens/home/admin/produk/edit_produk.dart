@@ -94,26 +94,13 @@ class _EditProdukViewState extends State<EditProdukView> {
                   height: 56,
                   child: ElevatedButton(
                       onPressed: () async {
-                        if (isLoading.isFalse) return;
-                        isLoading(true);
                         await produkC
                             .updateProduk(produkData['produk_id'])
                             .toString()
                             .trim();
-                        isLoading(false);
                       },
                       style: btnStylePrimary,
-                      child: Obx(() => isLoading.isFalse
-                          ? const Text("Edit", style: appFontButton)
-                          : const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CircularProgressIndicator(
-                                    color: colorBackground),
-                                SizedBox(width: 24),
-                                Text('Sedang memuat...', style: appFontButton)
-                              ],
-                            ))),
+                      child: const Text("Edit", style: appFontButton)),
                 ),
                 const SizedBox(height: 16),
                 SizedBox(

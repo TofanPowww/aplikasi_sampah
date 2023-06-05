@@ -339,8 +339,6 @@ class _DaftarScreenState extends State<DaftarScreen> {
                             height: 56,
                             child: ElevatedButton(
                                 onPressed: () async {
-                                  if (isLoading.isFalse) return;
-                                  isLoading(true);
                                   await AuthController.instance
                                       .daftar(
                                           daftarC.rool.trim(),
@@ -360,25 +358,12 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                     c.passwordsignupC.clear();
                                     c.confirmpasswordsignupC.clear();
                                   });
-                                  isLoading(false);
                                 },
                                 style: btnStylePrimary,
-                                child: Obx(() => isLoading.isFalse
-                                    ? const Text(
-                                        "Daftar",
-                                        style: appFontButton,
-                                      )
-                                    : const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          CircularProgressIndicator(
-                                              color: colorBackground),
-                                          SizedBox(width: 24),
-                                          Text('Sedang memuat...',
-                                              style: appFontButton)
-                                        ],
-                                      ))),
+                                child: const Text(
+                                  "Daftar",
+                                  style: appFontButton,
+                                )),
                           ),
                           const SizedBox(height: 16),
                           Row(

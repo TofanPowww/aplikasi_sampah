@@ -172,29 +172,14 @@ class _ProfilSayaViewState extends State<ProfilSayaView> {
                                   height: 56,
                                   child: ElevatedButton(
                                       onPressed: () async {
-                                        if (isLoading.isFalse) return;
-                                        isLoading(true);
                                         await profilsayaC
                                             .updateProfile(data['email']);
-                                        isLoading(false);
                                       },
                                       style: btnStylePrimary,
-                                      child: Obx(() => isLoading.isFalse
-                                          ? const Text(
-                                              "Simpan",
-                                              style: appFontButton,
-                                            )
-                                          : const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                CircularProgressIndicator(
-                                                    color: colorBackground),
-                                                SizedBox(width: 24),
-                                                Text('Sedang memuat...',
-                                                    style: appFontButton)
-                                              ],
-                                            ))))
+                                      child: const Text(
+                                        "Simpan",
+                                        style: appFontButton,
+                                      )))
                             ]))
                       ]);
                 } else {

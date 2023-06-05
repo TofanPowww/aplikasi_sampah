@@ -253,8 +253,6 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                 height: 56,
                 child: ElevatedButton(
                     onPressed: () async {
-                      if (isLoading.isFalse) return;
-                      isLoading(true);
                       status == "Ditolak"
                           ? await kirimC.updateTransaksi(
                               request['id'].toString(),
@@ -270,23 +268,13 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                               int.parse(kirimC.jumlahC.text.trim()),
                               status!.trim(),
                               ket.text.trim());
-                      isLoading(false);
                     },
                     style: btnStylePrimary,
-                    child: Obx(() => isLoading.isFalse
-                        ? status == "Ditolak"
-                            ? const Text("Konfirmasi Pembatalan",
-                                style: appFontButton)
-                            : const Text("Konfirmasi Pengambilan",
-                                style: appFontButton)
-                        : const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircularProgressIndicator(color: colorBackground),
-                              SizedBox(width: 24),
-                              Text('Sedang memuat...', style: appFontButton)
-                            ],
-                          )))),
+                    child: status == "Ditolak"
+                        ? const Text("Konfirmasi Pembatalan",
+                            style: appFontButton)
+                        : const Text("Konfirmasi Pengambilan",
+                            style: appFontButton))),
           ],
         ),
       ))),

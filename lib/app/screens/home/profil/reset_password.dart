@@ -159,31 +159,14 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                             height: 56,
                             child: ElevatedButton(
                                 onPressed: () async {
-                                  if (isLoading.isFalse) return;
-                                  isLoading(true);
                                   await resetC.resetPass(
                                       resetC.passLamaC.text.trim(),
                                       resetC.passBaruC.text.trim(),
                                       resetC.passKonfirC.text.trim());
-                                  isLoading(false);
                                 },
                                 style: btnStylePrimary,
-                                child: Obx(() => isLoading.isFalse
-                                    ? const Text(
-                                        "Simpan",
-                                        style: appFontButton,
-                                      )
-                                    : const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          CircularProgressIndicator(
-                                              color: colorBackground),
-                                          SizedBox(width: 24),
-                                          Text('Sedang memuat...',
-                                              style: appFontButton)
-                                        ],
-                                      ))),
+                                child:
+                                    const Text("Simpan", style: appFontButton)),
                           ),
                           //End Submit Button//
                         ]))

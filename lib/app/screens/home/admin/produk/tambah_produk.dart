@@ -89,8 +89,6 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                 height: 56,
                 child: ElevatedButton(
                     onPressed: () async {
-                      if (isLoading.isFalse) return;
-                      isLoading(true);
                       await control
                           .tambahProduk(
                         control.namaProdukAdd.text.trim(),
@@ -102,19 +100,9 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                         control.desProdukAdd.clear();
                         control.poinProdukAdd.clear();
                       });
-                      isLoading(false);
                     },
                     style: btnStylePrimary,
-                    child: Obx(() => isLoading.isFalse
-                        ? const Text("Tambah", style: appFontButton)
-                        : const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircularProgressIndicator(color: colorBackground),
-                              SizedBox(width: 24),
-                              Text('Sedang memuat...', style: appFontButton)
-                            ],
-                          ))))
+                    child: const Text("Tambah", style: appFontButton)))
           ],
         )),
       )),

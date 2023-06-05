@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final db = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance;
   final loginController = Get.put(LoginController());
-  RxBool isLoading = false.obs;
+  bool isLoading = true;
   bool _isHidePassword = true;
   void _togglePasswordVisibility() {
     setState(() {
@@ -137,8 +137,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                         height: 56,
                                         child: ElevatedButton(
                                             onPressed: () async {
-                                              if (isLoading.isFalse) return;
-                                              isLoading(true);
                                               await AuthController.instance
                                                   .login(
                                                       loginController
@@ -147,25 +145,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       loginController
                                                           .passwordloginC.text
                                                           .trim());
-                                              isLoading(false);
                                             },
                                             style: btnStylePrimary,
-                                            child: Obx(() => isLoading.isFalse
-                                                ? const Text("Masuk",
-                                                    style: appFontButton)
-                                                : const Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      CircularProgressIndicator(
-                                                          color:
-                                                              colorBackground),
-                                                      SizedBox(width: 24),
-                                                      Text('Sedang memuat...',
-                                                          style: appFontButton)
-                                                    ],
-                                                  ))))
+                                            child: const Text("Masuk",
+                                                style: appFontButton)))
                                   ])),
                           const SizedBox(height: 16),
                           Row(

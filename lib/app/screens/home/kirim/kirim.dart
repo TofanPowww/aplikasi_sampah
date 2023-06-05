@@ -362,33 +362,18 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                             height: 56,
                             child: ElevatedButton(
                                 onPressed: () async {
-                                  if (isLoading.isFalse) return;
-                                  isLoading(true);
                                   await kirimC.addNewKirim(
                                     kirimC.nama.text.trim(),
                                     rt.trim(),
                                     rw.trim(),
                                     kirimC.dateinput.text.trim(),
                                   );
-                                  isLoading(false);
                                 },
                                 style: btnStylePrimary,
-                                child: Obx(() => isLoading.isFalse
-                                    ? const Text(
-                                        "Kirim Request",
-                                        style: appFontButton,
-                                      )
-                                    : const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          CircularProgressIndicator(
-                                              color: colorBackground),
-                                          SizedBox(width: 24),
-                                          Text('Sedang memuat...',
-                                              style: appFontButton)
-                                        ],
-                                      ))),
+                                child: const Text(
+                                  "Kirim Request",
+                                  style: appFontButton,
+                                )),
                           ),
                         ],
                       ),

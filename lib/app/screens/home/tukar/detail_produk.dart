@@ -93,12 +93,9 @@ class _DetailProdukViewState extends State<DetailProdukView> {
                 child: widget.poinW >= produk['poin']
                     ? ElevatedButton(
                         onPressed: () async {
-                          if (isLoading.isFalse) return;
-                          isLoading(true);
                           await tukarC.transaksiTukar(
                               produk['nama'].toString().trim(),
                               int.parse(produk['poin'].toString().trim()));
-                          isLoading(false);
                           // Get.defaultDialog(
                           //     backgroundColor: colorBackground2,
                           //     barrierDismissible: false,
@@ -138,20 +135,10 @@ class _DetailProdukViewState extends State<DetailProdukView> {
                           // });
                         },
                         style: btnStylePrimary,
-                        child: Obx(() => isLoading.isFalse
-                            ? const Text(
-                                "Tukar",
-                                style: appFontButton,
-                              )
-                            : const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CircularProgressIndicator(
-                                      color: colorBackground),
-                                  SizedBox(width: 24),
-                                  Text('Sedang memuat...', style: appFontButton)
-                                ],
-                              )))
+                        child: const Text(
+                          "Tukar",
+                          style: appFontButton,
+                        ))
                     : ElevatedButton(
                         onPressed: null,
                         style: ButtonStyle(
