@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_local_variable
+// ignore_for_file: avoid_print, unused_local_variable, use_build_context_synchronously
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -137,6 +137,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         height: 56,
                                         child: ElevatedButton(
                                             onPressed: () async {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return const Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                      color: colorAccent,
+                                                    ));
+                                                  });
                                               await AuthController.instance
                                                   .login(
                                                       loginController
@@ -145,6 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       loginController
                                                           .passwordloginC.text
                                                           .trim());
+                                              Navigator.of(context).pop();
                                             },
                                             style: btnStylePrimary,
                                             child: const Text("Masuk",

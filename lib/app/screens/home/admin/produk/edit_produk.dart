@@ -93,8 +93,8 @@ class _EditProdukViewState extends State<EditProdukView> {
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
-                      onPressed: () async {
-                        await produkC
+                      onPressed: () {
+                        produkC
                             .updateProduk(produkData['produk_id'])
                             .toString()
                             .trim();
@@ -134,7 +134,7 @@ class _EditProdukViewState extends State<EditProdukView> {
                                       backgroundColor:
                                           MaterialStatePropertyAll(colorAccent),
                                     ),
-                                    onPressed: () {
+                                    onPressed: () async {
                                       produkC.deleteProduk(
                                           produkData['produk_id']
                                               .toString()

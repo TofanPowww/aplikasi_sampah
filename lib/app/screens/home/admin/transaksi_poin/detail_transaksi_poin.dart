@@ -75,6 +75,7 @@ class _DetailTransaksiPoinState extends State<DetailTransaksiPoin> {
                                     .then((value) {
                                   control.getTransaksiPoinById(value);
                                 });
+                                Navigator.of(context).pop();
                               },
                               child:
                                   const Text("Lanjut", style: appFontButtonb))
