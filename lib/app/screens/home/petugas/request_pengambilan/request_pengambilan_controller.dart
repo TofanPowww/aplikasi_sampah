@@ -14,6 +14,8 @@ class RequestPengambilanController extends GetxController {
   TextEditingController jumlahC = TextEditingController();
   TextEditingController keteranganC = TextEditingController();
 
+  var isLoading = false.obs;
+
   //? Firebase //
   final AuthController authC = Get.put(AuthController());
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -29,6 +31,7 @@ class RequestPengambilanController extends GetxController {
   //? Update Transaksi Sampah //
   Future<void> updateTransaksi(String id, String email, String tgl, int jumlah,
       String status, String keterangan) async {
+    isLoading.value = true;
     try {
       //* Update Transaksi Sampah pada Collection Kirim User //
       final petugas = await usersDb.doc(auth.currentUser!.email).get();
@@ -54,12 +57,14 @@ class RequestPengambilanController extends GetxController {
         "keterangan": keterangan,
         "confirmTime": DateFormat.yMMMEd().format(DateTime.now())
       });
+      isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
+      isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,

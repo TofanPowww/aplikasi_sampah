@@ -14,6 +14,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
 class ProdukController extends GetxController {
+  var isLoading = false.obs;
   //Form Controller Edit Produk//
   TextEditingController namaProdukC = TextEditingController();
   TextEditingController desProdukC = TextEditingController();
@@ -36,6 +37,7 @@ class ProdukController extends GetxController {
   //Function Add Produk//
   Future<void> tambahProduk(
       String namaProduk, String desProduk, int poinProduk) async {
+    isLoading.value = true;
     try {
       CollectionReference produkDb = db.collection('produk');
       await produkDb.add({
@@ -45,7 +47,7 @@ class ProdukController extends GetxController {
       }).then((DocumentReference doc) {
         produkDb.doc(doc.id).update({"produk_id": doc.id});
       });
-
+      isLoading.value = false;
       Get.snackbar(
         "Berhasil",
         "Produk berhasil ditambahkan",
@@ -53,6 +55,7 @@ class ProdukController extends GetxController {
         snackPosition: SnackPosition.TOP,
       );
     } catch (e) {
+      isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -62,6 +65,7 @@ class ProdukController extends GetxController {
 
   //Update Data Produk//
   Future<void> updateProduk(String id) async {
+    isLoading.value = true;
     if (namaProdukC.text.isNotEmpty &&
         desProdukC.text.isNotEmpty &&
         poinProdukC.text.isNotEmpty) {
@@ -71,9 +75,11 @@ class ProdukController extends GetxController {
           'deskripsi': desProdukC.text,
           'poin': int.parse(poinProdukC.text),
         });
+        isLoading.value = false;
         Get.snackbar("Berhasil", "Data berhasil diupdate",
             backgroundColor: appSuccess, snackPosition: SnackPosition.TOP);
       } catch (e) {
+        isLoading.value = false;
         Get.snackbar("Gagal", "Data gagal diupdate",
             backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
       }

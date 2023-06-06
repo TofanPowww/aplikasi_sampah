@@ -251,30 +251,54 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
             SizedBox(
                 width: double.infinity,
                 height: 56,
-                child: ElevatedButton(
-                    onPressed: () async {
-                      status == "Ditolak"
-                          ? await kirimC.updateTransaksi(
-                              request['id'].toString(),
-                              request['email'].toString(),
-                              request['tgl'].toString(),
-                              int.parse(jmlh.text.trim()),
-                              status!.trim(),
-                              kirimC.keteranganC.text.trim())
-                          : await kirimC.updateTransaksi(
-                              request['id'].toString(),
-                              request['email'].toString(),
-                              request['tgl'].toString(),
-                              int.parse(kirimC.jumlahC.text.trim()),
-                              status!.trim(),
-                              ket.text.trim());
+                child: Obx(() => ElevatedButton(
+                    onPressed: () {
+                      kirimC.isLoading.value
+                          ? null
+                          : status == "Ditolak"
+                              ? kirimC.updateTransaksi(
+                                  request['id'].toString(),
+                                  request['email'].toString(),
+                                  request['tgl'].toString(),
+                                  int.parse(jmlh.text.trim()),
+                                  status!.trim(),
+                                  kirimC.keteranganC.text.trim())
+                              : kirimC.updateTransaksi(
+                                  request['id'].toString(),
+                                  request['email'].toString(),
+                                  request['tgl'].toString(),
+                                  int.parse(kirimC.jumlahC.text.trim()),
+                                  status!.trim(),
+                                  ket.text.trim());
                     },
                     style: btnStylePrimary,
                     child: status == "Ditolak"
-                        ? const Text("Konfirmasi Pembatalan",
-                            style: appFontButton)
-                        : const Text("Konfirmasi Pengambilan",
-                            style: appFontButton))),
+                        ? kirimC.isLoading.value
+                            ? const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircularProgressIndicator(
+                                      color: colorBackground),
+                                  SizedBox(width: 16),
+                                  Text("Sedang memuat...",
+                                      style: appFontButton),
+                                ],
+                              )
+                            : const Text("Konfirmasi Pembatalan",
+                                style: appFontButton)
+                        : kirimC.isLoading.value
+                            ? const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircularProgressIndicator(
+                                      color: colorBackground),
+                                  SizedBox(width: 16),
+                                  Text("Sedang memuat...",
+                                      style: appFontButton),
+                                ],
+                              )
+                            : const Text("Konfirmasi Pengambilan",
+                                style: appFontButton)))),
           ],
         ),
       ))),

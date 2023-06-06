@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 import '../../../data/models/users_kirim_model.dart';
 
 class KirimController extends GetxController {
+  var isLoading = false.obs;
   //? Firebase //
   FirebaseAuth auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
@@ -47,7 +48,9 @@ class KirimController extends GetxController {
   }
 
   //? Menyimpan Transaksi Kirim Sampah //
-  Future<void> addNewKirim(String nama, String rt, String rw, String tgl) async {
+  Future<void> addNewKirim(
+      String nama, String rt, String rw, String tgl) async {
+    isLoading.value = true;
     User? users = auth.currentUser;
     if (dateinput.text.isNotEmpty && foto != null) {
       try {
@@ -102,6 +105,7 @@ class KirimController extends GetxController {
             creationTime:
                 DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())));
 
+        isLoading.value = false;
         Get.snackbar(
             "Berhasil", "Request terkirim, tunggu konfirmasi dari petugas",
             backgroundColor: appSuccess,
@@ -110,12 +114,14 @@ class KirimController extends GetxController {
 
         kirim.refresh();
       } catch (e) {
+        isLoading.value = false;
         Get.snackbar("Gagal", "Request gagal terkirim",
             backgroundColor: appDanger,
             snackPosition: SnackPosition.TOP,
             margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
       }
     } else {
+      isLoading.value = false;
       Get.snackbar("Gagal", "Masukkan semua data",
           backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
     }

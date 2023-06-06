@@ -253,28 +253,45 @@ class _AddPetugasState extends State<AddPetugas> {
                           SizedBox(
                               width: double.infinity,
                               height: 56,
-                              child: ElevatedButton(
-                                  onPressed: () async {
-                                    await AddPetugasController.instance
-                                        .tambahPetugas(
-                                      c.rool.trim(),
-                                      c.emailpetugasC.text.trim(),
-                                      c.namapetugasC.text.trim(),
-                                      c.wapetugasC.text.trim(),
-                                      c.passwordPetugasC.text.trim(),
-                                      c.confirmpasswordPetugasC.text.trim(),
-                                    )
-                                        .whenComplete(() {
-                                      c.emailpetugasC.clear();
-                                      c.namapetugasC.clear();
-                                      c.wapetugasC.clear();
-                                      c.passwordPetugasC.clear();
-                                      c.confirmpasswordPetugasC.clear();
-                                    });
+                              child: Obx(() => ElevatedButton(
+                                  onPressed: () {
+                                    AddPetugasController
+                                            .instance.isLoading.value
+                                        ? null
+                                        : AddPetugasController.instance
+                                            .tambahPetugas(
+                                            c.rool.trim(),
+                                            c.emailpetugasC.text.trim(),
+                                            c.namapetugasC.text.trim(),
+                                            c.wapetugasC.text.trim(),
+                                            c.passwordPetugasC.text.trim(),
+                                            c.confirmpasswordPetugasC.text
+                                                .trim(),
+                                          )
+                                            .whenComplete(() {
+                                            c.emailpetugasC.clear();
+                                            c.namapetugasC.clear();
+                                            c.wapetugasC.clear();
+                                            c.passwordPetugasC.clear();
+                                            c.confirmpasswordPetugasC.clear();
+                                          });
                                   },
                                   style: btnStylePrimary,
-                                  child: const Text("Daftar",
-                                      style: appFontButton)))
+                                  child: AddPetugasController
+                                          .instance.isLoading.value
+                                      ? const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            CircularProgressIndicator(
+                                                color: colorBackground),
+                                            SizedBox(width: 16),
+                                            Text("Sedang memuat...",
+                                                style: appFontButton),
+                                          ],
+                                        )
+                                      : const Text("Daftar",
+                                          style: appFontButton))))
                         ])))));
   }
 }

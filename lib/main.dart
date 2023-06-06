@@ -13,7 +13,6 @@ import 'package:aplikasi_sampah/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();

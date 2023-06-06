@@ -337,33 +337,48 @@ class _DaftarScreenState extends State<DaftarScreen> {
                           SizedBox(
                             width: double.infinity,
                             height: 56,
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  await AuthController.instance
-                                      .daftar(
-                                          daftarC.rool.trim(),
-                                          c.emailsignupC.text.trim(),
-                                          c.namasignupC.text.trim(),
-                                          c.rtsignupC.text.trim(),
-                                          c.rwsignupC.text.trim(),
-                                          c.wasignupC.text.trim(),
-                                          c.passwordsignupC.text.trim(),
-                                          c.confirmpasswordsignupC.text.trim())
-                                      .whenComplete(() {
-                                    c.emailsignupC.clear();
-                                    c.namasignupC.clear();
-                                    c.rtsignupC.clear();
-                                    c.rwsignupC.clear();
-                                    c.wasignupC.clear();
-                                    c.passwordsignupC.clear();
-                                    c.confirmpasswordsignupC.clear();
-                                  });
+                            child: Obx(() => ElevatedButton(
+                                onPressed: () {
+                                  AuthController.instance.isLoading.value
+                                      ? null
+                                      : AuthController.instance
+                                          .daftar(
+                                              daftarC.rool.trim(),
+                                              c.emailsignupC.text.trim(),
+                                              c.namasignupC.text.trim(),
+                                              c.rtsignupC.text.trim(),
+                                              c.rwsignupC.text.trim(),
+                                              c.wasignupC.text.trim(),
+                                              c.passwordsignupC.text.trim(),
+                                              c.confirmpasswordsignupC.text
+                                                  .trim())
+                                          .whenComplete(() {
+                                          c.emailsignupC.clear();
+                                          c.namasignupC.clear();
+                                          c.rtsignupC.clear();
+                                          c.rwsignupC.clear();
+                                          c.wasignupC.clear();
+                                          c.passwordsignupC.clear();
+                                          c.confirmpasswordsignupC.clear();
+                                        });
                                 },
                                 style: btnStylePrimary,
-                                child: const Text(
-                                  "Daftar",
-                                  style: appFontButton,
-                                )),
+                                child: AuthController.instance.isLoading.value
+                                    ? const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircularProgressIndicator(
+                                              color: colorBackground),
+                                          SizedBox(width: 16),
+                                          Text("Sedang memuat...",
+                                              style: appFontButton),
+                                        ],
+                                      )
+                                    : const Text(
+                                        "Daftar",
+                                        style: appFontButton,
+                                      ))),
                           ),
                           const SizedBox(height: 16),
                           Row(

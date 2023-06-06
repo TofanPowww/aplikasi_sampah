@@ -87,22 +87,33 @@ class _TambahProdukViewState extends State<TambahProdukView> {
             SizedBox(
                 width: double.infinity,
                 height: 56,
-                child: ElevatedButton(
-                    onPressed: () async {
-                      await control
-                          .tambahProduk(
-                        control.namaProdukAdd.text.trim(),
-                        control.desProdukAdd.text.trim(),
-                        int.parse(control.poinProdukAdd.text.trim()),
-                      )
-                          .whenComplete(() {
-                        control.namaProdukAdd.clear();
-                        control.desProdukAdd.clear();
-                        control.poinProdukAdd.clear();
-                      });
+                child: Obx(() => ElevatedButton(
+                    onPressed: () {
+                      control.isLoading.value
+                          ? null
+                          : control
+                              .tambahProduk(
+                              control.namaProdukAdd.text.trim(),
+                              control.desProdukAdd.text.trim(),
+                              int.parse(control.poinProdukAdd.text.trim()),
+                            )
+                              .whenComplete(() {
+                              control.namaProdukAdd.clear();
+                              control.desProdukAdd.clear();
+                              control.poinProdukAdd.clear();
+                            });
                     },
                     style: btnStylePrimary,
-                    child: const Text("Tambah", style: appFontButton)))
+                    child: control.isLoading.value
+                        ? const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(color: colorBackground),
+                              SizedBox(width: 16),
+                              Text("Sedang memuat...", style: appFontButton),
+                            ],
+                          )
+                        : const Text("Tambah", style: appFontButton))))
           ],
         )),
       )),

@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart' as s;
 
 class ProfilSayaController extends GetxController {
+  var isLoading = false.obs;
   TextEditingController emailC = TextEditingController();
   TextEditingController namaC = TextEditingController();
   TextEditingController rtC = TextEditingController();
@@ -27,6 +28,7 @@ class ProfilSayaController extends GetxController {
 
   //Update User Data//
   Future<void> updateProfile(String email) async {
+    isLoading.value = true;
     if (emailC.text.isNotEmpty &&
         namaC.text.isNotEmpty &&
         rtC.text.isNotEmpty &&
@@ -49,9 +51,11 @@ class ProfilSayaController extends GetxController {
           'no_wa': waC.text,
           //'foto_profil': imageUrl
         });
+        isLoading.value = false;
         Get.snackbar("Berhasil", "Data berhasil diupdate",
             backgroundColor: appSuccess, snackPosition: SnackPosition.TOP);
       } catch (e) {
+        isLoading.value = false;
         Get.snackbar("Gagal", "Data gagal diupdate",
             backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
       }

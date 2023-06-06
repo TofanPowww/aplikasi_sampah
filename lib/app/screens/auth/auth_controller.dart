@@ -12,6 +12,7 @@ import 'signup/daftar_controller.dart';
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   final c = Get.put(DaftarController());
+  var isLoading = false.obs;
 
   FirebaseAuth auth = FirebaseAuth.instance;
   Stream<User?> get streamAuthStatus => auth.userChanges();
@@ -39,6 +40,7 @@ class AuthController extends GetxController {
   //Daftar//
   Future<void> daftar(String rool, String email, String nama, String rt,
       String rw, String wa, String password, String konfirpass) async {
+    isLoading.value = true;    
     if (c.emailsignupC.text.isNotEmpty &&
         c.namasignupC.text.isNotEmpty &&
         c.rtsignupC.text.isNotEmpty &&
@@ -51,6 +53,7 @@ class AuthController extends GetxController {
               .createUserWithEmailAndPassword(email: email, password: password)
               .then((value) => postDetailsToFirestore(
                   rool, email, nama, rt, rw, wa, password));
+          isLoading.value = false;
           Get.snackbar(
             "Berhasil mendaftar",
             "akun berhasil didaftarkan",
@@ -59,7 +62,7 @@ class AuthController extends GetxController {
           );
         } on FirebaseAuthException catch (e) {
           if (e.code == 'email-already-in-use') {
-            print("Email already in use");
+            isLoading.value = false;
             Get.snackbar(
               "Gagal Mendaftar",
               "Email sudah digunakan",
@@ -68,6 +71,7 @@ class AuthController extends GetxController {
             );
           } else if (e.code == 'weak-password') {
             print("Weak Password");
+            isLoading.value = false;
             Get.snackbar(
               "Gagal Mendaftar",
               "Password kurang aman",
@@ -77,10 +81,12 @@ class AuthController extends GetxController {
           }
         }
       } else {
+        isLoading.value = false;
         Get.snackbar("Gagal", "Konfirmasi password salah",
             backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
       }
     } else {
+      isLoading.value = false;
       Get.snackbar("Gagal", "Masukkan semua data",
           backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
     }

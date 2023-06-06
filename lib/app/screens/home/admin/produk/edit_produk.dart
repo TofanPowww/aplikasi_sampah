@@ -92,15 +92,27 @@ class _EditProdukViewState extends State<EditProdukView> {
                 SizedBox(
                   width: double.infinity,
                   height: 56,
-                  child: ElevatedButton(
+                  child: Obx(() => ElevatedButton(
                       onPressed: () {
-                        produkC
-                            .updateProduk(produkData['produk_id'])
-                            .toString()
-                            .trim();
+                        produkC.isLoading.value
+                            ? null
+                            : produkC
+                                .updateProduk(produkData['produk_id'])
+                                .toString()
+                                .trim();
                       },
                       style: btnStylePrimary,
-                      child: const Text("Edit", style: appFontButton)),
+                      child: produkC.isLoading.value
+                          ? const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircularProgressIndicator(
+                                    color: colorBackground),
+                                SizedBox(width: 16),
+                                Text("Sedang memuat...", style: appFontButton),
+                              ],
+                            )
+                          : const Text("Edit", style: appFontButton))),
                 ),
                 const SizedBox(height: 16),
                 SizedBox(

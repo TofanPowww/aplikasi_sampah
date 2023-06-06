@@ -157,16 +157,30 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                           SizedBox(
                             width: double.infinity,
                             height: 56,
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  await resetC.resetPass(
-                                      resetC.passLamaC.text.trim(),
-                                      resetC.passBaruC.text.trim(),
-                                      resetC.passKonfirC.text.trim());
+                            child: Obx(() => ElevatedButton(
+                                onPressed: () {
+                                  resetC.isLoading.value
+                                      ? null
+                                      : resetC.resetPass(
+                                          resetC.passLamaC.text.trim(),
+                                          resetC.passBaruC.text.trim(),
+                                          resetC.passKonfirC.text.trim());
                                 },
                                 style: btnStylePrimary,
-                                child:
-                                    const Text("Simpan", style: appFontButton)),
+                                child: resetC.isLoading.value
+                                    ? const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircularProgressIndicator(
+                                              color: colorBackground),
+                                          SizedBox(width: 16),
+                                          Text("Sedang memuat...",
+                                              style: appFontButton),
+                                        ],
+                                      )
+                                    : const Text("Simpan",
+                                        style: appFontButton))),
                           ),
                           //End Submit Button//
                         ]))

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class ResetPasswordController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
+  var isLoading = false.obs;
 
   //Form Controller
   TextEditingController passLamaC = TextEditingController();
@@ -15,6 +16,7 @@ class ResetPasswordController extends GetxController {
   //Function Reset Password
   Future<void> resetPass(
       String passLama, String passBaru, String passKonfir) async {
+    isLoading.value = true;    
     if (passLamaC.text.isNotEmpty &&
         passBaruC.text.isNotEmpty &&
         passKonfirC.text.isNotEmpty) {
@@ -26,23 +28,28 @@ class ResetPasswordController extends GetxController {
           await auth.currentUser!
               .updatePassword(passBaru)
               .then((value) => updateDb(passBaru));
+          isLoading.value = false;
           Get.back();
           Get.snackbar("Berhasil", "Password berhasil diperbarui",
               backgroundColor: appSuccess, snackPosition: SnackPosition.TOP);
         } on FirebaseAuthException catch (e) {
           if (e.code == "wrong-password") {
+            isLoading.value = false;
             Get.snackbar("Gagal", "Password lama yang dimasukkan salah.",
                 backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
           }
         } catch (e) {
+          isLoading.value = false;
           Get.snackbar("Gagal", "Tidak dapat memperbarui password",
               backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
         }
       } else {
+        isLoading.value = false;
         Get.snackbar("Gagal", "Konfirmasi password salah",
             backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
       }
     } else {
+      isLoading.value = false;
       Get.snackbar("Gagal", "Masukkan semua data",
           backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
     }

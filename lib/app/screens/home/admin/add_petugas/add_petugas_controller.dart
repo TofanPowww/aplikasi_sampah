@@ -12,6 +12,8 @@ import 'package:printing/printing.dart';
 class AddPetugasController extends GetxController {
   static AddPetugasController instance = Get.find();
 
+  var isLoading = false.obs;
+
   //Firebase
   final db = FirebaseFirestore.instance;
 
@@ -33,6 +35,7 @@ class AddPetugasController extends GetxController {
   //Function Add Petugas//
   Future<void> tambahPetugas(String rool, String email, String nama, String wa,
       String password, String confirmpass) async {
+    isLoading.value = true;
     if (emailpetugasC.text.isNotEmpty &&
         namapetugasC.text.isNotEmpty &&
         wapetugasC.text.isNotEmpty &&
@@ -57,6 +60,7 @@ class AddPetugasController extends GetxController {
               'uid': uid,
             });
           }
+          isLoading.value = false;
           Get.snackbar(
             "Berhasil mendaftar",
             "akun berhasil didaftarkan",
@@ -65,9 +69,11 @@ class AddPetugasController extends GetxController {
           );
         } on FirebaseAuthException catch (e) {
           if (e.code == 'email-already-in-use') {
+            isLoading.value = false;
             Get.snackbar("Gagal Mendaftar", "Email telah digunakan",
                 backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
           } else if (e.code == 'weak-password') {
+            isLoading.value = false;
             Get.snackbar(
               "Gagal Mendaftar",
               "Password kurang aman",
@@ -77,10 +83,12 @@ class AddPetugasController extends GetxController {
           }
         }
       } else {
+        isLoading.value = false;
         Get.snackbar("Gagal", "Konfirmasi password salah",
             backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
       }
     } else {
+      isLoading.value = false;
       Get.snackbar("Gagal", "Masukkan semua data",
           backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
     }

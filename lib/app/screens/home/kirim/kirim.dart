@@ -360,20 +360,34 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                           SizedBox(
                             width: double.infinity,
                             height: 56,
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  await kirimC.addNewKirim(
-                                    kirimC.nama.text.trim(),
-                                    rt.trim(),
-                                    rw.trim(),
-                                    kirimC.dateinput.text.trim(),
-                                  );
+                            child: Obx(() => ElevatedButton(
+                                onPressed: () {
+                                  kirimC.isLoading.value
+                                      ? null
+                                      : kirimC.addNewKirim(
+                                          kirimC.nama.text.trim(),
+                                          rt.trim(),
+                                          rw.trim(),
+                                          kirimC.dateinput.text.trim(),
+                                        );
                                 },
                                 style: btnStylePrimary,
-                                child: const Text(
-                                  "Kirim Request",
-                                  style: appFontButton,
-                                )),
+                                child: kirimC.isLoading.value
+                                    ? const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircularProgressIndicator(
+                                              color: colorBackground),
+                                          SizedBox(width: 16),
+                                          Text("Sedang memuat...",
+                                              style: appFontButton),
+                                        ],
+                                      )
+                                    : const Text(
+                                        "Kirim Request",
+                                        style: appFontButton,
+                                      ))),
                           ),
                         ],
                       ),

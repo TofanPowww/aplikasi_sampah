@@ -170,16 +170,30 @@ class _ProfilSayaViewState extends State<ProfilSayaView> {
                               SizedBox(
                                   width: double.infinity,
                                   height: 56,
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                        await profilsayaC
-                                            .updateProfile(data['email']);
+                                  child: Obx(() => ElevatedButton(
+                                      onPressed: () {
+                                        profilsayaC.isLoading.value
+                                            ? null
+                                            : profilsayaC
+                                                .updateProfile(data['email']);
                                       },
                                       style: btnStylePrimary,
-                                      child: const Text(
-                                        "Simpan",
-                                        style: appFontButton,
-                                      )))
+                                      child: profilsayaC.isLoading.value
+                                          ? const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                CircularProgressIndicator(
+                                                    color: colorBackground),
+                                                SizedBox(width: 16),
+                                                Text("Sedang memuat...",
+                                                    style: appFontButton),
+                                              ],
+                                            )
+                                          : const Text(
+                                              "Simpan",
+                                              style: appFontButton,
+                                            ))))
                             ]))
                       ]);
                 } else {
