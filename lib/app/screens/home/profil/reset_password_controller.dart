@@ -8,12 +8,12 @@ class ResetPasswordController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   var isLoading = false.obs;
 
-  //Form Controller
+  //?Form Controller//
   TextEditingController passLamaC = TextEditingController();
   TextEditingController passBaruC = TextEditingController();
   TextEditingController passKonfirC = TextEditingController();
 
-  //Function Reset Password
+  //?Function Reset Password
   Future<void> resetPass(
       String passLama, String passBaru, String passKonfir) async {
     isLoading.value = true;    
@@ -55,7 +55,7 @@ class ResetPasswordController extends GetxController {
     }
   }
 
-  //Update User Firestore
+  //?Update User Firestore//
   updateDb(String passBaru) async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     await users

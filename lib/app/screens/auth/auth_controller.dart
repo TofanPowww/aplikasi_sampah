@@ -18,26 +18,26 @@ class AuthController extends GetxController {
   Stream<User?> get streamAuthStatus => auth.userChanges();
   Rx user = UsersModel().obs;
 
-  //Get current user data
+  //?Get current user data//
   Future getCurrentUser() async {
     return auth.currentUser!;
   }
 
-  //Routing
+  //?Routing//
   toSignup() => Get.toNamed(AppLinks.SIGNUP);
   toLogin() => Get.offAllNamed(AppLinks.LOGIN);
 
-  //Dropdown Button//
+  //?Dropdown Button//
   var option = ['Warga'];
   var currentItemSelected = "Warga";
   var rool = "Warga";
 
-  //Image Picker//
+  //?Image Picker//
   File? imageProfil;
   String? imageProfilUrl;
   //End Image PIcker//
 
-  //Daftar//
+  //?Daftar//
   Future<void> daftar(String rool, String email, String nama, String rt,
       String rw, String wa, String password, String konfirpass) async {
     isLoading.value = true;    
@@ -92,7 +92,7 @@ class AuthController extends GetxController {
     }
   }
 
-  //Login//
+  //?Login//
   Future<void> login(String email, String password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
@@ -117,7 +117,7 @@ class AuthController extends GetxController {
     }
   }
 
-  //Simpan Data User di Firestore//
+  //?Simpan Data User di Firestore//
   Future<void> postDetailsToFirestore(String rool, String email, String nama,
       String rt, String rw, String wa, String password) async {
     final ref = FirebaseStorage.instance
@@ -161,7 +161,7 @@ class AuthController extends GetxController {
     Get.offNamed(AppLinks.LOGIN);
   }
 
-  //Direct to Home Page
+  //?Direct to Home Page//
   Future<void> toHome() async {
     FirebaseFirestore.instance
         .collection('users')
@@ -195,7 +195,7 @@ class AuthController extends GetxController {
     });
   }
 
-  //Logout
+  //?Logout//
   Future<void> logOut() async {
     await auth.signOut();
     Get.offAllNamed(AppLinks.LOGIN);

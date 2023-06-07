@@ -20,13 +20,14 @@ class ProfilSayaController extends GetxController {
   s.FirebaseStorage media = s.FirebaseStorage.instance;
   File? imageProfil;
   String? extImageProfil;
-  //Read User Data//
+
+  //?Read User Data//
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {
     String email = auth.currentUser!.email!;
     yield* db.collection('users').doc(email).snapshots();
   }
 
-  //Update User Data//
+  //?Update User Data//
   Future<void> updateProfile(String email) async {
     isLoading.value = true;
     if (emailC.text.isNotEmpty &&
