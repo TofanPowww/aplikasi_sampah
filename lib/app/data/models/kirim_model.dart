@@ -18,9 +18,12 @@ class KirimModel {
     this.rw,
     this.tgl,
     this.fotoSampah,
+    this.petugas,
     this.jumlah,
     this.poin,
     this.status,
+    this.keterangan,
+    this.tanggalKonfirmasi,
     this.creationTime,
     this.confirmTime,
   });
@@ -32,9 +35,12 @@ class KirimModel {
   String? rw;
   String? tgl;
   String? fotoSampah;
+  String? petugas;
   int? jumlah;
   String? poin;
   String? status;
+  String? keterangan;
+  String? tanggalKonfirmasi;
   String? creationTime;
   String? confirmTime;
 
@@ -46,9 +52,12 @@ class KirimModel {
         rw: json["rw"],
         tgl: json["tgl"],
         fotoSampah: json["foto_sampah"],
+        petugas: json["petugas"],
         jumlah: json["jumlah"],
         poin: json["poin"],
         status: json["status"],
+        keterangan: json["keterangan"],
+        tanggalKonfirmasi: json["tanggalKonfirmasi"],
         creationTime: json["creationTime"],
         confirmTime: json["confirmTime"],
       );
@@ -61,9 +70,12 @@ class KirimModel {
         "rw": rw,
         "tgl": tgl,
         "foto_sampah": fotoSampah,
+        "petugas": petugas,
         "jumlah": jumlah,
         "poin": poin,
         "status": status,
+        "keterangan": keterangan,
+        "tanggalKonfirmasi": tanggalKonfirmasi,
         "creationTime": creationTime,
         "confirmTime": confirmTime,
       };

@@ -16,3 +16,4 @@ const colorAccent2 = Color.fromRGBO(241, 255, 92, 1);
 const colorBackground = Color.fromRGBO(242, 247, 247, 1);
 const colorBackground2 = Color.fromRGBO(240, 240, 245, 1);
 const colorBlack = Color.fromRGBO(16, 16, 20, 1);
+const colorGray = Color.fromRGBO(181, 176, 181, 1);

@@ -282,7 +282,7 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                               );
                               if (pickedDate != null) {
                                 String formattedDate =
-                                    DateFormat("E, dd MMM yyyy")
+                                    DateFormat("EEEE, dd MMMM YYYY")
                                         .format(pickedDate);
                                 setState(() {
                                   kirimC.dateinput.text =

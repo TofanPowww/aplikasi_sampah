@@ -32,15 +32,18 @@ class RequestPengambilanController extends GetxController {
   Future<void> updateTransaksi(String id, String email, String tgl, int jumlah,
       String status, String keterangan) async {
     isLoading.value = true;
+    final petugas = await usersDb.doc(auth.currentUser!.email).get();
     try {
       //* Update Transaksi Sampah pada Collection Kirim User //
-      final petugas = await usersDb.doc(auth.currentUser!.email).get();
       await usersDb.doc(email).collection("kirim").doc(id).update({
         "petugas": petugas.get("nama_lengkap"),
         "status": status,
         "jumlah": jumlah,
         "poin": jumlah * 200,
-        "keterangan": keterangan
+        "keterangan": keterangan,
+        "tanggalKonfirmasi":
+            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss").format(DateTime.now()),
+        "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
       });
 
       //* Update Jumlah Poin Warga //
@@ -55,7 +58,9 @@ class RequestPengambilanController extends GetxController {
         "jumlah": jumlah,
         "poin": jumlah * 200,
         "keterangan": keterangan,
-        "confirmTime": DateFormat.yMMMEd().format(DateTime.now())
+        "tanggalKonfirmasi":
+            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss").format(DateTime.now()),
+        "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
       });
       isLoading.value = false;
       Get.back();
@@ -76,10 +81,14 @@ class RequestPengambilanController extends GetxController {
 
     //* Update Users Kirim Model //
     modelUserKirim(UsersKirimModel(
-      status: status,
-      jumlah: jumlah,
-      poin: jumlah * 200,
-    ));
+        status: status,
+        jumlah: jumlah,
+        poin: jumlah * 200,
+        petugas: petugas.get("nama_lengkap"),
+        keterangan: keterangan,
+        tanggalKonfirmasi:
+            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss").format(DateTime.now()),
+        confirmTime: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())));
     modelUserKirim.refresh();
   }
 }

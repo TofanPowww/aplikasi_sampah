@@ -76,7 +76,7 @@ class KirimController extends GetxController {
           "poin": 0,
           "status": status,
           "creationTime":
-              DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
 
         //* Menambah Transaksi Sampah //
@@ -92,7 +92,7 @@ class KirimController extends GetxController {
           "poin": 0,
           "status": status,
           "creationTime":
-              DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
 
         //* Update Users Kirim Model //
@@ -103,7 +103,7 @@ class KirimController extends GetxController {
             poin: 0,
             status: status,
             creationTime:
-                DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())));
+                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())));
 
         isLoading.value = false;
         Get.snackbar(

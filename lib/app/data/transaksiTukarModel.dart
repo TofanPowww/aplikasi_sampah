@@ -7,6 +7,8 @@ class TransaksiTukarModel {
   final String namaProduk;
   final int poinProduk;
   final String status;
+  final String tanggal;
+  final String tanggalKonfirmasi;
   final String creationTime;
   final String confirmTime;
 
@@ -17,6 +19,8 @@ class TransaksiTukarModel {
     required this.namaProduk,
     required this.poinProduk,
     required this.status,
+    required this.tanggal,
+    required this.tanggalKonfirmasi,
     required this.creationTime,
     required this.confirmTime,
   });
@@ -29,6 +33,8 @@ class TransaksiTukarModel {
         namaProduk: json["nama_produk"] ?? "",
         poinProduk: json["poin_produk"] ?? 0,
         status: json["status"] ?? "",
+        tanggal: json["tanggal"] ?? "",
+        tanggalKonfirmasi: json["tanggalKonfirmasi"] ?? "",
         creationTime: json["creationTime"] ?? "",
         confirmTime: json["confirmTime"] ?? "",
       );
@@ -40,6 +46,8 @@ class TransaksiTukarModel {
         "nama_produk": namaProduk,
         "poin_produk": poinProduk,
         "status": status,
+        "tanggal": tanggal,
+        "tanggalKonfirmasi": tanggalKonfirmasi,
         "creationTime": creationTime,
         "confirmTime": confirmTime,
       };

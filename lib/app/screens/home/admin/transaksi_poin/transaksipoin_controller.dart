@@ -33,8 +33,10 @@ class TransaksiPoinController extends GetxController {
         //*Mengupdate Status Transaksi Pada Collection Transaksi Sampah
         await tPoinDb.doc(id).update({
           "status": "Selesai",
+          "tanggalKonfirmasi":
+              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss').format(DateTime.now()),
           "confirmTime":
-              DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
 
         //*Mengambil Email Warga
@@ -46,8 +48,10 @@ class TransaksiPoinController extends GetxController {
         //*Mengupdate Status Transaksi Tukar Pada Warga
         await usersDb.doc(emailWarga).collection("tukar").doc(id).update({
           "status": "Selesai",
+          "tanggalKonfirmasi":
+              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss').format(DateTime.now()),
           "confirmTime":
-              DateFormat('E, d MMM yyyy HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
 
         //*Mengupdate Jumlah Poin Warga
@@ -62,10 +66,18 @@ class TransaksiPoinController extends GetxController {
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
         );
-      } else {
+      }
+      if (hasil.data() == null) {
         Get.snackbar(
           "Gagal",
           "Kode Penukaran Tidak Ditemukan",
+          backgroundColor: appDanger,
+          snackPosition: SnackPosition.TOP,
+        );
+      } else {
+        Get.snackbar(
+          "Batal",
+          "Batal Memindai Kode QR",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
         );
