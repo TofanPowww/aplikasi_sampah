@@ -1,4 +1,3 @@
-import 'package:aplikasi_sampah/app/data/models/users_kirim_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,6 @@ class RequestPengambilanController extends GetxController {
 
   //? Model //
   var modelUser = UsersModel().obs;
-  var modelUserKirim = UsersKirimModel().obs;
 
   //? Update Transaksi Sampah //
   Future<void> updateTransaksi(String id, String email, String tgl, int jumlah,
@@ -41,8 +39,8 @@ class RequestPengambilanController extends GetxController {
         "jumlah": jumlah,
         "poin": jumlah * 200,
         "keterangan": keterangan,
-        "tanggalKonfirmasi":
-            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss", "id_ID").format(DateTime.now()),
+        "tanggalKonfirmasi": DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+            .format(DateTime.now()),
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
       });
 
@@ -58,8 +56,8 @@ class RequestPengambilanController extends GetxController {
         "jumlah": jumlah,
         "poin": jumlah * 200,
         "keterangan": keterangan,
-        "tanggalKonfirmasi":
-            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss", "id_ID").format(DateTime.now()),
+        "tanggalKonfirmasi": DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+            .format(DateTime.now()),
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
       });
       isLoading.value = false;
@@ -78,17 +76,5 @@ class RequestPengambilanController extends GetxController {
     //* Update Users Model //
     modelUser(UsersModel(poin: FieldValue.increment(jumlah * 200) as int));
     modelUser.refresh();
-
-    //* Update Users Kirim Model //
-    modelUserKirim(UsersKirimModel(
-        status: status,
-        jumlah: jumlah,
-        poin: jumlah * 200,
-        petugas: petugas.get("nama_lengkap"),
-        keterangan: keterangan,
-        tanggalKonfirmasi:
-            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss", "id_ID").format(DateTime.now()),
-        confirmTime: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())));
-    modelUserKirim.refresh();
   }
 }

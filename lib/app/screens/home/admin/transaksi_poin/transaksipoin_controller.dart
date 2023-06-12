@@ -14,7 +14,7 @@ class TransaksiPoinController extends GetxController {
   FirebaseFirestore db = FirebaseFirestore.instance;
   CollectionReference transaksiDb =
       FirebaseFirestore.instance.collection('transaksiTukar');
-  final poinDb = FirebaseFirestore.instance.collection("transaksiSampah");
+  final poinDb = FirebaseFirestore.instance.collection("transaksiTukar");
 
   //? Stream Data Transaksi Sampah//
   Stream<QuerySnapshot> transaksiTukarStream() {
@@ -35,7 +35,7 @@ class TransaksiPoinController extends GetxController {
         await tPoinDb.doc(id).update({
           "status": "Selesai",
           "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss', "id_ID")
+              DateFormat('EEEE, dd MMMM yyyy HH:mm:ss', "id_ID")
                   .format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
@@ -51,7 +51,7 @@ class TransaksiPoinController extends GetxController {
         await usersDb.doc(emailWarga).collection("tukar").doc(id).update({
           "status": "Selesai",
           "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss', "id_ID")
+              DateFormat('EEEE, dd MMMM yyyy HH:mm:ss', "id_ID")
                   .format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
@@ -74,13 +74,6 @@ class TransaksiPoinController extends GetxController {
         Get.snackbar(
           "Gagal",
           "Kode Penukaran Tidak Ditemukan",
-          backgroundColor: appDanger,
-          snackPosition: SnackPosition.TOP,
-        );
-      } else {
-        Get.snackbar(
-          "Batal",
-          "Batal Memindai Kode QR",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
         );
@@ -310,7 +303,7 @@ class TransaksiPoinController extends GetxController {
                 style:
                     pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)),
             pw.SizedBox(height: 8),
-            pw.Text("Daftar Transaksi Sampah",
+            pw.Text("Daftar Transaksi Poin",
                 style: pw.TextStyle(
                     fontSize: 20, fontWeight: pw.FontWeight.normal)),
             pw.SizedBox(height: 16),
@@ -380,5 +373,9 @@ class TransaksiPoinController extends GetxController {
                 ])
           ];
         }));
+    //*Print PDF
+    await Printing.layoutPdf(
+        name: 'Transaksi_Poin',
+        onLayout: (PdfPageFormat format) async => pdf.save());
   }
 }

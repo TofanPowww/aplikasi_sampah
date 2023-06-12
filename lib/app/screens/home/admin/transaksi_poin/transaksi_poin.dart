@@ -1,6 +1,7 @@
 import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
+import 'package:aplikasi_sampah/app/screens/home/admin/transaksi_poin/cetak_transaksi_poin.dart';
 import 'package:aplikasi_sampah/routes/links.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,13 @@ class _TransaksiPoinViewState extends State<TransaksiPoinView> {
                 color: colorBackground)),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CetakTransaksiPoin(),
+                    ));
+              },
               icon: const Icon(Icons.picture_as_pdf_rounded),
               color: colorBackground)
         ],
