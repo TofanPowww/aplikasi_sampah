@@ -4,6 +4,7 @@ import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'transaksisampah_controller.dart';
@@ -86,7 +87,7 @@ class _CetakTransaksiSampahState extends State<CetakTransaksiSampah> {
               color: (value3 == index) ? colorPrimary : colorGray,
               fontFamily: "Satoshi",
               fontWeight:
-                  (value3 == index) ? FontWeight.w700 : FontWeight.w500)),
+                  (value3 == index) ? FontWeight.w600 : FontWeight.w500)),
     );
   }
 
@@ -165,12 +166,54 @@ class _CetakTransaksiSampahState extends State<CetakTransaksiSampah> {
                           Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                customRadioButton3("Mei", 1),
+                                Expanded(
+                                    child: customRadioButton3("Januari", 1)),
                                 const SizedBox(width: 8),
-                                customRadioButton3("Juni", 2),
+                                Expanded(
+                                    child: customRadioButton3("Februari", 2)),
                                 const SizedBox(width: 8),
-                                customRadioButton3("Juli", 3)
-                              ])
+                                Expanded(child: customRadioButton3("Maret", 3)),
+                                const SizedBox(width: 8),
+                              ]),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(child: customRadioButton3("April", 4)),
+                              const SizedBox(width: 8),
+                              Expanded(child: customRadioButton3("Mei", 5)),
+                              const SizedBox(width: 8),
+                              Expanded(child: customRadioButton3("Juni", 6)),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: customRadioButton3("Juli", 7)),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                  flex: 2,
+                                  child: customRadioButton3("Agustus", 8)),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                  flex: 2,
+                                  child: customRadioButton3("September", 9)),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                  child: customRadioButton3("Oktober", 10)),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                  child: customRadioButton3("November", 11)),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                  child: customRadioButton3("Desember", 12))
+                            ],
+                          )
                         ]))
                 : const SizedBox(),
             const SizedBox(height: 16),
@@ -184,48 +227,168 @@ class _CetakTransaksiSampahState extends State<CetakTransaksiSampah> {
                       print("Semua jenis transaksi semua waktu");
                     }
                     if (value1 == 1 && value2 == 2) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
                       print("Semua jenis transaksi hari ini");
                     }
                     if (value1 == 1 && value2 == 3 && value3 == 1) {
-                      print("Semua jenis transaksi bulan Mei");
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 1");
                     }
                     if (value1 == 1 && value2 == 3 && value3 == 2) {
-                      print("Semua jenis transaksi bulan Juni");
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 2");
                     }
                     if (value1 == 1 && value2 == 3 && value3 == 3) {
-                      print("Semua jenis transaksi bulan Juli");
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 3");
+                    }
+                    if (value1 == 1 && value2 == 3 && value3 == 4) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 4");
+                    }
+                    if (value1 == 1 && value2 == 3 && value3 == 5) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 5");
+                    }
+                    if (value1 == 1 && value2 == 3 && value3 == 6) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 6");
+                    }
+                    if (value1 == 1 && value2 == 3 && value3 == 7) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 7");
+                    }
+                    if (value1 == 1 && value2 == 3 && value3 == 8) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 8");
+                    }
+                    if (value1 == 1 && value2 == 3 && value3 == 9) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 9");
+                    }
+                    if (value1 == 1 && value2 == 3 && value3 == 10) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 10");
+                    }
+                    if (value1 == 1 && value2 == 3 && value3 == 11) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 11");
+                    }
+                    if (value1 == 1 && value2 == 3 && value3 == 12) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Semua jenis transaksi bulan 12");
                     }
                     if (value1 == 2 && value2 == 1) {
                       control.cetakTransaksiSampah(value1, value2, 0);
                       print("Transaksi diterima semua waktu");
                     }
                     if (value1 == 2 && value2 == 2) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
                       print("Transaksi diterima hari ini");
                     }
                     if (value1 == 2 && value2 == 3 && value3 == 1) {
-                      print("Transaksi diterima bulan mei");
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 1");
                     }
                     if (value1 == 2 && value2 == 3 && value3 == 2) {
-                      print("Transaksi diterima bulan juni");
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 2");
                     }
                     if (value1 == 2 && value2 == 3 && value3 == 3) {
-                      print("Transaksi diterima bulan juli");
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 3");
+                    }
+                    if (value1 == 2 && value2 == 3 && value3 == 4) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 4");
+                    }
+                    if (value1 == 2 && value2 == 3 && value3 == 5) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 5");
+                    }
+                    if (value1 == 2 && value2 == 3 && value3 == 6) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 6");
+                    }
+                    if (value1 == 2 && value2 == 3 && value3 == 7) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 7");
+                    }
+                    if (value1 == 2 && value2 == 3 && value3 == 8) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 8");
+                    }
+                    if (value1 == 2 && value2 == 3 && value3 == 9) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 9");
+                    }
+                    if (value1 == 2 && value2 == 3 && value3 == 10) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 10");
+                    }
+                    if (value1 == 2 && value2 == 3 && value3 == 11) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 11");
+                    }
+                    if (value1 == 2 && value2 == 3 && value3 == 12) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 12");
                     }
                     if (value1 == 3 && value2 == 1) {
                       control.cetakTransaksiSampah(value1, value2, 0);
                       print("Transaksi ditolak semua waktu");
                     }
                     if (value1 == 3 && value2 == 2) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
                       print("Transaksi ditolak hari ini");
                     }
                     if (value1 == 3 && value2 == 3 && value3 == 1) {
-                      print("Transaksi diterima bulan mei");
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 1");
                     }
                     if (value1 == 3 && value2 == 3 && value3 == 2) {
-                      print("Transaksi diterima bulan juni");
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 2");
                     }
                     if (value1 == 3 && value2 == 3 && value3 == 3) {
-                      print("Transaksi diterima bulan juli");
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 3");
+                    }
+                    if (value1 == 3 && value2 == 3 && value3 == 4) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 4");
+                    }
+                    if (value1 == 3 && value2 == 3 && value3 == 5) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 5");
+                    }
+                    if (value1 == 3 && value2 == 3 && value3 == 6) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 6");
+                    }
+                    if (value1 == 3 && value2 == 3 && value3 == 7) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 7");
+                    }
+                    if (value1 == 3 && value2 == 3 && value3 == 8) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 8");
+                    }
+                    if (value1 == 3 && value2 == 3 && value3 == 9) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 9");
+                    }
+                    if (value1 == 3 && value2 == 3 && value3 == 10) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 10");
+                    }
+                    if (value1 == 3 && value2 == 3 && value3 == 11) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 11");
+                    }
+                    if (value1 == 3 && value2 == 3 && value3 == 12) {
+                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      print("Transaksi diterima bulan 12");
                     }
                   },
                   style: btnStylePrimary,
