@@ -14,6 +14,7 @@ class TransaksiPoinController extends GetxController {
   FirebaseFirestore db = FirebaseFirestore.instance;
   CollectionReference transaksiDb =
       FirebaseFirestore.instance.collection('transaksiTukar');
+  final poinDb = FirebaseFirestore.instance.collection("transaksiSampah");
 
   //? Stream Data Transaksi Sampah//
   Stream<QuerySnapshot> transaksiTukarStream() {
@@ -34,7 +35,8 @@ class TransaksiPoinController extends GetxController {
         await tPoinDb.doc(id).update({
           "status": "Selesai",
           "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss').format(DateTime.now()),
+              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss', "id_ID")
+                  .format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -49,7 +51,8 @@ class TransaksiPoinController extends GetxController {
         await usersDb.doc(emailWarga).collection("tukar").doc(id).update({
           "status": "Selesai",
           "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss').format(DateTime.now()),
+              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss', "id_ID")
+                  .format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -228,5 +231,154 @@ class TransaksiPoinController extends GetxController {
     await Printing.layoutPdf(
         name: 'Bukti_Penukaran',
         onLayout: (PdfPageFormat format) async => pdf.save());
+  }
+
+  //? Funngsi Mengambil Data //
+  void cetakTransaksiPoin(int v1, int v2) async {
+    if (v1 == 1 && v2 == 0) {
+      final tSemua = poinDb.where("status", isEqualTo: "Selesai");
+      await tSemua.get().then((value) => printPdf(value, "Semua"));
+    }
+  }
+
+  //? Fungsi Cetak //
+  RxList<TransaksiTukarModel> allDataTransaksi =
+      List<TransaksiTukarModel>.empty().obs;
+  void printPdf(
+      QuerySnapshot<Map<String, dynamic>> getData, String waktu) async {
+    allDataTransaksi([]);
+    for (var element in getData.docs) {
+      allDataTransaksi.add(TransaksiTukarModel.fromJson(element.data()));
+    }
+    final pdf = pw.Document();
+    pdf.addPage(pw.MultiPage(
+        pageFormat: PdfPageFormat.letter,
+        orientation: pw.PageOrientation.landscape,
+        build: (pw.Context context) {
+          List<pw.TableRow> allTransaksi =
+              List.generate(allDataTransaksi.length, (index) {
+            TransaksiTukarModel data = allDataTransaksi[index];
+            return pw.TableRow(
+                verticalAlignment: pw.TableCellVerticalAlignment.middle,
+                children: [
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text("${index + 1}",
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.kode,
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.email,
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.namaProduk,
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.poinProduk.toString(),
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.tanggalKonfirmasi,
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.status,
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                ]);
+          });
+          return [
+            pw.Text("Aplikasi Pickup Sampah Digital",
+                style:
+                    pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)),
+            pw.SizedBox(height: 8),
+            pw.Text("Daftar Transaksi Sampah",
+                style: pw.TextStyle(
+                    fontSize: 20, fontWeight: pw.FontWeight.normal)),
+            pw.SizedBox(height: 16),
+            pw.Text("Waktu Transaksi: $waktu",
+                style: pw.TextStyle(
+                    fontSize: 16, fontWeight: pw.FontWeight.normal)),
+            pw.SizedBox(height: 32),
+            pw.Table(
+                border: pw.TableBorder.all(width: 1.5, color: PdfColors.black),
+                children: [
+                  pw.TableRow(
+                      decoration:
+                          const pw.BoxDecoration(color: PdfColors.grey300),
+                      verticalAlignment: pw.TableCellVerticalAlignment.middle,
+                      children: [
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(4),
+                            child: pw.Text("No",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Kode",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Email Warga",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Nama Produk",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Poin Produk",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Tanggal Konfirmasi",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Status",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                      ]),
+                  ...allTransaksi
+                ])
+          ];
+        }));
   }
 }

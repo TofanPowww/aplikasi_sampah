@@ -42,7 +42,7 @@ class RequestPengambilanController extends GetxController {
         "poin": jumlah * 200,
         "keterangan": keterangan,
         "tanggalKonfirmasi":
-            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss").format(DateTime.now()),
+            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss", "id_ID").format(DateTime.now()),
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
       });
 
@@ -59,7 +59,7 @@ class RequestPengambilanController extends GetxController {
         "poin": jumlah * 200,
         "keterangan": keterangan,
         "tanggalKonfirmasi":
-            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss").format(DateTime.now()),
+            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss", "id_ID").format(DateTime.now()),
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
       });
       isLoading.value = false;
@@ -87,7 +87,7 @@ class RequestPengambilanController extends GetxController {
         petugas: petugas.get("nama_lengkap"),
         keterangan: keterangan,
         tanggalKonfirmasi:
-            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss").format(DateTime.now()),
+            DateFormat("EEEE, dd MMMM YYYY HH:mm:ss", "id_ID").format(DateTime.now()),
         confirmTime: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())));
     modelUserKirim.refresh();
   }

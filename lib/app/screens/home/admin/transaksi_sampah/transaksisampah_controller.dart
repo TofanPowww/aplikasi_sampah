@@ -13,14 +13,20 @@ class TransaksiSampahController extends GetxController {
     return db
         .collection("transaksiSampah")
         .where("status", isNotEqualTo: "Menunggu")
+        .orderBy("confirmTime", descending: true)
         .snapshots();
   }
 
+  //? Fungsi Mengambil Data //
   void cetakTransaksiSampah(int v1, int v2, int v3) async {
     if (v1 == 1 && v2 == 1 && v3 == 0) {
       final tSemua = tSampahDb.where("status", isNotEqualTo: "Menunggu");
       await tSemua.get().then((value) => printPdf(value, "Semua", "Semua"));
     }
+    // if (v1 == 1 && v2 == 1 && v3 == 1) {
+    //   final tSemua = tSampahDb.where("status", isNotEqualTo: "Menunggu").where("tanggalKonfirmasi", arrayContains: "");
+    //   await tSemua.get().then((value) => printPdf(value, "Semua", "Semua"));
+    // }
     if (v1 == 2 && v2 == 1 && v3 == 0) {
       final tSemua = tSampahDb.where("status", isEqualTo: "Diterima");
       await tSemua.get().then((value) => printPdf(value, "Diterima", "Semua"));
@@ -31,6 +37,7 @@ class TransaksiSampahController extends GetxController {
     }
   }
 
+  //? Fungsi Cetak //
   RxList<TransaksiSampahModel> allDataTransaksi =
       List<TransaksiSampahModel>.empty().obs;
   void printPdf(QuerySnapshot<Map<String, dynamic>> getData, String status,
@@ -41,7 +48,8 @@ class TransaksiSampahController extends GetxController {
     }
     final pdf = pw.Document();
     pdf.addPage(pw.MultiPage(
-        pageFormat: PdfPageFormat.a4,
+        pageFormat: PdfPageFormat.letter,
+        orientation: pw.PageOrientation.landscape,
         build: (pw.Context context) {
           List<pw.TableRow> allTransaksi =
               List.generate(allDataTransaksi.length, (index) {
@@ -52,6 +60,12 @@ class TransaksiSampahController extends GetxController {
                   pw.Padding(
                       padding: const pw.EdgeInsets.all(8),
                       child: pw.Text("${index + 1}",
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.email,
                           style: pw.TextStyle(
                               fontSize: 11, fontWeight: pw.FontWeight.normal),
                           textAlign: pw.TextAlign.center)),
@@ -70,6 +84,30 @@ class TransaksiSampahController extends GetxController {
                   pw.Padding(
                       padding: const pw.EdgeInsets.all(8),
                       child: pw.Text(data.status,
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.status,
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.jumlah.toString(),
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.poin.toString(),
+                          style: pw.TextStyle(
+                              fontSize: 11, fontWeight: pw.FontWeight.normal),
+                          textAlign: pw.TextAlign.center)),
+                  pw.Padding(
+                      padding: const pw.EdgeInsets.all(8),
+                      child: pw.Text(data.keterangan,
                           style: pw.TextStyle(
                               fontSize: 11, fontWeight: pw.FontWeight.normal),
                           textAlign: pw.TextAlign.center)),
@@ -109,6 +147,13 @@ class TransaksiSampahController extends GetxController {
                                 textAlign: pw.TextAlign.center)),
                         pw.Padding(
                             padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Email Warga",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
                             child: pw.Text("Nama Warga",
                                 style: pw.TextStyle(
                                     fontSize: 12,
@@ -124,6 +169,34 @@ class TransaksiSampahController extends GetxController {
                         pw.Padding(
                             padding: const pw.EdgeInsets.all(8),
                             child: pw.Text("Status",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Tanggal Konfirmasi",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Jumlah Sampah",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Jumlah Poin",
+                                style: pw.TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Keterangan",
                                 style: pw.TextStyle(
                                     fontSize: 12,
                                     fontWeight: pw.FontWeight.bold),

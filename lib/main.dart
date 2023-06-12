@@ -17,8 +17,8 @@ void main() async {
   FlutterNativeSplash.remove();
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();
-  await initializeDateFormatting('id_ID', null);
-  runApp(const MyApp());
+  await initializeDateFormatting('id_ID', null)
+      .then((_) => runApp(const MyApp()));
 }
 
 class MyApp extends StatefulWidget {

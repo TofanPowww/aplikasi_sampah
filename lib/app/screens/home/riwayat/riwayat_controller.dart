@@ -14,7 +14,7 @@ class RiwayatController extends GetxController {
         .collection("users")
         .doc(users!.email)
         .collection("kirim")
-        .orderBy('tgl', descending: true)
+        .orderBy("creationTime", descending: true)
         .snapshots();
   }
 }

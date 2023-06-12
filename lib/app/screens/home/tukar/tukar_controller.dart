@@ -49,7 +49,7 @@ class TukarController extends GetxController {
         "poin_produk": poinProduk,
         "status": status,
         "tanggal":
-            DateFormat('EEEE, dd MMMM YYYY HH:mm:ss').format(DateTime.now()),
+            DateFormat('EEEE, dd MMMM YYYY HH:mm:ss', "id_ID").format(DateTime.now()),
         "creationTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
       }).then((DocumentReference doc) async {
         tukarUser.doc(doc.id).update({"kode": doc.id});
@@ -63,7 +63,7 @@ class TukarController extends GetxController {
           "poin_produk": poinProduk,
           "status": status,
           "tanggal":
-              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss').format(DateTime.now()),
+              DateFormat('EEEE, dd MMMM YYYY HH:mm:ss', "id_ID").format(DateTime.now()),
           "creationTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });

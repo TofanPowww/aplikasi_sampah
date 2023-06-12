@@ -12,12 +12,12 @@ import 'riwayat_pengambilan_controller.dart';
 class RiwayatPengambilan extends GetView<RiwayatPengambilanController> {
   RiwayatPengambilan({super.key});
 
-  final Stream<QuerySnapshot> _transaksiSampahStream =
-      FirebaseFirestore.instance
-          .collection('transaksiSampah')
-          .where('status', isNotEqualTo: 'Menunggu')
-          // .orderBy('confirmTime', descending: true)
-          .snapshots();
+  final Stream<QuerySnapshot> _transaksiSampahStream = FirebaseFirestore
+      .instance
+      .collection('transaksiSampah')
+      .where('status', isNotEqualTo: 'Menunggu')
+      .orderBy('confirmTime', descending: true)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
