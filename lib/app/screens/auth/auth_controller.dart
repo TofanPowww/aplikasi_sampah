@@ -40,7 +40,6 @@ class AuthController extends GetxController {
   //?Image Picker//
   File? imageProfil;
   String? imageProfilUrl;
-  //End Image PIcker//
 
   //?Daftar//
   Future<void> daftar(String rool, String email, String nama, String rt,
