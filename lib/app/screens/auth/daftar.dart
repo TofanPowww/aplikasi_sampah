@@ -341,26 +341,15 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                 onPressed: () {
                                   AuthController.instance.isLoading.value
                                       ? null
-                                      : AuthController.instance
-                                          .daftar(
-                                              daftarC.rool.trim(),
-                                              c.emailsignupC.text.trim(),
-                                              c.namasignupC.text.trim(),
-                                              c.rtsignupC.text.trim(),
-                                              c.rwsignupC.text.trim(),
-                                              c.wasignupC.text.trim(),
-                                              c.passwordsignupC.text.trim(),
-                                              c.confirmpasswordsignupC.text
-                                                  .trim())
-                                          .whenComplete(() {
-                                          c.emailsignupC.clear();
-                                          c.namasignupC.clear();
-                                          c.rtsignupC.clear();
-                                          c.rwsignupC.clear();
-                                          c.wasignupC.clear();
-                                          c.passwordsignupC.clear();
-                                          c.confirmpasswordsignupC.clear();
-                                        });
+                                      : AuthController.instance.daftar(
+                                          daftarC.rool.trim(),
+                                          c.emailsignupC.text.trim(),
+                                          c.namasignupC.text.trim(),
+                                          c.rtsignupC.text.trim(),
+                                          c.rwsignupC.text.trim(),
+                                          c.wasignupC.text.trim(),
+                                          c.passwordsignupC.text.trim(),
+                                          c.confirmpasswordsignupC.text.trim());
                                 },
                                 style: btnStylePrimary,
                                 child: AuthController.instance.isLoading.value

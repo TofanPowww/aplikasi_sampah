@@ -15,12 +15,37 @@ class DetailRequestView extends StatefulWidget {
 
 class _DetailRequestVieqState extends State<DetailRequestView> {
   RxBool isLoading = false.obs;
+  int value = 0;
   String? status;
   final RequestPengambilanController kirimC =
       Get.put(RequestPengambilanController());
+  Widget customRadioButton(String text, int index) {
+    return OutlinedButton(
+      style: ButtonStyle(
+          shape: MaterialStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+          side: MaterialStatePropertyAll(BorderSide(
+            color: (value == index) ? colorPrimary : colorGray,
+            width: (value == index) ? 1.7 : 1,
+          ))),
+      onPressed: () {
+        setState(() {
+          value = index;
+        });
+      },
+      child: Text(text,
+          style: TextStyle(
+              color: (value == index) ? colorPrimary : colorGray,
+              fontFamily: "Satoshi",
+              fontWeight:
+                  (value == index) ? FontWeight.w700 : FontWeight.w500)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController jmlh = TextEditingController(text: "0");
+    TextEditingController jmlhOrganik = TextEditingController(text: "0");
+    TextEditingController jmlhAnorganik = TextEditingController(text: "0");
     TextEditingController ket = TextEditingController(text: "-");
     final request =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
@@ -122,37 +147,36 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
               decoration: boxDecorationInput,
               padding: const EdgeInsets.all(16),
               width: double.infinity,
-              height: 85,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              height: status == "Ditolak" ? 250 : 330,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Jumlah", style: appFontFormInput),
-                  const SizedBox(width: 24),
-                  SizedBox(
-                      width: 200,
+                  const Center(
+                    child: Text(
+                      "Jumlah",
+                      style: appFontFormInput,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text("Organik", style: appFontFormInput),
+                  const SizedBox(height: 4),
+                  Expanded(
                       child: status == "Ditolak"
                           ? TextFormField(
                               readOnly: true,
-                              controller: jmlh,
+                              controller: jmlhOrganik,
                               style: appFontHeding2,
                               decoration: const InputDecoration(
                                   filled: true,
                                   enabled: true,
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.never,
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: colorSecondary)),
+                                  focusedBorder: focusInputBorder,
                                   fillColor: colorSecondary,
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 0.0, color: colorSecondary),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10)))),
+                                  enabledBorder: enableInputBorder),
                             )
                           : TextFormField(
-                              controller: kirimC.jumlahC,
+                              controller: kirimC.jumlahOrganikC,
                               maxLines: 1,
                               keyboardType: TextInputType.number,
                               style: appFontHeding2,
@@ -163,15 +187,71 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                                   enabled: true,
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.never,
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: colorSecondary)),
+                                  focusedBorder: focusInputBorder,
                                   fillColor: colorSecondary,
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 0.0, color: colorSecondary),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10)))),
+                                  enabledBorder: enableInputBorder),
+                            )),
+                  const SizedBox(height: 8),
+                  const Text("Anorganik", style: appFontFormInput),
+                  status == "Ditolak"
+                      ? const SizedBox()
+                      : const SizedBox(height: 4),
+                  status == "Ditolak"
+                      ? const SizedBox()
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(child: customRadioButton("Plastik", 1)),
+                            const SizedBox(width: 4),
+                            Expanded(child: customRadioButton("Kertas", 2)),
+                            const SizedBox(width: 4),
+                            Expanded(child: customRadioButton("Logam", 3)),
+                          ],
+                        ),
+                  status == "Ditolak"
+                      ? const SizedBox()
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                                flex: 1, child: customRadioButton("Besi", 4)),
+                            const SizedBox(width: 4),
+                            Expanded(
+                                flex: 2,
+                                child: customRadioButton("Botol Kaca", 5))
+                          ],
+                        ),
+                  const SizedBox(height: 4),
+                  Expanded(
+                      child: status == "Ditolak"
+                          ? TextFormField(
+                              readOnly: true,
+                              controller: jmlhAnorganik,
+                              style: appFontHeding2,
+                              decoration: const InputDecoration(
+                                  filled: true,
+                                  enabled: true,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  focusedBorder: focusInputBorder,
+                                  fillColor: colorSecondary,
+                                  enabledBorder: enableInputBorder),
+                            )
+                          : TextFormField(
+                              controller: kirimC.jumlahAnorganikC,
+                              maxLines: 1,
+                              keyboardType: TextInputType.number,
+                              style: appFontHeding2,
+                              cursorColor: colorPrimary,
+                              cursorHeight: 25,
+                              decoration: const InputDecoration(
+                                  filled: true,
+                                  enabled: true,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  focusedBorder: focusInputBorder,
+                                  fillColor: colorSecondary,
+                                  enabledBorder: enableInputBorder),
                             )),
                 ],
               ),
@@ -188,33 +268,28 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text("Keterangan", style: appFontFormInput),
-                        const SizedBox(width: 24),
-                        SizedBox(
-                            width: 180,
-                            child: TextFormField(
-                              controller: kirimC.keteranganC,
-                              maxLines: 3,
-                              textAlign: TextAlign.justify,
-                              keyboardType: TextInputType.text,
-                              style: appFontFormInput,
-                              cursorColor: colorPrimary,
-                              cursorHeight: 25,
-                              decoration: const InputDecoration(
-                                filled: true,
-                                enabled: true,
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: colorSecondary)),
-                                fillColor: colorSecondary,
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.0, color: colorSecondary),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                              ),
-                            )),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: SizedBox(
+                              child: TextFormField(
+                            controller: kirimC.keteranganC,
+                            maxLines: 3,
+                            textAlign: TextAlign.justify,
+                            keyboardType: TextInputType.text,
+                            style: appFontFormInput,
+                            cursorColor: colorPrimary,
+                            cursorHeight: 25,
+                            decoration: const InputDecoration(
+                              filled: true,
+                              enabled: true,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
+                              focusedBorder: focusInputBorder,
+                              fillColor: colorSecondary,
+                              enabledBorder: enableInputBorder,
+                            ),
+                          )),
+                        ),
                       ],
                     ),
                   )
@@ -260,16 +335,23 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                                   request['id'].toString(),
                                   request['email'].toString(),
                                   request['tgl'].toString(),
-                                  int.parse(jmlh.text.trim()),
+                                  int.parse(jmlhOrganik.text.trim()),
+                                  int.parse(jmlhAnorganik.text.trim()),
                                   status!.trim(),
-                                  kirimC.keteranganC.text.trim())
+                                  kirimC.keteranganC.text.trim(),
+                                  0
+                                  )
                               : kirimC.updateTransaksi(
                                   request['id'].toString(),
                                   request['email'].toString(),
                                   request['tgl'].toString(),
-                                  int.parse(kirimC.jumlahC.text.trim()),
+                                  int.parse(kirimC.jumlahOrganikC.text.trim()),
+                                  int.parse(
+                                      kirimC.jumlahAnorganikC.text.trim()),
                                   status!.trim(),
-                                  ket.text.trim());
+                                  ket.text.trim(),
+                                  value
+                                  );
                     },
                     style: btnStylePrimary,
                     child: status == "Ditolak"

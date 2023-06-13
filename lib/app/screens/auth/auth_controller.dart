@@ -15,12 +15,17 @@ class AuthController extends GetxController {
   var isLoading = false.obs;
 
   FirebaseAuth auth = FirebaseAuth.instance;
-  Stream<User?> get streamAuthStatus => auth.userChanges();
+  final db = FirebaseFirestore.instance;
   Rx user = UsersModel().obs;
 
   //?Get current user data//
   Future getCurrentUser() async {
     return auth.currentUser!;
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> streamRole() async* {
+    String? email = auth.currentUser!.email;
+    yield* db.collection("users").doc(email).snapshots();
   }
 
   //?Routing//
@@ -40,12 +45,12 @@ class AuthController extends GetxController {
   //?Daftar//
   Future<void> daftar(String rool, String email, String nama, String rt,
       String rw, String wa, String password, String konfirpass) async {
-    isLoading.value = true;    
+    isLoading.value = true;
     if (c.emailsignupC.text.isNotEmpty &&
         c.namasignupC.text.isNotEmpty &&
         c.rtsignupC.text.isNotEmpty &&
         c.rwsignupC.text.isNotEmpty &&
-        c.passwordsignupC.text.isEmpty &&
+        c.passwordsignupC.text.isNotEmpty &&
         c.confirmpasswordsignupC.text.isNotEmpty) {
       if (password == konfirpass) {
         try {
@@ -135,7 +140,7 @@ class AuthController extends GetxController {
       'nama_lengkap': c.namasignupC.text,
       'rt': c.rtsignupC.text,
       'rw': c.rwsignupC.text,
-      'wa': c.wasignupC.text,
+      'no_wa': c.wasignupC.text,
       'password': c.passwordsignupC.text,
       'foto_profil': imageProfilUrl,
       'poin': 0
@@ -152,12 +157,13 @@ class AuthController extends GetxController {
         namaLengkap: currUserData["nama_lengkap"],
         rt: currUserData["rt"],
         rw: currUserData["rw"],
-        wa: currUserData["wa"],
+        wa: currUserData["no_wa"],
         poin: currUserData['poin'],
         fotoProfil: currUserData["foto_profil"],
         rool: currUserData["rool"],
         password: currUserData["password"]));
 
+    await auth.signOut();
     Get.offNamed(AppLinks.LOGIN);
   }
 
@@ -180,7 +186,7 @@ class AuthController extends GetxController {
             namaLengkap: currUserData["nama_lengkap"],
             rt: currUserData["rt"],
             rw: currUserData["rw"],
-            wa: currUserData["wa"],
+            wa: currUserData["no_wa"],
             poin: currUserData['poin'],
             fotoProfil: currUserData["foto_profil"],
             rool: currUserData["rool"],

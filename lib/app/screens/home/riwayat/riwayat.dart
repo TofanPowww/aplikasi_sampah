@@ -44,132 +44,145 @@ class _RiwayatViewState extends State<RiwayatView> {
           stream: riwayatC.riwayatStream(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return const Text('Something went wrong');
-            }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const SizedBox(
-                height: 500,
-                child: Center(
-                    child: CircularProgressIndicator(color: colorPrimary)),
-              );
-            }
-            return ListView(
-              primary: false,
-              shrinkWrap: true,
-              children: snapshot.data!.docs.map((DocumentSnapshot doc) {
-                Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
-                return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const DetailRiwayatView(),
-                              settings: RouteSettings(arguments: data)));
-                    },
-                    child: Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      margin: const EdgeInsets.all(8),
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: data['status'] == 'Menunggu'
-                            ? boxDecorationInputActive
-                            : boxDecorationInput,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+              return const Center(
+                  child: CircularProgressIndicator(color: colorPrimary));
+            } else if (snapshot.connectionState == ConnectionState.active ||
+                snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return const Text('Something went wrong');
+              } else if (snapshot.hasData) {
+                return ListView(
+                  primary: false,
+                  shrinkWrap: true,
+                  children: snapshot.data!.docs.map((DocumentSnapshot doc) {
+                    Map<String, dynamic> data =
+                        doc.data()! as Map<String, dynamic>;
+                    return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DetailRiwayatView(),
+                                  settings: RouteSettings(arguments: data)));
+                        },
+                        child: Card(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          margin: const EdgeInsets.all(8),
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: data['status'] == 'Menunggu'
+                                ? boxDecorationInputActive
+                                : boxDecorationInput,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text("Tanggal", style: appFontFormInput),
-                                const SizedBox(height: 4),
-                                Text(data['tgl'], style: appFontHeding3b),
-                                const SizedBox(height: 8),
-                                data['status'] == 'Diterima'
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Column(
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text("Tanggal",
+                                        style: appFontFormInput),
+                                    const SizedBox(height: 4),
+                                    Text(data['tgl'], style: appFontHeding3b),
+                                    const SizedBox(height: 8),
+                                    data['status'] == 'Diterima'
+                                        ? Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: [
-                                              const Text("Jumlah",
-                                                  style: appFontFormInput),
-                                              const SizedBox(height: 4),
-                                              Text(data['jumlah'].toString(),
-                                                  style: appFontHeding3b),
-                                            ],
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text("Poin",
-                                                  style: appFontFormInput),
-                                              const SizedBox(height: 4),
-                                              Text(data['poin'].toString(),
-                                                  style: appFontHeding3b),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const Text("Organik",
+                                                      style: appFontFormInput),
+                                                  const SizedBox(height: 4),
+                                                  Text(
+                                                      data['jumlah'].toString(),
+                                                      style: appFontHeding3b),
+                                                ],
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const Text("Anorganik",
+                                                      style: appFontFormInput),
+                                                  const SizedBox(height: 4),
+                                                  Text(data['poin'].toString(),
+                                                      style: appFontHeding3b),
+                                                ],
+                                              )
                                             ],
                                           )
-                                        ],
-                                      )
-                                    : const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Column(
+                                        : const Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: [
-                                              Text("Jumlah",
-                                                  style: appFontFormInput),
-                                              SizedBox(height: 4),
-                                              Text("-", style: appFontHeding3b),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text("Organik",
+                                                      style: appFontFormInput),
+                                                  SizedBox(height: 4),
+                                                  Text("-",
+                                                      style: appFontHeding3b),
+                                                ],
+                                              ),
+                                              SizedBox(width: 8),
+                                              Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text("Anorganik",
+                                                        style:
+                                                            appFontFormInput),
+                                                    SizedBox(height: 4),
+                                                    Text("-",
+                                                        style: appFontHeding3b),
+                                                  ])
                                             ],
-                                          ),
-                                          SizedBox(width: 8),
-                                          Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text("Poin",
-                                                    style: appFontFormInput),
-                                                SizedBox(height: 4),
-                                                Text("-",
-                                                    style: appFontHeding3b),
-                                              ])
-                                        ],
-                                      )
+                                          )
+                                  ],
+                                ),
+                                data['status'] == 'Ditolak'
+                                    ? Text(data['status'],
+                                        style: appFontHeding3c)
+                                    : Text(data['status'],
+                                        style: appFontHeding3b)
                               ],
                             ),
-                            data['status'] == 'Ditolak'
-                                ? Text(data['status'], style: appFontHeding3c)
-                                : Text(data['status'], style: appFontHeding3b)
-                          ],
-                        ),
-                      ),
-                    ));
-              }).toList(),
-            );
+                          ),
+                        ));
+                  }).toList(),
+                );
+              } else {
+                return const Center(
+                    child: Text('Tidak ada riwayat', style: appFontHeding2));
+              }
+            } else {
+              return Text('State: ${snapshot.connectionState}');
+            }
           },
         ),
       )),

@@ -111,38 +111,57 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                    width: 150,
-                    decoration: boxDecorationInput,
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("Jumlah", style: appFontFormInput),
-                        const SizedBox(height: 4),
-                        allData['jumlah'] == 0
-                            ? const Text("-", style: appFontHeding2)
-                            : Text(allData['jumlah'].toString(),
-                                style: appFontHeding2)
-                      ],
-                    )),
-                Container(
-                    width: 150,
-                    decoration: boxDecorationInput,
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("Poin", style: appFontFormInput),
-                        const SizedBox(height: 4),
-                        allData['poin'] == 0
-                            ? const Text("-", style: appFontHeding2)
-                            : Text(allData['poin'].toString(),
-                                style: appFontHeding2)
-                      ],
-                    )),
+                Expanded(
+                  child: Container(
+                      decoration: boxDecorationInput,
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("Jumlah Organik", style: appFontFormInput),
+                          const SizedBox(height: 4),
+                          allData['jumlah'] == 0
+                              ? const Text("-", style: appFontHeding2)
+                              : Text(allData['jumlah'].toString(),
+                                  style: appFontHeding2)
+                        ],
+                      )),
+                ),
+                Expanded(
+                  child: Container(
+                      decoration: boxDecorationInput,
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("Jumlah Anorganik",
+                              style: appFontFormInput),
+                          const SizedBox(height: 4),
+                          allData['poin'] == 0
+                              ? const Text("-", style: appFontHeding2)
+                              : Text(allData['poin'].toString(),
+                                  style: appFontHeding2)
+                        ],
+                      )),
+                ),
               ],
             ),
+            const SizedBox(height: 8),
+            Container(
+                decoration: boxDecorationInput,
+                padding: const EdgeInsets.all(16),
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Poin", style: appFontFormInput),
+                    const SizedBox(height: 4),
+                    allData['poin'] == 0
+                        ? const Text("-", style: appFontHeding2)
+                        : Text(allData['poin'].toString(),
+                            style: appFontHeding2)
+                  ],
+                )),
             const SizedBox(height: 8),
             allData['status'] == 'Diterima'
                 ? Container(

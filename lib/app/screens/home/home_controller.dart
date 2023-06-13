@@ -22,13 +22,19 @@ class HomeController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> streamRole() async* {
+  Future<DocumentSnapshot<Map<String, dynamic>>> streamRole() {
     String? email = auth.currentUser!.email;
 
-    yield* firestore.collection("users").doc(email).snapshots();
+    return firestore.collection("users").doc(email).get();
   }
 
-  Stream<DocumentSnapshot> userStream() {
-    return users.doc(auth.currentUser!.email).snapshots();
+  late Map<String, dynamic> userData;
+
+  Future userStream() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((value) => userData);
   }
 }

@@ -49,7 +49,7 @@ class _ProfilSayaViewState extends State<ProfilSayaView> {
                   profilsayaC.namaC.text = data['nama_lengkap'];
                   profilsayaC.rtC.text = data['rt'];
                   profilsayaC.rwC.text = data['rw'];
-                  profilsayaC.waC.text = data['wa'];
+                  profilsayaC.waC.text = data['no_wa'];
                   return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

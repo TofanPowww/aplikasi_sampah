@@ -82,38 +82,59 @@ class _DetailRiwayatViewState extends State<DetailRiwayatView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                      width: 160,
-                      decoration: boxDecorationInput,
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("Jumlah", style: appFontFormInput),
-                          const SizedBox(height: 4),
-                          allData['jumlah'] == 0
-                              ? const Text("-", style: appFontHeding2)
-                              : Text(allData['jumlah'].toString(),
-                                  style: appFontHeding2)
-                        ],
-                      )),
-                  Container(
-                      width: 160,
-                      decoration: boxDecorationInput,
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("Poin", style: appFontFormInput),
-                          const SizedBox(height: 4),
-                          allData['poin'] == 0
-                              ? const Text("-", style: appFontHeding2)
-                              : Text(allData['poin'].toString(),
-                                  style: appFontHeding2)
-                        ],
-                      )),
+                  Expanded(
+                    child: Container(
+                        decoration: boxDecorationInput,
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Jumlah Organik (Kg)",
+                                style: appFontFormInput),
+                            const SizedBox(height: 4),
+                            allData['jumlahOrganik'] == 0
+                                ? const Text("-", style: appFontHeding2)
+                                : Text(allData['jumlahOrganik'].toString(),
+                                    style: appFontHeding2)
+                          ],
+                        )),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Container(
+                        decoration: boxDecorationInput,
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Jumlah Anorganik (Kg)",
+                                style: appFontFormInput),
+                            const SizedBox(height: 4),
+                            allData['jumlahAnorganik'] == 0
+                                ? const Text("-", style: appFontHeding2)
+                                : Text(allData['jumlahAnorganik'].toString(),
+                                    style: appFontHeding2)
+                          ],
+                        )),
+                  ),
                 ],
               ),
+              const SizedBox(height: 8),
+              Container(
+                  decoration: boxDecorationInput,
+                  padding: const EdgeInsets.all(16),
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Poin", style: appFontFormInput),
+                      const SizedBox(height: 4),
+                      allData['poin'] == 0
+                          ? const Text("-", style: appFontHeding2)
+                          : Text(allData['poin'].toString(),
+                              style: appFontHeding2)
+                    ],
+                  )),
               const SizedBox(height: 8),
               Container(
                   decoration: boxDecorationInput,

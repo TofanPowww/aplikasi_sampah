@@ -67,96 +67,118 @@ class _KelolaPetugasState extends State<KelolaPetugas> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
                         child: CircularProgressIndicator(color: colorPrimary));
-                  }
-                  if (!snapshot.hasData) {
-                    return const Center(child: Text("Belum Ada Petugas"));
-                  }
-                  return ListView.builder(
-                      primary: false,
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        DocumentSnapshot ds = snapshot.data!.docs[index];
-                        return Container(
-                          height: 200,
-                          width: Get.width,
-                          margin: const EdgeInsets.only(bottom: 16),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(15)),
-                              border:
-                                  Border.all(color: colorPrimary, width: 1.5)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                  } else if (snapshot.connectionState ==
+                          ConnectionState.active ||
+                      snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return const Text('Something went wrong');
+                    } else if (snapshot.hasData) {
+                      return ListView.builder(
+                          primary: false,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            DocumentSnapshot ds = snapshot.data!.docs[index];
+                            return Container(
+                              height: 200,
+                              width: Get.width,
+                              margin: const EdgeInsets.only(bottom: 16),
+                              decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(15)),
+                                  border: Border.all(
+                                      color: colorPrimary, width: 1.5)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text("Nama", style: appFontFormInput),
-                                    const SizedBox(height: 4),
-                                    Text(ds['nama_lengkap'],
-                                        style: appFontHeding3b),
-                                    const SizedBox(height: 8),
-                                    const Text("Email",
-                                        style: appFontFormInput),
-                                    const SizedBox(height: 4),
-                                    Text(ds['email'], style: appFontHeding3b),
-                                    const SizedBox(height: 8),
-                                    const Text("No. WhatsApp",
-                                        style: appFontFormInput),
-                                    const SizedBox(height: 3),
-                                    Text(ds['no_wa'], style: appFontHeding3b),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text("Nama",
+                                            style: appFontFormInput),
+                                        const SizedBox(height: 4),
+                                        Text(ds['nama_lengkap'],
+                                            style: appFontHeding3b),
+                                        const SizedBox(height: 8),
+                                        const Text("Email",
+                                            style: appFontFormInput),
+                                        const SizedBox(height: 4),
+                                        Text(ds['email'],
+                                            style: appFontHeding3b),
+                                        const SizedBox(height: 8),
+                                        const Text("No. WhatsApp",
+                                            style: appFontFormInput),
+                                        const SizedBox(height: 3),
+                                        Text(ds['no_wa'],
+                                            style: appFontHeding3b),
+                                      ],
+                                    ),
+                                    IconButton(
+                                        onPressed: () {
+                                          Get.defaultDialog(
+                                              backgroundColor: colorBackground2,
+                                              barrierDismissible: false,
+                                              title: "Konfirmasi",
+                                              content: const Text(
+                                                "Apakah yakin ingin menghapus akun?",
+                                                style: appFontFormInput,
+                                              ),
+                                              titleStyle: appFontFormInputa,
+                                              titlePadding:
+                                                  const EdgeInsets.only(
+                                                      top: 16, bottom: 8),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      bottom: 16,
+                                                      right: 16,
+                                                      left: 16),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text("Tidak",
+                                                        style:
+                                                            appFontFormInput)),
+                                                ElevatedButton(
+                                                    style: const ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              colorAccent),
+                                                    ),
+                                                    onPressed: () {
+                                                      petugasC.deletePetugas(
+                                                          ds['email']
+                                                              .toString()
+                                                              .trim());
+                                                    },
+                                                    child: const Text("Ya",
+                                                        style: appFontButtonb))
+                                              ]);
+                                        },
+                                        icon: const Icon(Icons.delete_rounded,
+                                            color: appDanger))
                                   ],
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      Get.defaultDialog(
-                                          backgroundColor: colorBackground2,
-                                          barrierDismissible: false,
-                                          title: "Konfirmasi",
-                                          content: const Text(
-                                            "Apakah yakin ingin menghapus akun?",
-                                            style: appFontFormInput,
-                                          ),
-                                          titleStyle: appFontFormInputa,
-                                          titlePadding: const EdgeInsets.only(
-                                              top: 16, bottom: 8),
-                                          contentPadding: const EdgeInsets.only(
-                                              bottom: 16, right: 16, left: 16),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text("Tidak",
-                                                    style: appFontFormInput)),
-                                            ElevatedButton(
-                                                style: const ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStatePropertyAll(
-                                                          colorAccent),
-                                                ),
-                                                onPressed: () {
-                                                  petugasC.deletePetugas(
-                                                      ds['email']
-                                                          .toString()
-                                                          .trim());
-                                                },
-                                                child: const Text("Ya",
-                                                    style: appFontButtonb))
-                                          ]);
-                                    },
-                                    icon: const Icon(Icons.delete_rounded,
-                                        color: appDanger))
-                              ],
-                            ),
-                          ),
-                        );
-                      });
+                              ),
+                            );
+                          });
+                    } else {
+                      return const Center(
+                          child:
+                              Text('Tidak ada petugas', style: appFontHeding2));
+                    }
+                  } else {
+                    return Text('State: ${snapshot.connectionState}');
+                  }
                 })
           ],
         ),

@@ -47,208 +47,195 @@ class _RiwayatTukarViewState extends State<RiwayatTukarView> {
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SizedBox(
-                  height: 500,
-                  child: Center(
-                      child: CircularProgressIndicator(color: colorAccent)),
-                );
-              }
-              if (snapshot.hasData) {
-                return ListView(
-                  primary: false,
-                  shrinkWrap: true,
-                  children: snapshot.data!.docs.map((DocumentSnapshot doc) {
-                    Map<String, dynamic> data =
-                        doc.data()! as Map<String, dynamic>;
-                    return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DetailPenukaranView(),
-                                  settings: RouteSettings(arguments: data)));
-                        },
-                        child: data['status'] == 'Batal'
-                            ? Card(
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                // color: colorSecondary,
-                                margin: const EdgeInsets.all(8),
-                                child: Container(
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: boxDecorationInput,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            "Nama Produk",
-                                            style: appFontFormInput,
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Text(
-                                            data['nama_produk'],
-                                            style: appFontHeding3b,
-                                          ),
-                                          const SizedBox(height: 8),
-                                          const Text(
-                                            "Poin Produk",
-                                            style: appFontFormInput,
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Text(
-                                            data['poin_produk'].toString(),
-                                            style: appFontHeding3b,
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        data['status'],
-                                        style: appFontHeding3b,
-                                      )
-                                    ],
+                return const Center(
+                    child: CircularProgressIndicator(color: colorAccent));
+              } else if (snapshot.connectionState == ConnectionState.active ||
+                  snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text("Error"),
+                  );
+                } else if (snapshot.hasData) {
+                  return ListView(
+                    primary: false,
+                    shrinkWrap: true,
+                    children: snapshot.data!.docs.map((DocumentSnapshot doc) {
+                      Map<String, dynamic> data =
+                          doc.data()! as Map<String, dynamic>;
+                      return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DetailPenukaranView(),
+                                    settings: RouteSettings(arguments: data)));
+                          },
+                          child: data['status'] == 'Batal'
+                              ? Card(
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                ),
-                              )
-                            : data['status'] == 'Selesai'
-                                ? Card(
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                                  // color: colorSecondary,
+                                  margin: const EdgeInsets.all(8),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(16),
+                                    decoration: boxDecorationInput,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Text(
+                                              "Nama Produk",
+                                              style: appFontFormInput,
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              data['nama_produk'],
+                                              style: appFontHeding3b,
+                                            ),
+                                            const SizedBox(height: 8),
+                                            const Text(
+                                              "Poin Produk",
+                                              style: appFontFormInput,
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              data['poin_produk'].toString(),
+                                              style: appFontHeding3b,
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          data['status'],
+                                          style: appFontHeding3b,
+                                        )
+                                      ],
                                     ),
-                                    color: appBackgroundSecondary,
-                                    margin: const EdgeInsets.all(8),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(16),
-                                      decoration: boxDecorationInput,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                "Nama Produk",
-                                                style: appFontFormInput,
-                                              ),
-                                              const SizedBox(height: 4),
-                                              Text(
-                                                data['nama_produk'],
-                                                style: appFontHeding3b,
-                                              ),
-                                              const SizedBox(height: 8),
-                                              const Text(
-                                                "Poin Produk",
-                                                style: appFontFormInput,
-                                              ),
-                                              const SizedBox(height: 4),
-                                              Text(
-                                                data['poin_produk'].toString(),
-                                                style: appFontHeding3b,
-                                              ),
-                                            ],
-                                          ),
-                                          Text(
-                                            data['status'],
-                                            style: appFontHeding3b,
-                                          )
-                                        ],
+                                  ),
+                                )
+                              : data['status'] == 'Selesai'
+                                  ? Card(
+                                      elevation: 5,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                    ),
-                                  )
-                                : Card(
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    color: appSecondary,
-                                    margin: const EdgeInsets.all(8),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(16),
-                                      decoration: boxDecorationInputActive,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                "Nama Produk",
-                                                style: appFontFormInput,
-                                              ),
-                                              const SizedBox(height: 4),
-                                              Text(
-                                                data['nama_produk'],
-                                                style: appFontHeding3b,
-                                              ),
-                                              const SizedBox(height: 8),
-                                              const Text(
-                                                "Poin Produk",
-                                                style: appFontFormInput,
-                                              ),
-                                              const SizedBox(height: 4),
-                                              Text(
-                                                data['poin_produk'].toString(),
-                                                style: appFontHeding3b,
-                                              ),
-                                            ],
-                                          ),
-                                          Text(
-                                            data['status'],
-                                            style: appFontHeding3b,
-                                          )
-                                        ],
+                                      color: appBackgroundSecondary,
+                                      margin: const EdgeInsets.all(8),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(16),
+                                        decoration: boxDecorationInput,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "Nama Produk",
+                                                  style: appFontFormInput,
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  data['nama_produk'],
+                                                  style: appFontHeding3b,
+                                                ),
+                                                const SizedBox(height: 8),
+                                                const Text(
+                                                  "Poin Produk",
+                                                  style: appFontFormInput,
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  data['poin_produk']
+                                                      .toString(),
+                                                  style: appFontHeding3b,
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              data['status'],
+                                              style: appFontHeding3b,
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ));
-                  }).toList(),
-                );
-              }
-              if (snapshot.data!.docs.isEmpty) {
-                return Container(
-                  width: double.infinity,
-                  height: 500,
-                  child: const Center(
-                    child: Text(
-                      "Belum ada riwayat Penukaran",
-                      style: appFontHeding3b,
-                    ),
-                  ),
-                );
+                                    )
+                                  : Card(
+                                      elevation: 5,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      color: appSecondary,
+                                      margin: const EdgeInsets.all(8),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(16),
+                                        decoration: boxDecorationInputActive,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "Nama Produk",
+                                                  style: appFontFormInput,
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  data['nama_produk'],
+                                                  style: appFontHeding3b,
+                                                ),
+                                                const SizedBox(height: 8),
+                                                const Text(
+                                                  "Poin Produk",
+                                                  style: appFontFormInput,
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  data['poin_produk']
+                                                      .toString(),
+                                                  style: appFontHeding3b,
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              data['status'],
+                                              style: appFontHeding3b,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ));
+                    }).toList(),
+                  );
+                } else {
+                  return const Center(
+                      child: Text('Tidak ada riwayat', style: appFontHeding2));
+                }
               } else {
-                return Container(
-                  width: double.infinity,
-                  height: 500,
-                  child: const Center(
-                    child: Text(
-                      "Belum ada riwayat Penukaran",
-                      style: appFontHeding3b,
-                    ),
-                  ),
-                );
+                return Text('State: ${snapshot.connectionState}');
               }
             }),
       )),

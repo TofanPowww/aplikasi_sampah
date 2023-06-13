@@ -1,9 +1,11 @@
 // import 'package:flutter/widgets.dart';
+import 'package:aplikasi_sampah/app/screens/home/home_controller.dart';
 import 'package:get/get.dart';
 import 'package:aplikasi_sampah/app/screens/index.dart';
 import 'links.dart';
 
 class AppRoutes {
+  final HomeController homeC = Get.put(HomeController());
   static final pages = [
     GetPage(
       name: AppLinks.LOGIN,

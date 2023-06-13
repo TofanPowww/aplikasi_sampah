@@ -10,6 +10,7 @@ class TransaksiSampahModel {
   final String rw;
   final String fotoSampah;
   final int jumlah;
+  final int jumlahAnorganik;
   final int poin;
   final String keterangan;
   final String tanggalKonfirmasi;
@@ -27,6 +28,7 @@ class TransaksiSampahModel {
     required this.rw,
     required this.fotoSampah,
     required this.jumlah,
+    required this.jumlahAnorganik,
     required this.poin,
     required this.keterangan,
     required this.tanggalKonfirmasi,
@@ -46,6 +48,7 @@ class TransaksiSampahModel {
         rw: json["rw"] ?? "",
         fotoSampah: json["foto_sampah"] ?? "",
         jumlah: json["jumlah"] ?? 0,
+        jumlahAnorganik: json["jumlahAnorganik"] ?? 0,
         poin: json["poin"] ?? 0,
         keterangan: json["keterangan"] ?? "",
         tanggalKonfirmasi: json["tanggalKonfirmasi"] ?? "",
@@ -64,6 +67,7 @@ class TransaksiSampahModel {
         "rw": rw,
         "foto_sampah": fotoSampah,
         "jumlah": jumlah,
+        "jumlahAnorganik": jumlahAnorganik,
         "poin": poin,
         "keterangan": keterangan,
         "tanggalKonfirmasi": tanggalKonfirmasi,

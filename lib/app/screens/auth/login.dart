@@ -27,14 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
       _isHidePassword = !_isHidePassword;
     });
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   requestPermission();
-  //   getToken();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,45 +167,4 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         ])))));
   }
-
-  // //Request Permission//
-  // FirebaseMessaging message = FirebaseMessaging.instance;
-  // String? mToken = "";
-  // void requestPermission() async {
-  //   NotificationSettings settings = await message.requestPermission(
-  //     alert: true,
-  //     announcement: false,
-  //     badge: true,
-  //     carPlay: false,
-  //     criticalAlert: false,
-  //     provisional: false,
-  //     sound: true,
-  //   );
-
-  //   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-  //     print('User granted permission');
-  //   } else if (settings.authorizationStatus ==
-  //       AuthorizationStatus.provisional) {
-  //     print('User granted provisional permission');
-  //   } else {
-  //     print('User decline or has not accepted permissions');
-  //   }
-  // }
-
-  // //Get Users Token//
-  // void getToken() async {
-  //   await message.getToken().then((token) {
-  //     setState(() {
-  //       mToken = token;
-  //       print("My Token is $mToken");
-  //     });
-  //     saveToken(token!);
-  //   });
-  // }
-
-  // void saveToken(String token) async {
-  //   await db.collection("users").doc(auth.currentUser!.email).update({
-  //     "token": token,
-  //   });
-  // }
 }

@@ -64,53 +64,70 @@ class _ProdukState extends State<ProdukView> {
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    return ListView(
-                        primary: false,
-                        shrinkWrap: true,
-                        children: snapshot.data!.docs
-                            .map((DocumentSnapshot document) {
-                          Map<String, dynamic> data =
-                              document.data()! as Map<String, dynamic>;
-                          return Container(
-                            height: 100,
-                            width: Get.width,
-                            margin: const EdgeInsets.only(bottom: 16),
-                            decoration: boxDecorationInputActive,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 14, top: 16, left: 16, right: 16),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                      return const Center(
+                          child:
+                              CircularProgressIndicator(color: colorPrimary));
+                    } else if (snapshot.connectionState ==
+                            ConnectionState.active ||
+                        snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return const Text('Something went wrong');
+                      } else if (snapshot.hasData) {
+                        return ListView(
+                            primary: false,
+                            shrinkWrap: true,
+                            children: snapshot.data!.docs
+                                .map((DocumentSnapshot document) {
+                              Map<String, dynamic> data =
+                                  document.data()! as Map<String, dynamic>;
+                              return Container(
+                                height: 100,
+                                width: Get.width,
+                                margin: const EdgeInsets.only(bottom: 16),
+                                decoration: boxDecorationInputActive,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 14, top: 16, left: 16, right: 16),
+                                  child: Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(data["nama"],
-                                          style: appFontHeding2a),
-                                      const SizedBox(height: 8),
-                                      Text("${data['poin']} Poin",
-                                          style: appFontHeding1a)
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(data["nama"],
+                                              style: appFontHeding2a),
+                                          const SizedBox(height: 8),
+                                          Text("${data['poin']} Poin",
+                                              style: appFontHeding1a)
+                                        ],
+                                      ),
+                                      IconButton(
+                                          onPressed: () {
+                                            Get.toNamed(AppLinks.EDIT_PRODUK,
+                                                arguments: data);
+                                          },
+                                          icon: const Icon(
+                                              Icons.arrow_forward_ios_rounded,
+                                              color: colorPrimary))
                                     ],
                                   ),
-                                  IconButton(
-                                      onPressed: () {
-                                        Get.toNamed(AppLinks.EDIT_PRODUK,
-                                            arguments: data);
-                                      },
-                                      icon: const Icon(
-                                          Icons.arrow_forward_ios_rounded,
-                                          color: colorPrimary))
-                                ],
-                              ),
-                            ),
-                          );
-                        }).toList());
+                                ),
+                              );
+                            }).toList());
+                      } else {
+                        return const Center(
+                            child: Text('Tidak ada produk',
+                                style: appFontHeding2));
+                      }
+                    } else {
+                      return Text('State: ${snapshot.connectionState}');
+                    }
                   }),
             ],
           ),

@@ -10,7 +10,8 @@ import '../../../auth/auth_controller.dart';
 
 class RequestPengambilanController extends GetxController {
   //? TextField Controller //
-  TextEditingController jumlahC = TextEditingController();
+  TextEditingController jumlahAnorganikC = TextEditingController();
+  TextEditingController jumlahOrganikC = TextEditingController();
   TextEditingController keteranganC = TextEditingController();
 
   var isLoading = false.obs;
@@ -27,39 +28,198 @@ class RequestPengambilanController extends GetxController {
   var modelUser = UsersModel().obs;
 
   //? Update Transaksi Sampah //
-  Future<void> updateTransaksi(String id, String email, String tgl, int jumlah,
-      String status, String keterangan) async {
+  Future<void> updateTransaksi(
+      String id,
+      String email,
+      String tgl,
+      int jumlahOrganik,
+      int jumlahAnorganik,
+      String status,
+      String keterangan,
+      int v) async {
     isLoading.value = true;
     final petugas = await usersDb.doc(auth.currentUser!.email).get();
     try {
-      //* Update Transaksi Sampah pada Collection Kirim User //
-      await usersDb.doc(email).collection("kirim").doc(id).update({
-        "petugas": petugas.get("nama_lengkap"),
-        "status": status,
-        "jumlah": jumlah,
-        "poin": jumlah * 200,
-        "keterangan": keterangan,
-        "tanggalKonfirmasi": DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-            .format(DateTime.now()),
-        "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
-      });
-
-      //* Update Jumlah Poin Warga //
-      await usersDb
-          .doc(email)
-          .update({"poin": FieldValue.increment(jumlah * 200)});
-
-      //* Update Transaksi Sampah pada Collection transaksiSampah //
-      await transaksiDb.doc(id).update({
-        "petugas": petugas.get("nama_lengkap"),
-        "status": status,
-        "jumlah": jumlah,
-        "poin": jumlah * 200,
-        "keterangan": keterangan,
-        "tanggalKonfirmasi": DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-            .format(DateTime.now()),
-        "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
-      });
+      //? Sampah Jenis Plastik
+      if (v == 1) {
+        //* Update Transaksi Sampah pada Collection Kirim User //
+        await usersDb.doc(email).collection("kirim").doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+        //* Update Jumlah Poin Warga //
+        await usersDb.doc(email).update({
+          "poin": FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 200))
+        });
+        //* Update Transaksi Sampah pada Collection transaksiSampah //
+        await transaksiDb.doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+      }
+      //? Sampah Jenis Kertas
+      if (v == 2) {
+        //* Update Transaksi Sampah pada Collection Kirim User //
+        await usersDb.doc(email).collection("kirim").doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+        //* Update Jumlah Poin Warga //
+        await usersDb.doc(email).update({
+          "poin": FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 200))
+        });
+        //* Update Transaksi Sampah pada Collection transaksiSampah //
+        await transaksiDb.doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+      }
+      //? Sampah Jenis Logam
+      if (v == 3) {
+        //* Update Transaksi Sampah pada Collection Kirim User //
+        await usersDb.doc(email).collection("kirim").doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 300),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+        //* Update Jumlah Poin Warga //
+        await usersDb.doc(email).update({
+          "poin": FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 300))
+        });
+        //* Update Transaksi Sampah pada Collection transaksiSampah //
+        await transaksiDb.doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 300),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+      }
+      //? Sampah Jenis Besi
+      if (v == 4) {
+        //* Update Transaksi Sampah pada Collection Kirim User //
+        await usersDb.doc(email).collection("kirim").doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 320),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+        //* Update Jumlah Poin Warga //
+        await usersDb.doc(email).update({
+          "poin": FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 320))
+        });
+        //* Update Transaksi Sampah pada Collection transaksiSampah //
+        await transaksiDb.doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 320),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+      }
+      //? Sampah Jenis Botol Kaca
+      if (v == 5) {
+        //* Update Transaksi Sampah pada Collection Kirim User //
+        await usersDb.doc(email).collection("kirim").doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 220),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+        //* Update Jumlah Poin Warga //
+        await usersDb.doc(email).update({
+          "poin": FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 220))
+        });
+        //* Update Transaksi Sampah pada Collection transaksiSampah //
+        await transaksiDb.doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 220),
+          "keterangan": keterangan,
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+      }
       isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
@@ -74,7 +234,40 @@ class RequestPengambilanController extends GetxController {
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     }
     //* Update Users Model //
-    modelUser(UsersModel(poin: FieldValue.increment(jumlah * 200) as int));
-    modelUser.refresh();
+    //? Jenis Sampah Plastik
+    if (v == 1) {
+      modelUser(UsersModel(
+          poin: FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 200)) as int));
+      modelUser.refresh();
+    }
+    //? Jenis Sampah Kertas
+    if (v == 2) {
+      modelUser(UsersModel(
+          poin: FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 200)) as int));
+      modelUser.refresh();
+    }
+    //? Jenis Sampah Logam
+    if (v == 3) {
+      modelUser(UsersModel(
+          poin: FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 300)) as int));
+      modelUser.refresh();
+    }
+    //? Jenis Sampah Besi
+    if (v == 4) {
+      modelUser(UsersModel(
+          poin: FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 320)) as int));
+      modelUser.refresh();
+    }
+    //? Jenis Sampah Botol Kaca
+    if (v == 5) {
+      modelUser(UsersModel(
+          poin: FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 220)) as int));
+      modelUser.refresh();
+    }
   }
 }

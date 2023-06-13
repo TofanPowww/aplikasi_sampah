@@ -41,132 +41,152 @@ class RiwayatPengambilan extends GetView<RiwayatPengambilanController> {
                     stream: _transaksiSampahStream,
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasError) {
-                        return const Text('Something went wrong');
-                      }
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const SizedBox(
-                            height: 500,
-                            child: Center(
-                                child: CircularProgressIndicator(
-                                    color: colorPrimary)));
-                      }
-                      return ListView(
-                        primary: false,
-                        shrinkWrap: true,
-                        children: snapshot.data!.docs
-                            .map((DocumentSnapshot document) {
-                          Map<String, dynamic> data =
-                              document.data()! as Map<String, dynamic>;
-                          return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DetailPengambilanView(),
-                                        settings:
-                                            RouteSettings(arguments: data)));
-                              },
-                              child: Card(
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                margin: const EdgeInsets.all(8),
-                                child: Container(
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: boxDecorationInput,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Column(
+                        return const Center(
+                            child:
+                                CircularProgressIndicator(color: colorPrimary));
+                      } else if (snapshot.connectionState ==
+                              ConnectionState.active ||
+                          snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Something went wrong');
+                        } else if (snapshot.hasData) {
+                          return ListView(
+                            primary: false,
+                            shrinkWrap: true,
+                            children: snapshot.data!.docs
+                                .map((DocumentSnapshot document) {
+                              Map<String, dynamic> data =
+                                  document.data()! as Map<String, dynamic>;
+                              return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const DetailPengambilanView(),
+                                            settings: RouteSettings(
+                                                arguments: data)));
+                                  },
+                                  child: Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    margin: const EdgeInsets.all(8),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(16),
+                                      decoration: boxDecorationInput,
+                                      child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         children: [
-                                          const Text("Nama Warga",
-                                              style: appFontFormInput),
-                                          const SizedBox(height: 4),
-                                          Text(data['nama'],
-                                              style: appFontHeding3b),
-                                          const SizedBox(height: 8),
-                                          const Text("Tanggal",
-                                              style: appFontFormInput),
-                                          const SizedBox(height: 4),
-                                          Text(data['tanggal'],
-                                              style: appFontHeding3b),
-                                          const SizedBox(height: 8),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Text("Nama Warga",
+                                                  style: appFontFormInput),
+                                              const SizedBox(height: 4),
+                                              Text(data['nama'],
+                                                  style: appFontHeding3b),
+                                              const SizedBox(height: 8),
+                                              const Text("Tanggal",
+                                                  style: appFontFormInput),
+                                              const SizedBox(height: 4),
+                                              Text(data['tanggal'],
+                                                  style: appFontHeding3b),
+                                              const SizedBox(height: 8),
+                                              data['status'] == 'Ditolak'
+                                                  ? const Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text("Organik",
+                                                            style:
+                                                                appFontFormInput),
+                                                        SizedBox(width: 8),
+                                                        Text("-",
+                                                            style:
+                                                                appFontHeding3b),
+                                                      ],
+                                                    )
+                                                  : Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const Text("Organik",
+                                                            style:
+                                                                appFontFormInput),
+                                                        const SizedBox(
+                                                            width: 8),
+                                                        Text(
+                                                            data['jumlah']
+                                                                .toString(),
+                                                            style:
+                                                                appFontHeding3b),
+                                                      ],
+                                                    ),
+                                              const SizedBox(height: 8),
+                                              data['status'] == 'Ditolak'
+                                                  ? const Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text("Anorganik",
+                                                            style:
+                                                                appFontFormInput),
+                                                        SizedBox(width: 8),
+                                                        Text("-",
+                                                            style:
+                                                                appFontHeding3b),
+                                                      ],
+                                                    )
+                                                  : Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const Text("Anorganik",
+                                                            style:
+                                                                appFontFormInput),
+                                                        const SizedBox(
+                                                            width: 8),
+                                                        Text(
+                                                            data['poin']
+                                                                .toString(),
+                                                            style:
+                                                                appFontHeding3b),
+                                                      ],
+                                                    )
+                                            ],
+                                          ),
                                           data['status'] == 'Ditolak'
-                                              ? const Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Text("Jumlah",
-                                                        style:
-                                                            appFontFormInput),
-                                                    SizedBox(width: 8),
-                                                    Text("-",
-                                                        style: appFontHeding3b),
-                                                  ],
-                                                )
-                                              : Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    const Text("Jumlah",
-                                                        style:
-                                                            appFontFormInput),
-                                                    const SizedBox(width: 8),
-                                                    Text(
-                                                        data['jumlah']
-                                                            .toString(),
-                                                        style: appFontHeding3b),
-                                                  ],
-                                                ),
-                                          const SizedBox(height: 8),
-                                          data['status'] == 'Ditolak'
-                                              ? const Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Text("Poin",
-                                                        style:
-                                                            appFontFormInput),
-                                                    SizedBox(width: 8),
-                                                    Text("-",
-                                                        style: appFontHeding3b),
-                                                  ],
-                                                )
-                                              : Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    const Text("Poin",
-                                                        style:
-                                                            appFontFormInput),
-                                                    const SizedBox(width: 8),
-                                                    Text(
-                                                        data['poin'].toString(),
-                                                        style: appFontHeding3b),
-                                                  ],
-                                                )
+                                              ? Text(data['status'],
+                                                  style: appFontHeding3c)
+                                              : Text(data['status'],
+                                                  style: appFontHeding3b)
                                         ],
                                       ),
-                                      data['status'] == 'Ditolak'
-                                          ? Text(data['status'],
-                                              style: appFontHeding3c)
-                                          : Text(data['status'],
-                                              style: appFontHeding3b)
-                                    ],
-                                  ),
-                                ),
-                              ));
-                        }).toList(),
-                      );
+                                    ),
+                                  ));
+                            }).toList(),
+                          );
+                        } else {
+                          return const Center(
+                              child: Text('Tidak ada riwayat',
+                                  style: appFontHeding2));
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
                     }))));
   }
 }
