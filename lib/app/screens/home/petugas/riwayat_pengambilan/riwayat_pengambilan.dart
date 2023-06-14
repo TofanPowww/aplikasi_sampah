@@ -127,7 +127,7 @@ class RiwayatPengambilan extends GetView<RiwayatPengambilanController> {
                                                         const SizedBox(
                                                             width: 8),
                                                         Text(
-                                                            data['jumlah']
+                                                            data['jumlahOrganik']
                                                                 .toString(),
                                                             style:
                                                                 appFontHeding3b),
@@ -160,7 +160,7 @@ class RiwayatPengambilan extends GetView<RiwayatPengambilanController> {
                                                         const SizedBox(
                                                             width: 8),
                                                         Text(
-                                                            data['poin']
+                                                            data['jumlahAnorganik']
                                                                 .toString(),
                                                             style:
                                                                 appFontHeding3b),

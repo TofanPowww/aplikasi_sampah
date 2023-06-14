@@ -130,7 +130,7 @@ class _RequestPengambilan extends State<RequestPengambilan> {
                             }).toList(),
                           );
                         } else {
-                          return const Text('Empty data');
+                          return const Center(child: Text('Empty data'));
                         }
                       } else {
                         return Text('State: ${snapshot.connectionState}');

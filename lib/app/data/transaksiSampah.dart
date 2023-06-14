@@ -9,10 +9,11 @@ class TransaksiSampahModel {
   final String rt;
   final String rw;
   final String fotoSampah;
-  final int jumlah;
-  final int jumlahAnorganik;
+  final double jumlahOrganik;
+  final double jumlahAnorganik;
   final int poin;
   final String keterangan;
+  final String jenisAnorganik;
   final String tanggalKonfirmasi;
   final String creationTime;
   final String confirmTime;
@@ -27,10 +28,11 @@ class TransaksiSampahModel {
     required this.rt,
     required this.rw,
     required this.fotoSampah,
-    required this.jumlah,
+    required this.jumlahOrganik,
     required this.jumlahAnorganik,
     required this.poin,
     required this.keterangan,
+    required this.jenisAnorganik,
     required this.tanggalKonfirmasi,
     required this.creationTime,
     required this.confirmTime,
@@ -47,10 +49,11 @@ class TransaksiSampahModel {
         rt: json["rt"] ?? "",
         rw: json["rw"] ?? "",
         fotoSampah: json["foto_sampah"] ?? "",
-        jumlah: json["jumlah"] ?? 0,
+        jumlahOrganik: json["jumlahOrganik"] ?? 0,
         jumlahAnorganik: json["jumlahAnorganik"] ?? 0,
         poin: json["poin"] ?? 0,
         keterangan: json["keterangan"] ?? "",
+        jenisAnorganik: json["jenisAnorganik"] ?? "",
         tanggalKonfirmasi: json["tanggalKonfirmasi"] ?? "",
         creationTime: json["creationTime"] ?? "",
         confirmTime: json["confirmTime"] ?? "",
@@ -66,10 +69,11 @@ class TransaksiSampahModel {
         "rt": rt,
         "rw": rw,
         "foto_sampah": fotoSampah,
-        "jumlah": jumlah,
+        "jumlah": jumlahOrganik,
         "jumlahAnorganik": jumlahAnorganik,
         "poin": poin,
         "keterangan": keterangan,
+        "jenisAnorganik": jenisAnorganik,
         "tanggalKonfirmasi": tanggalKonfirmasi,
         "creationTime": creationTime,
         "confirmTime": confirmTime,

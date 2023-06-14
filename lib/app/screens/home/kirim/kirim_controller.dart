@@ -64,8 +64,8 @@ class KirimController extends GetxController {
       final dataKirim = await kirimU.add({
         "tgl": tgl,
         "foto_sampah": imageUrl,
-        "jumlahOrganik": 0,
-        "jumlahAnorganik": 0,
+        "jumlahOrganik": 0.0,
+        "jumlahAnorganik": 0.0,
         "poin": 0,
         "status": status,
         "creationTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
@@ -80,8 +80,8 @@ class KirimController extends GetxController {
         "rt": rt,
         "rw": rw,
         "foto_sampah": imageUrl,
-        "jumlahOrganik": 0,
-        "jumlahAnorganik": 0,
+        "jumlahOrganik": 0.0,
+        "jumlahAnorganik": 0.0,
         "poin": 0,
         "status": status,
         "creationTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())

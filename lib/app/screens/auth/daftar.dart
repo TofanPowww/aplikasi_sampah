@@ -20,6 +20,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
   final c = Get.put(DaftarController());
   bool showProgres = false;
   RxBool isLoading = false.obs;
+  final formKey = GlobalKey<FormState>();
 
   //Show & Hide Password
   bool _isHidePassword = true;
@@ -37,6 +38,13 @@ class _DaftarScreenState extends State<DaftarScreen> {
     });
   }
 
+  String userEmail = '';
+  String userNama = '';
+  String userRT = '';
+  String userRW = '';
+  String userWa = '';
+  String userPass = '';
+  String userConfirm = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,296 +68,371 @@ class _DaftarScreenState extends State<DaftarScreen> {
                           //Form Daftar
                           Container(
                               padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                      child: Column(
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundColor: colorPrimary,
-                                            backgroundImage: daftarC
-                                                        .imageProfil ==
-                                                    null
-                                                ? const AssetImage(
-                                                    "assets/images/Profile.png")
-                                                : FileImage(File(daftarC
-                                                    .imageProfil!
-                                                    .path)) as ImageProvider,
-                                            radius: 80,
-                                          ),
-                                          const SizedBox(height: 8),
-                                          InkWell(
-                                              onTap: () {
-                                                showModalBottomSheet(
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      bottomSheet(context),
+                              child: Form(
+                                key: formKey,
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Column(
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundColor: colorPrimary,
+                                              backgroundImage: daftarC
+                                                          .imageProfil ==
+                                                      null
+                                                  ? const AssetImage(
+                                                      "assets/images/Profile.png")
+                                                  : FileImage(File(daftarC
+                                                      .imageProfil!
+                                                      .path)) as ImageProvider,
+                                              radius: 80,
+                                            ),
+                                            const SizedBox(height: 8),
+                                            InkWell(
+                                                onTap: () {
+                                                  showModalBottomSheet(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        bottomSheet(context),
+                                                  );
+                                                },
+                                                child: const Text(
+                                                  "Tambah foto profil",
+                                                  style: appFontButtonText,
+                                                ))
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 24),
+                                      Container(
+                                        width: double.infinity,
+                                        height: 56,
+                                        decoration:
+                                            boxDecorationInputSmallAccent,
+                                        padding: const EdgeInsets.only(
+                                            left: 16,
+                                            top: 8,
+                                            bottom: 8,
+                                            right: 16),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              "Daftar sebagai",
+                                              style: appFontFormInput,
+                                            ),
+                                            const SizedBox(width: 16),
+                                            DropdownButton<String>(
+                                              dropdownColor: colorSecondary,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              iconSize: 30,
+                                              underline: Container(
+                                                  height: 0,
+                                                  color: Colors.transparent),
+                                              icon: const Icon(Icons
+                                                  .arrow_drop_down_rounded),
+                                              iconEnabledColor: colorPrimary,
+                                              style: appFontFormInput,
+                                              alignment: Alignment.center,
+                                              value:
+                                                  daftarC.currentItemSelected,
+                                              items: daftarC.option.map(
+                                                  (String dropDownStringItem) {
+                                                return DropdownMenuItem<String>(
+                                                  value: dropDownStringItem,
+                                                  child:
+                                                      Text(dropDownStringItem),
                                                 );
+                                              }).toList(),
+                                              onChanged: (newValueSelected) {
+                                                setState(() {
+                                                  daftarC.currentItemSelected =
+                                                      newValueSelected!;
+                                                  daftarC.rool =
+                                                      newValueSelected;
+                                                });
                                               },
-                                              child: const Text(
-                                                "Tambah foto profil",
-                                                style: appFontButtonText,
-                                              ))
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 24),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 56,
-                                      decoration: boxDecorationInputSmallAccent,
-                                      padding: const EdgeInsets.only(
-                                          left: 16,
-                                          top: 8,
-                                          bottom: 8,
-                                          right: 16),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text(
-                                            "Daftar sebagai",
-                                            style: appFontFormInput,
-                                          ),
-                                          const SizedBox(width: 16),
-                                          DropdownButton<String>(
-                                            dropdownColor: colorSecondary,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            iconSize: 30,
-                                            underline: Container(
-                                                height: 0,
-                                                color: Colors.transparent),
-                                            icon: const Icon(
-                                                Icons.arrow_drop_down_rounded),
-                                            iconEnabledColor: colorPrimary,
-                                            style: appFontFormInput,
-                                            alignment: Alignment.center,
-                                            value: daftarC.currentItemSelected,
-                                            items: daftarC.option.map(
-                                                (String dropDownStringItem) {
-                                              return DropdownMenuItem<String>(
-                                                value: dropDownStringItem,
-                                                child: Text(dropDownStringItem),
-                                              );
-                                            }).toList(),
-                                            onChanged: (newValueSelected) {
-                                              setState(() {
-                                                daftarC.currentItemSelected =
-                                                    newValueSelected!;
-                                                daftarC.rool = newValueSelected;
-                                              });
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 24),
-                                    TextFormField(
-                                      controller: c.emailsignupC,
-                                      keyboardType: TextInputType.emailAddress,
-                                      style: appFontFormInput,
-                                      cursorColor: colorPrimary,
-                                      cursorHeight: 25,
-                                      decoration: const InputDecoration(
-                                          filled: true,
-                                          enabled: true,
-                                          fillColor: colorSecondary,
-                                          label: Text("Email"),
-                                          labelStyle: appFontFormInput,
-                                          floatingLabelStyle: appFontFormInput,
-                                          focusColor: colorSecondary,
-                                          enabledBorder: enableInputBorder,
-                                          focusedBorder: focusInputBorder),
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Email tidak boleh kosong";
-                                        }
-                                        if (!RegExp(
-                                                "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                            .hasMatch(value)) {
-                                          return ("Tolong masukkan email dengan benar");
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      onChanged: (value) {},
-                                    ),
-                                    const SizedBox(height: 24),
-                                    TextFormField(
-                                      controller: c.namasignupC,
-                                      style: appFontFormInput,
-                                      cursorColor: colorPrimary,
-                                      cursorHeight: 25,
-                                      decoration: const InputDecoration(
-                                          filled: true,
-                                          fillColor: colorSecondary,
-                                          label: Text("Nama Lengkap"),
-                                          labelStyle: appFontFormInput,
-                                          floatingLabelStyle: appFontFormInput,
-                                          focusColor: colorSecondary,
-                                          enabledBorder: enableInputBorder,
-                                          focusedBorder: focusInputBorder),
-                                      onChanged: (value) {},
-                                    ),
-                                    const SizedBox(height: 24),
-                                    TextFormField(
-                                      controller: c.rtsignupC,
-                                      style: appFontFormInput,
-                                      cursorColor: colorPrimary,
-                                      cursorHeight: 25,
-                                      keyboardType: TextInputType.number,
-                                      decoration: const InputDecoration(
-                                          filled: true,
-                                          fillColor: colorSecondary,
-                                          label: Text("RT"),
-                                          labelStyle: appFontFormInput,
-                                          floatingLabelStyle: appFontFormInput,
-                                          focusColor: colorSecondary,
-                                          enabledBorder: enableInputBorder,
-                                          focusedBorder: focusInputBorder),
-                                      onChanged: (value) {},
-                                    ),
-                                    const SizedBox(height: 24),
-                                    //No. KK
-                                    TextFormField(
-                                      controller: c.rwsignupC,
-                                      style: appFontFormInput,
-                                      cursorColor: colorPrimary,
-                                      cursorHeight: 25,
-                                      keyboardType: TextInputType.number,
-                                      decoration: const InputDecoration(
-                                          filled: true,
-                                          fillColor: colorSecondary,
-                                          label: Text("RW"),
-                                          labelStyle: appFontFormInput,
-                                          floatingLabelStyle: appFontFormInput,
-                                          focusColor: colorSecondary,
-                                          enabledBorder: enableInputBorder,
-                                          focusedBorder: focusInputBorder),
-                                      onChanged: (value) {},
-                                    ),
-                                    const SizedBox(height: 24),
-                                    //No. WA
-                                    TextFormField(
-                                      controller: c.wasignupC,
-                                      style: appFontFormInput,
-                                      cursorColor: colorPrimary,
-                                      cursorHeight: 25,
-                                      keyboardType: TextInputType.phone,
-                                      decoration: const InputDecoration(
-                                          filled: true,
-                                          fillColor: colorSecondary,
-                                          label: Text("No. WhatsApp"),
-                                          labelStyle: appFontFormInput,
-                                          floatingLabelStyle: appFontFormInput,
-                                          focusColor: colorSecondary,
-                                          enabledBorder: enableInputBorder,
-                                          focusedBorder: focusInputBorder),
-                                      onChanged: (value) {},
-                                    ),
-                                    const SizedBox(height: 24),
-                                    //password
-                                    TextFormField(
-                                      controller: c.passwordsignupC,
-                                      obscureText: _isHidePassword,
-                                      keyboardType: TextInputType.text,
-                                      style: appFontFormInput,
-                                      cursorColor: colorPrimary,
-                                      cursorHeight: 25,
-                                      decoration: InputDecoration(
-                                          filled: true,
-                                          enabled: true,
-                                          fillColor: colorSecondary,
-                                          suffixIcon: GestureDetector(
-                                            onTap: () {
-                                              _togglePasswordVisibility();
-                                            },
-                                            child: Icon(
-                                              _isHidePassword
-                                                  ? Icons.visibility_off
-                                                  : Icons.visibility,
-                                              color: colorPrimary,
                                             ),
-                                          ),
-                                          label: const Text("Password"),
-                                          labelStyle: appFontFormInput,
-                                          floatingLabelStyle: appFontFormInput,
-                                          focusColor: colorSecondary,
-                                          enabledBorder: enableInputBorder,
-                                          focusedBorder: focusInputBorder),
-                                      validator: (value) {
-                                        RegExp regex = RegExp(r'^.{6,}$');
-                                        if (value!.isEmpty) {
-                                          return "Password tidak boleh kosong";
-                                        }
-                                        if (!regex.hasMatch(value)) {
-                                          return ("Masukkan password dengan benar min. 6 karakter");
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      onChanged: (value) {},
-                                    ),
-                                    const SizedBox(height: 24),
-                                    //confirm password
-                                    TextFormField(
-                                      controller: c.confirmpasswordsignupC,
-                                      obscureText: _isHideConfirmPass,
-                                      keyboardType: TextInputType.text,
-                                      style: appFontFormInput,
-                                      cursorColor: colorPrimary,
-                                      cursorHeight: 25,
-                                      decoration: InputDecoration(
-                                          filled: true,
-                                          enabled: true,
-                                          fillColor: colorSecondary,
-                                          suffixIcon: GestureDetector(
-                                            onTap: () {
-                                              _toggleConfirmPassVisibility();
-                                            },
-                                            child: Icon(
-                                              _isHideConfirmPass
-                                                  ? Icons.visibility_off
-                                                  : Icons.visibility,
-                                              color: colorPrimary,
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 24),
+                                      TextFormField(
+                                        controller: c.emailsignupC,
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                        style: appFontFormInput,
+                                        cursorColor: colorPrimary,
+                                        cursorHeight: 25,
+                                        decoration: const InputDecoration(
+                                            filled: true,
+                                            enabled: true,
+                                            fillColor: colorSecondary,
+                                            label: Text("Email"),
+                                            labelStyle: appFontFormInput,
+                                            floatingLabelStyle:
+                                                appFontFormInput,
+                                            focusColor: colorSecondary,
+                                            enabledBorder: enableInputBorder,
+                                            focusedBorder: focusInputBorder,
+                                            errorBorder: errorInputBorder,
+                                            focusedErrorBorder:
+                                                errorInputBorder),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Email tidak boleh kosong";
+                                          }
+                                          if (!RegExp(
+                                                  "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                              .hasMatch(value)) {
+                                            return ("Tolong masukkan email dengan benar");
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        onChanged: (value) => userEmail = value,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      TextFormField(
+                                        controller: c.namasignupC,
+                                        style: appFontFormInput,
+                                        cursorColor: colorPrimary,
+                                        cursorHeight: 25,
+                                        decoration: const InputDecoration(
+                                            filled: true,
+                                            fillColor: colorSecondary,
+                                            label: Text("Nama Lengkap"),
+                                            labelStyle: appFontFormInput,
+                                            floatingLabelStyle:
+                                                appFontFormInput,
+                                            focusColor: colorSecondary,
+                                            enabledBorder: enableInputBorder,
+                                            focusedBorder: focusInputBorder,
+                                            errorBorder: errorInputBorder,
+                                            focusedErrorBorder:
+                                                errorInputBorder),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Nama Lengkap tidak boleh kosong";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        onChanged: (value) => userNama = value,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      TextFormField(
+                                        controller: c.rtsignupC,
+                                        style: appFontFormInput,
+                                        cursorColor: colorPrimary,
+                                        cursorHeight: 25,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
+                                            filled: true,
+                                            fillColor: colorSecondary,
+                                            label: Text("RT"),
+                                            labelStyle: appFontFormInput,
+                                            floatingLabelStyle:
+                                                appFontFormInput,
+                                            focusColor: colorSecondary,
+                                            enabledBorder: enableInputBorder,
+                                            focusedBorder: focusInputBorder,
+                                            errorBorder: errorInputBorder,
+                                            focusedErrorBorder:
+                                                errorInputBorder),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "RT tidak boleh kosong";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        onChanged: (value) => userRT = value,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      //No. KK
+                                      TextFormField(
+                                        controller: c.rwsignupC,
+                                        style: appFontFormInput,
+                                        cursorColor: colorPrimary,
+                                        cursorHeight: 25,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
+                                            filled: true,
+                                            fillColor: colorSecondary,
+                                            label: Text("RW"),
+                                            labelStyle: appFontFormInput,
+                                            floatingLabelStyle:
+                                                appFontFormInput,
+                                            focusColor: colorSecondary,
+                                            enabledBorder: enableInputBorder,
+                                            focusedBorder: focusInputBorder,
+                                            errorBorder: errorInputBorder,
+                                            focusedErrorBorder:
+                                                errorInputBorder),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "RW tidak boleh kosong";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        onChanged: (value) => userRW = value,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      //No. WA
+                                      TextFormField(
+                                        controller: c.wasignupC,
+                                        style: appFontFormInput,
+                                        cursorColor: colorPrimary,
+                                        cursorHeight: 25,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: const InputDecoration(
+                                            filled: true,
+                                            fillColor: colorSecondary,
+                                            label: Text("No. WhatsApp"),
+                                            labelStyle: appFontFormInput,
+                                            floatingLabelStyle:
+                                                appFontFormInput,
+                                            focusColor: colorSecondary,
+                                            enabledBorder: enableInputBorder,
+                                            focusedBorder: focusInputBorder,
+                                            errorBorder: errorInputBorder,
+                                            focusedErrorBorder:
+                                                errorInputBorder),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "No. WhatsApp tidak boleh kosong";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        onChanged: (value) => userWa = value,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      //password
+                                      TextFormField(
+                                        controller: c.passwordsignupC,
+                                        obscureText: _isHidePassword,
+                                        keyboardType: TextInputType.text,
+                                        style: appFontFormInput,
+                                        cursorColor: colorPrimary,
+                                        cursorHeight: 25,
+                                        decoration: InputDecoration(
+                                            filled: true,
+                                            enabled: true,
+                                            fillColor: colorSecondary,
+                                            suffixIcon: GestureDetector(
+                                              onTap: () {
+                                                _togglePasswordVisibility();
+                                              },
+                                              child: Icon(
+                                                _isHidePassword
+                                                    ? Icons.visibility_off
+                                                    : Icons.visibility,
+                                                color: colorPrimary,
+                                              ),
                                             ),
-                                          ),
-                                          label: const Text("Confirm Password"),
-                                          labelStyle: appFontFormInput,
-                                          floatingLabelStyle: appFontFormInput,
-                                          focusColor: colorSecondary,
-                                          enabledBorder: enableInputBorder,
-                                          focusedBorder: focusInputBorder),
-                                      validator: (value) {
-                                        if (c.confirmpasswordsignupC.text !=
-                                            c.passwordsignupC.text) {
-                                          return "Password tidak sama";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      onChanged: (value) {},
-                                    )
-                                  ])),
+                                            label: const Text("Password"),
+                                            labelStyle: appFontFormInput,
+                                            floatingLabelStyle:
+                                                appFontFormInput,
+                                            focusColor: colorSecondary,
+                                            enabledBorder: enableInputBorder,
+                                            focusedBorder: focusInputBorder,
+                                            errorBorder: errorInputBorder,
+                                            focusedErrorBorder:
+                                                errorInputBorder),
+                                        validator: (value) {
+                                          RegExp regex = RegExp(r'^.{6,}$');
+                                          if (value!.isEmpty) {
+                                            return "Password tidak boleh kosong";
+                                          }
+                                          if (!regex.hasMatch(value)) {
+                                            return ("Masukkan password dengan benar min. 6 karakter");
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        onChanged: (value) => userPass = value,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      //confirm password
+                                      TextFormField(
+                                        controller: c.confirmpasswordsignupC,
+                                        obscureText: _isHideConfirmPass,
+                                        keyboardType: TextInputType.text,
+                                        style: appFontFormInput,
+                                        cursorColor: colorPrimary,
+                                        cursorHeight: 25,
+                                        decoration: InputDecoration(
+                                            filled: true,
+                                            enabled: true,
+                                            fillColor: colorSecondary,
+                                            suffixIcon: GestureDetector(
+                                              onTap: () {
+                                                _toggleConfirmPassVisibility();
+                                              },
+                                              child: Icon(
+                                                _isHideConfirmPass
+                                                    ? Icons.visibility_off
+                                                    : Icons.visibility,
+                                                color: colorPrimary,
+                                              ),
+                                            ),
+                                            label:
+                                                const Text("Confirm Password"),
+                                            labelStyle: appFontFormInput,
+                                            floatingLabelStyle:
+                                                appFontFormInput,
+                                            focusColor: colorSecondary,
+                                            enabledBorder: enableInputBorder,
+                                            focusedBorder: focusInputBorder,
+                                            errorBorder: errorInputBorder,
+                                            focusedErrorBorder:
+                                                errorInputBorder),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Konfirmasi Password tidak boleh kosong";
+                                          }
+                                          if (c.confirmpasswordsignupC.text !=
+                                              c.passwordsignupC.text) {
+                                            return "Konfirmasi Password tidak sama";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        onChanged: (value) =>
+                                            userConfirm = value,
+                                      )
+                                    ]),
+                              )),
                           const SizedBox(height: 32),
                           SizedBox(
                             width: double.infinity,
                             height: 56,
                             child: Obx(() => ElevatedButton(
                                 onPressed: () {
+                                  final bool? isValid =
+                                      formKey.currentState?.validate();
                                   AuthController.instance.isLoading.value
                                       ? null
-                                      : AuthController.instance.daftar(
-                                          daftarC.rool.trim(),
-                                          c.emailsignupC.text.trim(),
-                                          c.namasignupC.text.trim(),
-                                          c.rtsignupC.text.trim(),
-                                          c.rwsignupC.text.trim(),
-                                          c.wasignupC.text.trim(),
-                                          c.passwordsignupC.text.trim(),
-                                          c.confirmpasswordsignupC.text.trim());
+                                      : isValid == true
+                                          ? AuthController.instance.daftar(
+                                              daftarC.rool.trim(),
+                                              c.emailsignupC.text.trim(),
+                                              c.namasignupC.text.trim(),
+                                              c.rtsignupC.text.trim(),
+                                              c.rwsignupC.text.trim(),
+                                              c.wasignupC.text.trim(),
+                                              c.passwordsignupC.text.trim(),
+                                              c.confirmpasswordsignupC.text
+                                                  .trim())
+                                          : null;
                                 },
                                 style: btnStylePrimary,
                                 child: AuthController.instance.isLoading.value

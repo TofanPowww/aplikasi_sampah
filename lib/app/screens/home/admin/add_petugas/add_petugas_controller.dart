@@ -36,61 +36,42 @@ class AddPetugasController extends GetxController {
   Future<void> tambahPetugas(String rool, String email, String nama, String wa,
       String password, String confirmpass) async {
     isLoading.value = true;
-    if (emailpetugasC.text.isNotEmpty &&
-        namapetugasC.text.isNotEmpty &&
-        wapetugasC.text.isNotEmpty &&
-        passwordPetugasC.text.isNotEmpty &&
-        confirmpasswordPetugasC.text.isNotEmpty) {
-      if (password == confirmpass) {
-        try {
-          UserCredential userCredential = await FirebaseAuth.instance
-              .createUserWithEmailAndPassword(email: email, password: password);
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
 
-          if (userCredential.user != null) {
-            String uid = userCredential.user!.uid;
-            await FirebaseFirestore.instance
-                .collection('users')
-                .doc(email)
-                .set({
-              'rool': rool,
-              'email': emailpetugasC.text,
-              'nama_lengkap': namapetugasC.text,
-              'no_wa': wapetugasC.text,
-              'password': passwordPetugasC.text,
-              'uid': uid,
-            });
-          }
-          isLoading.value = false;
-          Get.snackbar(
-            "Berhasil mendaftar",
-            "akun berhasil didaftarkan",
-            backgroundColor: appSuccess,
-            snackPosition: SnackPosition.TOP,
-          );
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'email-already-in-use') {
-            isLoading.value = false;
-            Get.snackbar("Gagal Mendaftar", "Email telah digunakan",
-                backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
-          } else if (e.code == 'weak-password') {
-            isLoading.value = false;
-            Get.snackbar(
-              "Gagal Mendaftar",
-              "Password kurang aman",
-              backgroundColor: appDanger,
-              snackPosition: SnackPosition.TOP,
-            );
-          }
-        }
-      } else {
-        isLoading.value = false;
-        Get.snackbar("Gagal", "Konfirmasi password salah",
-            backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
+      if (userCredential.user != null) {
+        String uid = userCredential.user!.uid;
+        await FirebaseFirestore.instance.collection('users').doc(email).set({
+          'rool': rool,
+          'email': emailpetugasC.text,
+          'nama_lengkap': namapetugasC.text,
+          'no_wa': wapetugasC.text,
+          'password': passwordPetugasC.text,
+          'uid': uid,
+        });
       }
-    } else {
       isLoading.value = false;
-      Get.snackbar("Gagal", "Masukkan semua data",
-          backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
+      Get.snackbar(
+        "Berhasil mendaftar",
+        "akun berhasil didaftarkan",
+        backgroundColor: appSuccess,
+        snackPosition: SnackPosition.TOP,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        isLoading.value = false;
+        Get.snackbar("Gagal Mendaftar", "Email telah digunakan",
+            backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
+      } else if (e.code == 'weak-password') {
+        isLoading.value = false;
+        Get.snackbar(
+          "Gagal Mendaftar",
+          "Password kurang aman",
+          backgroundColor: appDanger,
+          snackPosition: SnackPosition.TOP,
+        );
+      }
     }
   }
 

@@ -269,7 +269,9 @@ class _HomeViewState extends State<HomeView> {
                                     children: [
                                       const Text("Selamat Datang, ",
                                           style: appFontHeding3),
-                                      Text("${authC.user.value.namaLengkap}",
+                                      Text(
+                                          snapshot.data!
+                                              .data()!['nama_lengkap'],
                                           style: appFontHeding1),
                                       const SizedBox(height: 24),
                                       const Text("Menu", style: appFontHeding3),
@@ -410,7 +412,9 @@ class _HomeViewState extends State<HomeView> {
                                     children: [
                                       const Text("Selamat datang",
                                           style: appFontHeding3),
-                                      Text("${authC.user.value.namaLengkap}",
+                                      Text(
+                                          snapshot.data!
+                                              .data()!['nama_lengkap'],
                                           style: appFontHeding1),
                                       const SizedBox(height: 24),
                                       const Text("Menu", style: appFontHeding3),

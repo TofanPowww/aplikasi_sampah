@@ -32,14 +32,52 @@ class RequestPengambilanController extends GetxController {
       String id,
       String email,
       String tgl,
-      int jumlahOrganik,
-      int jumlahAnorganik,
+      double jumlahOrganik,
+      double jumlahAnorganik,
       String status,
       String keterangan,
       int v) async {
     isLoading.value = true;
     final petugas = await usersDb.doc(auth.currentUser!.email).get();
     try {
+      //? Transaksi ditolak atau Jumlah Anorganik 0
+      if (v == 0) {
+        //* Update Transaksi Sampah pada Collection Kirim User //
+        await usersDb.doc(email).collection("kirim").doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
+          "keterangan": keterangan,
+          "jenisAnorganik": "-",
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+        //* Update Jumlah Poin Warga //
+        await usersDb.doc(email).update({
+          "poin": FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 200))
+        });
+        //* Update Transaksi Sampah pada Collection transaksiSampah //
+        await transaksiDb.doc(id).update({
+          "petugas": petugas.get("nama_lengkap"),
+          "status": status,
+          "jumlahOrganik": jumlahOrganik,
+          "jumlahAnorganik": jumlahAnorganik,
+          "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
+          "keterangan": keterangan,
+          "jenisAnorganik": "-",
+          "tanggalKonfirmasi":
+              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
+                  .format(DateTime.now()),
+          "confirmTime":
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+        });
+      }
       //? Sampah Jenis Plastik
       if (v == 1) {
         //* Update Transaksi Sampah pada Collection Kirim User //
@@ -50,6 +88,7 @@ class RequestPengambilanController extends GetxController {
           "jumlahAnorganik": jumlahAnorganik,
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
           "keterangan": keterangan,
+          "jenisAnorganik": "Plastik",
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
                   .format(DateTime.now()),
@@ -67,6 +106,7 @@ class RequestPengambilanController extends GetxController {
           "status": status,
           "jumlahOrganik": jumlahOrganik,
           "jumlahAnorganik": jumlahAnorganik,
+          "jenisAnorganik": "Plastik",
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
           "keterangan": keterangan,
           "tanggalKonfirmasi":
@@ -77,7 +117,7 @@ class RequestPengambilanController extends GetxController {
         });
       }
       //? Sampah Jenis Kertas
-      if (v == 2) {
+      else if (v == 2) {
         //* Update Transaksi Sampah pada Collection Kirim User //
         await usersDb.doc(email).collection("kirim").doc(id).update({
           "petugas": petugas.get("nama_lengkap"),
@@ -86,6 +126,7 @@ class RequestPengambilanController extends GetxController {
           "jumlahAnorganik": jumlahAnorganik,
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
           "keterangan": keterangan,
+          "jenisAnorganik": "Kertas",
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
                   .format(DateTime.now()),
@@ -105,6 +146,7 @@ class RequestPengambilanController extends GetxController {
           "jumlahAnorganik": jumlahAnorganik,
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
           "keterangan": keterangan,
+          "jenisAnorganik": "Kertas",
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
                   .format(DateTime.now()),
@@ -113,7 +155,7 @@ class RequestPengambilanController extends GetxController {
         });
       }
       //? Sampah Jenis Logam
-      if (v == 3) {
+      else if (v == 3) {
         //* Update Transaksi Sampah pada Collection Kirim User //
         await usersDb.doc(email).collection("kirim").doc(id).update({
           "petugas": petugas.get("nama_lengkap"),
@@ -122,6 +164,7 @@ class RequestPengambilanController extends GetxController {
           "jumlahAnorganik": jumlahAnorganik,
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 300),
           "keterangan": keterangan,
+          "jenisAnorganik": "Logam",
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
                   .format(DateTime.now()),
@@ -141,6 +184,7 @@ class RequestPengambilanController extends GetxController {
           "jumlahAnorganik": jumlahAnorganik,
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 300),
           "keterangan": keterangan,
+          "jenisAnorganik": "Logam",
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
                   .format(DateTime.now()),
@@ -149,7 +193,7 @@ class RequestPengambilanController extends GetxController {
         });
       }
       //? Sampah Jenis Besi
-      if (v == 4) {
+      else if (v == 4) {
         //* Update Transaksi Sampah pada Collection Kirim User //
         await usersDb.doc(email).collection("kirim").doc(id).update({
           "petugas": petugas.get("nama_lengkap"),
@@ -158,6 +202,7 @@ class RequestPengambilanController extends GetxController {
           "jumlahAnorganik": jumlahAnorganik,
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 320),
           "keterangan": keterangan,
+          "jenisAnorganik": "Besi",
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
                   .format(DateTime.now()),
@@ -177,6 +222,7 @@ class RequestPengambilanController extends GetxController {
           "jumlahAnorganik": jumlahAnorganik,
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 320),
           "keterangan": keterangan,
+          "jenisAnorganik": "Besi",
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
                   .format(DateTime.now()),
@@ -194,6 +240,7 @@ class RequestPengambilanController extends GetxController {
           "jumlahAnorganik": jumlahAnorganik,
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 220),
           "keterangan": keterangan,
+          "jenisAnorganik": "Botol Kaca",
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
                   .format(DateTime.now()),
@@ -213,6 +260,7 @@ class RequestPengambilanController extends GetxController {
           "jumlahAnorganik": jumlahAnorganik,
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 220),
           "keterangan": keterangan,
+          "jenisAnorganik": "Botol Kaca",
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
                   .format(DateTime.now()),
@@ -234,6 +282,13 @@ class RequestPengambilanController extends GetxController {
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     }
     //* Update Users Model //
+    //? Transaksi Ditolak atau Jumlah Anorganik 0
+    if (v == 0) {
+      modelUser(UsersModel(
+          poin: FieldValue.increment(
+              (jumlahOrganik * 150) + (jumlahAnorganik * 200)) as int));
+      modelUser.refresh();
+    }
     //? Jenis Sampah Plastik
     if (v == 1) {
       modelUser(UsersModel(

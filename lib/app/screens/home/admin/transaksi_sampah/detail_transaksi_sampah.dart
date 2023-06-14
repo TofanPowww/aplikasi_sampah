@@ -109,7 +109,6 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
                 )),
             const SizedBox(height: 8),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: Container(
@@ -120,13 +119,14 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
                         children: [
                           const Text("Jumlah Organik", style: appFontFormInput),
                           const SizedBox(height: 4),
-                          allData['jumlah'] == 0
+                          allData['jumlahOrganik'] == 0
                               ? const Text("-", style: appFontHeding2)
-                              : Text(allData['jumlah'].toString(),
+                              : Text(allData['jumlahOrganik'].toString(),
                                   style: appFontHeding2)
                         ],
                       )),
                 ),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Container(
                       decoration: boxDecorationInput,
@@ -137,9 +137,9 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
                           const Text("Jumlah Anorganik",
                               style: appFontFormInput),
                           const SizedBox(height: 4),
-                          allData['poin'] == 0
+                          allData['jumlahAnorganik'] == 0
                               ? const Text("-", style: appFontHeding2)
-                              : Text(allData['poin'].toString(),
+                              : Text(allData['jumlahAnorganik'].toString(),
                                   style: appFontHeding2)
                         ],
                       )),

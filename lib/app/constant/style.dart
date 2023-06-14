@@ -17,6 +17,14 @@ const focusInputBorder = OutlineInputBorder(
     ),
     borderRadius: BorderRadius.all(Radius.circular(10)));
 
+const errorInputBorder = OutlineInputBorder(
+    borderSide: BorderSide(
+      width: 1.5,
+      color: appDanger,
+      style: BorderStyle.solid,
+    ),
+    borderRadius: BorderRadius.all(Radius.circular(10)));
+
 final btnStylePrimary = ButtonStyle(
     elevation: const MaterialStatePropertyAll(5),
     backgroundColor: const MaterialStatePropertyAll(colorPrimary),

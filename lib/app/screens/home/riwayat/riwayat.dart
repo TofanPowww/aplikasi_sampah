@@ -108,7 +108,8 @@ class _RiwayatViewState extends State<RiwayatView> {
                                                       style: appFontFormInput),
                                                   const SizedBox(height: 4),
                                                   Text(
-                                                      data['jumlah'].toString(),
+                                                      data['jumlahOrganik']
+                                                          .toString(),
                                                       style: appFontHeding3b),
                                                 ],
                                               ),
@@ -122,7 +123,9 @@ class _RiwayatViewState extends State<RiwayatView> {
                                                   const Text("Anorganik",
                                                       style: appFontFormInput),
                                                   const SizedBox(height: 4),
-                                                  Text(data['poin'].toString(),
+                                                  Text(
+                                                      data['jumlahAnorganik']
+                                                          .toString(),
                                                       style: appFontHeding3b),
                                                 ],
                                               )

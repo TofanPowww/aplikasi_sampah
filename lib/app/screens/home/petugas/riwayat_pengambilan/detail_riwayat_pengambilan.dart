@@ -107,9 +107,9 @@ class _DetailPengambilanViewState extends State<DetailPengambilanView> {
                         children: [
                           const Text("Jumlah Organik", style: appFontFormInput),
                           const SizedBox(height: 4),
-                          allData['jumlah'] == 0
+                          allData['jumlahOrganik'] == 0.0
                               ? const Text("-", style: appFontHeding2)
-                              : Text(allData['jumlah'].toString(),
+                              : Text(allData['jumlahOrganik'].toString(),
                                   style: appFontHeding2)
                         ],
                       )),
@@ -125,9 +125,9 @@ class _DetailPengambilanViewState extends State<DetailPengambilanView> {
                           const Text("Jumlah Anorganik",
                               style: appFontFormInput),
                           const SizedBox(height: 4),
-                          allData['poin'] == 0
+                          allData['jumlahAnorganik'] == 0.0
                               ? const Text("-", style: appFontHeding2)
-                              : Text(allData['poin'].toString(),
+                              : Text(allData['jumlahAnorganik'].toString(),
                                   style: appFontHeding2)
                         ],
                       )),
@@ -142,7 +142,7 @@ class _DetailPengambilanViewState extends State<DetailPengambilanView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Status", style: appFontFormInput),
+                    const Text("Poin", style: appFontFormInput),
                     const SizedBox(height: 4),
                     allData['poin'] == 0
                         ? const Text("-", style: appFontHeding2)

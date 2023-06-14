@@ -335,23 +335,34 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                                   request['id'].toString(),
                                   request['email'].toString(),
                                   request['tgl'].toString(),
-                                  int.parse(jmlhOrganik.text.trim()),
-                                  int.parse(jmlhAnorganik.text.trim()),
+                                  double.parse(jmlhOrganik.text.trim()),
+                                  double.parse(jmlhAnorganik.text.trim()),
                                   status!.trim(),
                                   kirimC.keteranganC.text.trim(),
-                                  0
-                                  )
-                              : kirimC.updateTransaksi(
-                                  request['id'].toString(),
-                                  request['email'].toString(),
-                                  request['tgl'].toString(),
-                                  int.parse(kirimC.jumlahOrganikC.text.trim()),
-                                  int.parse(
-                                      kirimC.jumlahAnorganikC.text.trim()),
-                                  status!.trim(),
-                                  ket.text.trim(),
-                                  value
-                                  );
+                                  0)
+                              : value == 0
+                                  ? kirimC.updateTransaksi(
+                                      request['id'].toString(),
+                                      request['email'].toString(),
+                                      request['tgl'].toString(),
+                                      double.parse(
+                                          kirimC.jumlahOrganikC.text.trim()),
+                                      double.parse(
+                                          kirimC.jumlahAnorganikC.text.trim()),
+                                      status!.trim(),
+                                      ket.text.trim(),
+                                      0)
+                                  : kirimC.updateTransaksi(
+                                      request['id'].toString(),
+                                      request['email'].toString(),
+                                      request['tgl'].toString(),
+                                      double.parse(
+                                          kirimC.jumlahOrganikC.text.trim()),
+                                      double.parse(
+                                          kirimC.jumlahAnorganikC.text.trim()),
+                                      status!.trim(),
+                                      ket.text.trim(),
+                                      value);
                     },
                     style: btnStylePrimary,
                     child: status == "Ditolak"

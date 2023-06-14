@@ -95,7 +95,7 @@ class TransaksiSampahController extends GetxController {
                           textAlign: pw.TextAlign.center)),
                   pw.Padding(
                       padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text(data.jumlah.toString(),
+                      child: pw.Text(data.jumlahOrganik.toString(),
                           style: pw.TextStyle(
                               fontSize: 11, fontWeight: pw.FontWeight.normal),
                           textAlign: pw.TextAlign.center)),

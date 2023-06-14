@@ -173,7 +173,7 @@ class _DetailPenukaranViewState extends State<DetailPenukaranView> {
                               onPressed: () {
                                 control.downloadBuktiTransaksiPoin(
                                     tukar["kode"],
-                                    tukar["confirmTime"],
+                                    tukar["tanggalKonfirmasi"],
                                     tukar["status"],
                                     tukar["nama_produk"],
                                     tukar["poin_produk"]);
