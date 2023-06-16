@@ -3,16 +3,15 @@
  ==========================================
 🔵 Create
     - Batas Waktu Penukaran
-    - Notifikasi Permintaan Pengambilan
+    - Notifikasi Permintaan Pengambilan (Optional)
     - Lupa Password (Optional)
     - Verifikasi Email (Optional)
 
 
 ==========================================
 ⚪ Modify
-    - Konfirmasi Penukaran Poin
+    - Konfirmasi Penukaran Poin 
     - Cetak Transaksi Sampah & Poin
-    - Model Transaksi Sampah
 
 
 ==========================================
@@ -23,6 +22,7 @@
 ==========================================
 🟢 Done
     - Konfirmasi Pengambilan Sampah
+    - Model Transaksi Sampah
 
 
 
@@ -33,3 +33,13 @@
 
 ==========================================
 🔴 Error
+
+
+
+
+==========================================
+Kebutuhan Laporan
+    - SS Halaman Detail Pengambilan
+    - SS Halaman Detail Permintaan Petugas Status Diterima dan Ditolak 
+    - SS Halaman Cetak Transaksi
+    - SS Snackbar Berhasil Daftar

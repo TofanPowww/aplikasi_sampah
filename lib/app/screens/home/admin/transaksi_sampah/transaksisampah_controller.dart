@@ -13,7 +13,7 @@ class TransaksiSampahController extends GetxController {
     return db
         .collection("transaksiSampah")
         .where("status", isNotEqualTo: "Menunggu")
-        // .orderBy("confirmTime", descending: true)
+        .orderBy("confirmTime", descending: true)
         .snapshots();
   }
 
