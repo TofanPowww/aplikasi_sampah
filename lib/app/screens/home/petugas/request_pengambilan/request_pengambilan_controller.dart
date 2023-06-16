@@ -52,8 +52,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "-",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -72,8 +71,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "-",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -90,8 +88,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "Plastik",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -110,8 +107,7 @@ class RequestPengambilanController extends GetxController {
           "poin": (jumlahOrganik * 150) + (jumlahAnorganik * 200),
           "keterangan": keterangan,
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -128,8 +124,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "Kertas",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -148,8 +143,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "Kertas",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -166,8 +160,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "Logam",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -186,8 +179,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "Logam",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -204,8 +196,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "Besi",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -224,8 +215,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "Besi",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -242,8 +232,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "Botol Kaca",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
@@ -262,8 +251,7 @@ class RequestPengambilanController extends GetxController {
           "keterangan": keterangan,
           "jenisAnorganik": "Botol Kaca",
           "tanggalKonfirmasi":
-              DateFormat("EEEE, dd MMMM yyyy HH:mm:ss", "id_ID")
-                  .format(DateTime.now()),
+              DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });

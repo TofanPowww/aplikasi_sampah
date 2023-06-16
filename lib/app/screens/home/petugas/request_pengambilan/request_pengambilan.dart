@@ -26,7 +26,7 @@ class _RequestPengambilan extends State<RequestPengambilan> {
   final Stream<QuerySnapshot> _kirimSampahStream = FirebaseFirestore.instance
       .collection('transaksiSampah')
       .where('status', isEqualTo: 'Menunggu')
-      .orderBy('creationTime', descending: true)
+      // .orderBy('creationTime')
       .snapshots();
 
   @override

@@ -11,11 +11,11 @@
 ==========================================
 ⚪ Modify
     - Konfirmasi Penukaran Poin 
-    - Cetak Transaksi Sampah & Poin
 
 
 ==========================================
 🟣 Progress
+    - Cetak Transaksi Sampah & Poin
 
 
 
@@ -39,7 +39,7 @@
 
 ==========================================
 Kebutuhan Laporan
-    - SS Halaman Detail Pengambilan
+    - SS Halaman Detail Pengambilan 
     - SS Halaman Detail Permintaan Petugas Status Diterima dan Ditolak 
     - SS Halaman Cetak Transaksi
     - SS Snackbar Berhasil Daftar

@@ -1,6 +1,7 @@
 import 'package:aplikasi_sampah/app/data/transaksiSampah.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -13,15 +14,23 @@ class TransaksiSampahController extends GetxController {
     return db
         .collection("transaksiSampah")
         .where("status", isNotEqualTo: "Menunggu")
-        .orderBy("confirmTime", descending: true)
         .snapshots();
   }
+
+  String hariIni =
+      DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now());
 
   //? Fungsi Mengambil Data //
   void cetakTransaksiSampah(int v1, int v2, int v3) async {
     if (v1 == 1 && v2 == 1 && v3 == 0) {
       final tSemua = tSampahDb.where("status", isNotEqualTo: "Menunggu");
       await tSemua.get().then((value) => printPdf(value, "Semua", "Semua"));
+    }
+    if (v1 == 1 && v2 == 2 && v3 == 0) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("tanggalKonfirmasi", isEqualTo: hariIni);
+      await tSemua.get().then((value) => printPdf(value, "Semua", "Hari ini"));
     }
     // if (v1 == 1 && v2 == 1 && v3 == 1) {
     //   final tSemua = tSampahDb.where("status", isNotEqualTo: "Menunggu").where("tanggalKonfirmasi", arrayContains: "");
@@ -31,9 +40,25 @@ class TransaksiSampahController extends GetxController {
       final tSemua = tSampahDb.where("status", isEqualTo: "Diterima");
       await tSemua.get().then((value) => printPdf(value, "Diterima", "Semua"));
     }
+    if (v1 == 2 && v2 == 2 && v3 == 0) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("tanggalKonfirmasi", isEqualTo: hariIni);
+      await tSemua
+          .get()
+          .then((value) => printPdf(value, "Diterima", "Hari ini"));
+    }
     if (v1 == 3 && v2 == 1 && v3 == 0) {
       final tSemua = tSampahDb.where("status", isEqualTo: "Ditolak");
       await tSemua.get().then((value) => printPdf(value, "Ditolak", "Semua"));
+    }
+    if (v1 == 3 && v2 == 2 && v3 == 0) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("tanggalKonfirmasi", isEqualTo: hariIni);
+      await tSemua
+          .get()
+          .then((value) => printPdf(value, "Ditolak", "Hari ini"));
     }
   }
 
