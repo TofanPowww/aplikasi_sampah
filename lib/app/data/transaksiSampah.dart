@@ -17,6 +17,7 @@ class TransaksiSampahModel {
   final String tanggalKonfirmasi;
   final String creationTime;
   final String confirmTime;
+  final String bulan;
 
   TransaksiSampahModel({
     required this.id,
@@ -36,6 +37,7 @@ class TransaksiSampahModel {
     required this.tanggalKonfirmasi,
     required this.creationTime,
     required this.confirmTime,
+    required this.bulan,
   });
 
   factory TransaksiSampahModel.fromJson(Map<String, dynamic> json) =>
@@ -57,6 +59,7 @@ class TransaksiSampahModel {
         tanggalKonfirmasi: json["tanggalKonfirmasi"] ?? "",
         creationTime: json["creationTime"] ?? "",
         confirmTime: json["confirmTime"] ?? "",
+        bulan: json["bulan"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -77,5 +80,6 @@ class TransaksiSampahModel {
         "tanggalKonfirmasi": tanggalKonfirmasi,
         "creationTime": creationTime,
         "confirmTime": confirmTime,
+        "bulan": bulan,
       };
 }

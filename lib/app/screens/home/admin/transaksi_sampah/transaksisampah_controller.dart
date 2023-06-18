@@ -1,5 +1,6 @@
 import 'package:aplikasi_sampah/app/data/transaksiSampah.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
@@ -30,12 +31,158 @@ class TransaksiSampahController extends GetxController {
       final tSemua = tSampahDb
           .where("status", isNotEqualTo: "Menunggu")
           .where("tanggalKonfirmasi", isEqualTo: hariIni);
-      await tSemua.get().then((value) => printPdf(value, "Semua", "Hari ini"));
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Hari ini");
+        }
+      });
     }
-    // if (v1 == 1 && v2 == 1 && v3 == 1) {
-    //   final tSemua = tSampahDb.where("status", isNotEqualTo: "Menunggu").where("tanggalKonfirmasi", arrayContains: "");
-    //   await tSemua.get().then((value) => printPdf(value, "Semua", "Semua"));
-    // }
+    if (v1 == 1 && v2 == 3 && v3 == 1) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "Januari");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Januari");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 2) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "Februari");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Februari");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 3) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "Maret");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Maret");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 4) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "April");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "April");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 5) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "Mei");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Mei");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 6) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "Juni");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Juni");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 7) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "Juli");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Juli");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 8) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "Agustus");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Agustus");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 9) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "September");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "September");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 10) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "Oktober");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Oktober");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 11) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "November");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "November");
+        }
+      });
+    }
+    if (v1 == 1 && v2 == 3 && v3 == 12) {
+      final tSemua = tSampahDb
+          .where("status", isNotEqualTo: "Menunggu")
+          .where("bulan", isEqualTo: "Desember");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Semua", "Desember");
+        }
+      });
+    }
     if (v1 == 2 && v2 == 1 && v3 == 0) {
       final tSemua = tSampahDb.where("status", isEqualTo: "Diterima");
       await tSemua.get().then((value) => printPdf(value, "Diterima", "Semua"));
@@ -44,9 +191,169 @@ class TransaksiSampahController extends GetxController {
       final tSemua = tSampahDb
           .where("status", isEqualTo: "Diterima")
           .where("tanggalKonfirmasi", isEqualTo: hariIni);
-      await tSemua
-          .get()
-          .then((value) => printPdf(value, "Diterima", "Hari ini"));
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Hari ini");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 1) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Januari");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Januari");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 2) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Februari");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Februari");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 3) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Maret");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Maret");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 4) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "April");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "April");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 5) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Mei");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Mei");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 6) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Juni");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Juni");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 6) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Juni");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Juni");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 7) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Juni");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Juni");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 8) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Agustus");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Agustus");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 9) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "September");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "September");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 10) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Oktober");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Oktober");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 11) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "November");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "November");
+        }
+      });
+    }
+    if (v1 == 2 && v2 == 3 && v3 == 12) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Diterima")
+          .where("bulan", isEqualTo: "Desember");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Diterima", "Desember");
+        }
+      });
     }
     if (v1 == 3 && v2 == 1 && v3 == 0) {
       final tSemua = tSampahDb.where("status", isEqualTo: "Ditolak");
@@ -56,9 +363,157 @@ class TransaksiSampahController extends GetxController {
       final tSemua = tSampahDb
           .where("status", isEqualTo: "Ditolak")
           .where("tanggalKonfirmasi", isEqualTo: hariIni);
-      await tSemua
-          .get()
-          .then((value) => printPdf(value, "Ditolak", "Hari ini"));
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Hari ini");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 1) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "Januari");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Januari");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 2) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "Februari");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Februari");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 3) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "Maret");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Maret");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 4) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "April");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "April");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 5) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "Mei");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Mei");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 6) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "Juni");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Juni");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 7) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "Juli");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Juli");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 8) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "Agustus");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Agustus");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 9) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "September");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "September");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 10) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "Oktober");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Oktober");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 11) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "November");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "November");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3 && v3 == 12) {
+      final tSemua = tSampahDb
+          .where("status", isEqualTo: "Ditolak")
+          .where("bulan", isEqualTo: "Desember");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Ditolak", "Desember");
+        }
+      });
     }
   }
 

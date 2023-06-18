@@ -5,7 +5,6 @@ import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
 import 'package:aplikasi_sampah/app/screens/home/admin/transaksi_poin/transaksipoin_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class CetakTransaksiPoin extends StatefulWidget {
@@ -180,55 +179,55 @@ class _CetakTransaksiPoinState extends State<CetakTransaksiPoin> {
                       print("Transaksi semua waktu");
                     }
                     if (value1 == 2) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, 0);
                       print("Transaksi hari ini");
                     }
                     if (value1 == 3 && value2 == 1) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Transaksi bulan 1");
                     }
                     if (value1 == 3 && value2 == 2) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 2");
                     }
                     if (value1 == 3 && value2 == 3) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 3");
                     }
                     if (value1 == 3 && value2 == 4) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 4");
                     }
                     if (value1 == 3 && value2 == 5) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 5");
                     }
                     if (value1 == 3 && value2 == 6) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 6");
                     }
                     if (value1 == 3 && value2 == 7) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 7");
                     }
                     if (value1 == 3 && value2 == 8) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 8");
                     }
                     if (value1 == 3 && value2 == 9) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 9");
                     }
                     if (value1 == 3 && value2 == 10) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 10");
                     }
                     if (value1 == 3 && value2 == 11) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 11");
                     }
                     if (value1 == 3 && value2 == 12) {
-                      Fluttertoast.showToast(msg: "Tidak ada transaksi");
+                      control.cetakTransaksiPoin(value1, value2);
                       print("Semua jenis transaksi bulan 12");
                     }
                   },

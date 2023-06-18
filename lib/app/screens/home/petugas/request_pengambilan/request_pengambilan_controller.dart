@@ -73,7 +73,8 @@ class RequestPengambilanController extends GetxController {
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+          "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
         });
       }
       //? Sampah Jenis Plastik
@@ -109,7 +110,8 @@ class RequestPengambilanController extends GetxController {
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+           "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
         });
       }
       //? Sampah Jenis Kertas
@@ -145,7 +147,8 @@ class RequestPengambilanController extends GetxController {
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+           "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
         });
       }
       //? Sampah Jenis Logam
@@ -181,7 +184,8 @@ class RequestPengambilanController extends GetxController {
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+           "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
         });
       }
       //? Sampah Jenis Besi
@@ -217,7 +221,8 @@ class RequestPengambilanController extends GetxController {
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+           "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
         });
       }
       //? Sampah Jenis Botol Kaca
@@ -253,7 +258,8 @@ class RequestPengambilanController extends GetxController {
           "tanggalKonfirmasi":
               DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
           "confirmTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+           "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
         });
       }
       isLoading.value = false;

@@ -15,7 +15,6 @@
 
 ==========================================
 🟣 Progress
-    - Cetak Transaksi Sampah & Poin
 
 
 
@@ -28,6 +27,7 @@
 
 ==========================================
 🟡 Done Without Test
+    - Cetak Transaksi Sampah & Poin
 
 
 

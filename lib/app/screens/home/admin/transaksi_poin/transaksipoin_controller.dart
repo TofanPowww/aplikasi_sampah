@@ -3,6 +3,7 @@
 import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/data/transaksiTukarModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
@@ -15,6 +16,9 @@ class TransaksiPoinController extends GetxController {
   CollectionReference transaksiDb =
       FirebaseFirestore.instance.collection('transaksiTukar');
   final poinDb = FirebaseFirestore.instance.collection("transaksiTukar");
+
+  String hariIni =
+      DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now());
 
   //? Stream Data Transaksi Sampah//
   Stream<QuerySnapshot> transaksiTukarStream() {
@@ -35,10 +39,12 @@ class TransaksiPoinController extends GetxController {
         await tPoinDb.doc(id).update({
           "status": "Selesai",
           "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM yyyy HH:mm:ss', "id_ID")
+              DateFormat('EEEE, dd MMMM yyyy', "id_ID")
                   .format(DateTime.now()),
           "confirmTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+          "bulan": DateFormat('MMMM', "id_ID")
+                  .format(DateTime.now())
         });
 
         //*Mengambil Email Warga
@@ -51,7 +57,7 @@ class TransaksiPoinController extends GetxController {
         await usersDb.doc(emailWarga).collection("tukar").doc(id).update({
           "status": "Selesai",
           "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM yyyy HH:mm:ss', "id_ID")
+              DateFormat('EEEE, dd MMMM yyyy', "id_ID")
                   .format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
@@ -231,6 +237,162 @@ class TransaksiPoinController extends GetxController {
     if (v1 == 1 && v2 == 0) {
       final tSemua = poinDb.where("status", isEqualTo: "Selesai");
       await tSemua.get().then((value) => printPdf(value, "Semua"));
+    }
+    if (v1 == 2 && v2 == 0) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("tanggalKonfirmasi", isEqualTo: hariIni);
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Hari ini");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 1) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "Januari");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Januari");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 2) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "Februari");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Februari");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 3) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "Maret");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Maret");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 4) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "April");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "April");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 5) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "Mei");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Mei");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 6) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "Juni");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Juni");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 7) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "Juli");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Juli");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 8) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "Agustus");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Agustus");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 9) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "September");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "September");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 10) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "Oktober");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Oktober");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 11) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "November");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "November");
+        }
+      });
+    }
+    if (v1 == 3 && v2 == 12) {
+      final tSemua = poinDb
+          .where("status", isEqualTo: "Selesai")
+          .where("bulan", isEqualTo: "Desember");
+      await tSemua.get().then((value) {
+        if (value.docs.isEmpty) {
+          Fluttertoast.showToast(msg: "Tidak ada transaksi");
+        } else {
+          printPdf(value, "Desember");
+        }
+      });
     }
   }
 
