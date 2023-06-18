@@ -14,7 +14,11 @@ class TambahProdukView extends StatefulWidget {
 }
 
 class _TambahProdukViewState extends State<TambahProdukView> {
+  final formKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
+  String namaP = '';
+  String deskP = '';
+  String poinP = '';
   final ProdukController control = Get.put(ProdukController());
   @override
   Widget build(BuildContext context) {
@@ -35,12 +39,14 @@ class _TambahProdukViewState extends State<TambahProdukView> {
           child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: SingleChildScrollView(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text("Nama produk", style: appFontHeding3a),
-            const SizedBox(height: 8),
-            TextFormField(
+            child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Nama produk", style: appFontHeding3a),
+              const SizedBox(height: 8),
+              TextFormField(
                 controller: control.namaProdukAdd,
                 autocorrect: false,
                 style: appFontLabelForm,
@@ -51,11 +57,20 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                     filled: true,
                     fillColor: colorSecondary,
                     enabledBorder: enableInputBorder,
-                    focusedBorder: focusInputBorder)),
-            const SizedBox(height: 16),
-            const Text("Poin produk", style: appFontHeding3a),
-            const SizedBox(height: 8),
-            TextFormField(
+                    focusedBorder: focusInputBorder),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Masukkan nama produk";
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) => namaP = value,
+              ),
+              const SizedBox(height: 16),
+              const Text("Poin produk", style: appFontHeding3a),
+              const SizedBox(height: 8),
+              TextFormField(
                 controller: control.poinProdukAdd,
                 autocorrect: false,
                 style: appFontLabelForm,
@@ -66,11 +81,20 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                     filled: true,
                     fillColor: colorSecondary,
                     enabledBorder: enableInputBorder,
-                    focusedBorder: focusInputBorder)),
-            const SizedBox(height: 16),
-            const Text("Deskripsi produk", style: appFontHeding3a),
-            const SizedBox(height: 8),
-            TextFormField(
+                    focusedBorder: focusInputBorder),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Masukkan poin produk";
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) => poinP = value,
+              ),
+              const SizedBox(height: 16),
+              const Text("Deskripsi produk", style: appFontHeding3a),
+              const SizedBox(height: 8),
+              TextFormField(
                 controller: control.desProdukAdd,
                 maxLines: 3,
                 autocorrect: false,
@@ -82,39 +106,54 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                     filled: true,
                     fillColor: colorSecondary,
                     enabledBorder: enableInputBorder,
-                    focusedBorder: focusInputBorder)),
-            const SizedBox(height: 32),
-            SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: Obx(() => ElevatedButton(
-                    onPressed: () {
-                      control.isLoading.value
-                          ? null
-                          : control
-                              .tambahProduk(
-                              control.namaProdukAdd.text.trim(),
-                              control.desProdukAdd.text.trim(),
-                              int.parse(control.poinProdukAdd.text.trim()),
+                    focusedBorder: focusInputBorder),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Masukkan deskripsi produk";
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) => deskP = value,
+              ),
+              const SizedBox(height: 32),
+              SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: Obx(() => ElevatedButton(
+                      onPressed: () {
+                        final bool? isValid = formKey.currentState?.validate();
+                        control.isLoading.value
+                            ? null
+                            : isValid == true
+                                ? control
+                                    .tambahProduk(
+                                    control.namaProdukAdd.text.trim(),
+                                    control.desProdukAdd.text.trim(),
+                                    int.parse(
+                                        control.poinProdukAdd.text.trim()),
+                                  )
+                                    .whenComplete(() {
+                                    control.namaProdukAdd.clear();
+                                    control.desProdukAdd.clear();
+                                    control.poinProdukAdd.clear();
+                                  })
+                                : null;
+                      },
+                      style: btnStylePrimary,
+                      child: control.isLoading.value
+                          ? const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircularProgressIndicator(
+                                    color: colorBackground),
+                                SizedBox(width: 16),
+                                Text("Sedang memuat...", style: appFontButton),
+                              ],
                             )
-                              .whenComplete(() {
-                              control.namaProdukAdd.clear();
-                              control.desProdukAdd.clear();
-                              control.poinProdukAdd.clear();
-                            });
-                    },
-                    style: btnStylePrimary,
-                    child: control.isLoading.value
-                        ? const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircularProgressIndicator(color: colorBackground),
-                              SizedBox(width: 16),
-                              Text("Sedang memuat...", style: appFontButton),
-                            ],
-                          )
-                        : const Text("Tambah", style: appFontButton))))
-          ],
+                          : const Text("Tambah", style: appFontButton))))
+            ],
+          ),
         )),
       )),
     );

@@ -33,12 +33,12 @@ class AddPetugasController extends GetxController {
   toKelolaPetugas() => Get.offAndToNamed(AppLinks.KELOLA_PETUGAS);
 
   //Function Add Petugas//
-  Future<void> tambahPetugas(String rool, String email, String nama, String wa,
-      String password, String confirmpass) async {
+  Future<void> tambahPetugas(
+      String rool, String email, String nama, String wa) async {
     isLoading.value = true;
     try {
       UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+          .createUserWithEmailAndPassword(email: email, password: "petugas");
 
       if (userCredential.user != null) {
         String uid = userCredential.user!.uid;
@@ -47,7 +47,7 @@ class AddPetugasController extends GetxController {
           'email': emailpetugasC.text,
           'nama_lengkap': namapetugasC.text,
           'no_wa': wapetugasC.text,
-          'password': passwordPetugasC.text,
+          'password': "petugas",
           'uid': uid,
         });
       }
@@ -63,11 +63,11 @@ class AddPetugasController extends GetxController {
         isLoading.value = false;
         Get.snackbar("Gagal Mendaftar", "Email telah digunakan",
             backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
-      } else if (e.code == 'weak-password') {
+      } else {
         isLoading.value = false;
         Get.snackbar(
           "Gagal Mendaftar",
-          "Password kurang aman",
+          "terjadi Error",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
         );

@@ -16,6 +16,11 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   bool _isHidePasswordBaru = true;
   bool _isHidePasswordKonfir = true;
 
+  final formKey = GlobalKey<FormState>();
+  String passLama = '';
+  String passBaru = '';
+  String passKonfirm = '';
+
   RxBool isLoading = false.obs;
 
   void _togglePasswordLamaVisibility() {
@@ -59,131 +64,171 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Form(
+                        key: formKey,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                          //Password Lama//
-                          const Text("Password Lama", style: appFontHeding3a),
-                          const SizedBox(height: 8),
-                          TextFormField(
-                            obscureText: _isHidePasswordLama,
-                            autofocus: false,
-                            autocorrect: false,
-                            controller: resetC.passLamaC,
-                            keyboardType: TextInputType.text,
-                            style: appFontLabelForm,
-                            cursorColor: colorPrimary,
-                            cursorHeight: 25,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: colorSecondary,
-                                suffixIcon: GestureDetector(
-                                  onTap: () {
-                                    _togglePasswordLamaVisibility();
-                                  },
-                                  child: Icon(
-                                      _isHidePasswordLama
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                      color: colorPrimary),
-                                ),
-                                enabledBorder: enableInputBorder,
-                                focusedBorder: focusInputBorder),
-                          ),
-                          //End Password Lama//
-                          const SizedBox(height: 16),
-                          //Password Baru//
-                          const Text("Password Baru", style: appFontHeding3a),
-                          const SizedBox(height: 8),
-                          TextFormField(
-                            obscureText: _isHidePasswordBaru,
-                            autofocus: false,
-                            autocorrect: false,
-                            controller: resetC.passBaruC,
-                            keyboardType: TextInputType.text,
-                            style: appFontLabelForm,
-                            cursorColor: colorPrimary,
-                            cursorHeight: 25,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: colorSecondary,
-                                suffixIcon: GestureDetector(
-                                  onTap: () {
-                                    _togglePasswordBaruVisibility();
-                                  },
-                                  child: Icon(
-                                      _isHidePasswordBaru
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                      color: colorPrimary),
-                                ),
-                                enabledBorder: enableInputBorder,
-                                focusedBorder: focusInputBorder),
-                          ),
-                          //Password Baru//
-                          const SizedBox(height: 16),
-                          //Konfirmasi Password//
-                          const Text("Konfirmasi Password",
-                              style: appFontHeding3a),
-                          const SizedBox(height: 8),
-                          TextFormField(
-                            obscureText: _isHidePasswordKonfir,
-                            controller: resetC.passKonfirC,
-                            autocorrect: false,
-                            autofocus: false,
-                            keyboardType: TextInputType.text,
-                            style: appFontLabelForm,
-                            cursorColor: colorPrimary,
-                            cursorHeight: 25,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: colorSecondary,
-                                suffixIcon: GestureDetector(
-                                  onTap: () {
-                                    _togglePasswordKonfirVisibility();
-                                  },
-                                  child: Icon(
-                                      _isHidePasswordKonfir
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                      color: colorPrimary),
-                                ),
-                                enabledBorder: enableInputBorder,
-                                focusedBorder: focusInputBorder),
-                          ),
-                          //End Konfirmasi Password//
-                          const SizedBox(height: 32),
-                          //Submit Button//
-                          SizedBox(
-                            width: double.infinity,
-                            height: 56,
-                            child: Obx(() => ElevatedButton(
-                                onPressed: () {
-                                  resetC.isLoading.value
-                                      ? null
-                                      : resetC.resetPass(
-                                          resetC.passLamaC.text.trim(),
-                                          resetC.passBaruC.text.trim(),
-                                          resetC.passKonfirC.text.trim());
+                              //Password Lama//
+                              const Text("Password Lama",
+                                  style: appFontHeding3a),
+                              const SizedBox(height: 8),
+                              TextFormField(
+                                obscureText: _isHidePasswordLama,
+                                autofocus: false,
+                                autocorrect: false,
+                                controller: resetC.passLamaC,
+                                keyboardType: TextInputType.text,
+                                style: appFontLabelForm,
+                                cursorColor: colorPrimary,
+                                cursorHeight: 25,
+                                decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: colorSecondary,
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        _togglePasswordLamaVisibility();
+                                      },
+                                      child: Icon(
+                                          _isHidePasswordLama
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                          color: colorPrimary),
+                                    ),
+                                    enabledBorder: enableInputBorder,
+                                    focusedBorder: focusInputBorder),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Password Lama tidak boleh kosong";
+                                  } else {
+                                    return null;
+                                  }
                                 },
-                                style: btnStylePrimary,
-                                child: resetC.isLoading.value
-                                    ? const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          CircularProgressIndicator(
-                                              color: colorBackground),
-                                          SizedBox(width: 16),
-                                          Text("Sedang memuat...",
-                                              style: appFontButton),
-                                        ],
-                                      )
-                                    : const Text("Simpan",
-                                        style: appFontButton))),
-                          ),
-                          //End Submit Button//
-                        ]))
+                                onChanged: (value) => passLama = value,
+                              ),
+                              //End Password Lama//
+                              const SizedBox(height: 16),
+                              //Password Baru//
+                              const Text("Password Baru",
+                                  style: appFontHeding3a),
+                              const SizedBox(height: 8),
+                              TextFormField(
+                                obscureText: _isHidePasswordBaru,
+                                autofocus: false,
+                                autocorrect: false,
+                                controller: resetC.passBaruC,
+                                keyboardType: TextInputType.text,
+                                style: appFontLabelForm,
+                                cursorColor: colorPrimary,
+                                cursorHeight: 25,
+                                decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: colorSecondary,
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        _togglePasswordBaruVisibility();
+                                      },
+                                      child: Icon(
+                                          _isHidePasswordBaru
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                          color: colorPrimary),
+                                    ),
+                                    enabledBorder: enableInputBorder,
+                                    focusedBorder: focusInputBorder),
+                                validator: (value) {
+                                  RegExp regex = RegExp(r'[A-Za-z0-9]{6,16}$');
+                                  if (value!.isEmpty) {
+                                    return "Password Baru tidak boleh kosong";
+                                  }
+                                  if (!regex.hasMatch(value)) {
+                                    return ("Password harus Huruf kapital, Angka, & Minimal 6 karakter");
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                onChanged: (value) => passBaru = value,
+                              ),
+                              //Password Baru//
+                              const SizedBox(height: 16),
+                              //Konfirmasi Password//
+                              const Text("Konfirmasi Password",
+                                  style: appFontHeding3a),
+                              const SizedBox(height: 8),
+                              TextFormField(
+                                obscureText: _isHidePasswordKonfir,
+                                controller: resetC.passKonfirC,
+                                autocorrect: false,
+                                autofocus: false,
+                                keyboardType: TextInputType.text,
+                                style: appFontLabelForm,
+                                cursorColor: colorPrimary,
+                                cursorHeight: 25,
+                                decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: colorSecondary,
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        _togglePasswordKonfirVisibility();
+                                      },
+                                      child: Icon(
+                                          _isHidePasswordKonfir
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                          color: colorPrimary),
+                                    ),
+                                    enabledBorder: enableInputBorder,
+                                    focusedBorder: focusInputBorder),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Konfirmasi Password tidak boleh kosong";
+                                  }
+                                  if (resetC.passBaruC.text !=
+                                      resetC.passKonfirC.text) {
+                                    return "Konfirmasi Password tidak sama";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                onChanged: (value) => passKonfirm = value,
+                              ),
+                              //End Konfirmasi Password//
+                              const SizedBox(height: 32),
+                              //Submit Button//
+                              SizedBox(
+                                width: double.infinity,
+                                height: 56,
+                                child: Obx(() => ElevatedButton(
+                                    onPressed: () {
+                                      final bool? isValid =
+                                          formKey.currentState?.validate();
+                                      resetC.isLoading.value
+                                          ? null
+                                          : isValid == true
+                                              ? resetC.resetPass(
+                                                  resetC.passLamaC.text.trim(),
+                                                  resetC.passBaruC.text.trim(),
+                                                  resetC.passKonfirC.text
+                                                      .trim())
+                                              : null;
+                                    },
+                                    style: btnStylePrimary,
+                                    child: resetC.isLoading.value
+                                        ? const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircularProgressIndicator(
+                                                  color: colorBackground),
+                                              SizedBox(width: 16),
+                                              Text("Sedang memuat...",
+                                                  style: appFontButton),
+                                            ],
+                                          )
+                                        : const Text("Simpan",
+                                            style: appFontButton))),
+                              ),
+                              //End Submit Button//
+                            ]))
                   ]))),
     );
   }

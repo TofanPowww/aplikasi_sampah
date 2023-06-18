@@ -16,19 +16,11 @@ class _AddPetugasState extends State<AddPetugas> {
   final c = Get.put(AddPetugasController());
   final formKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
-  bool _isHidePassword = true;
   bool showProgres = false;
-  void _togglePasswordVisibility() {
-    setState(() {
-      _isHidePassword = !_isHidePassword;
-    });
-  }
 
   String pEmail = '';
   String pNama = '';
   String pWa = '';
-  String pPass = '';
-  String pConfirm = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +46,6 @@ class _AddPetugasState extends State<AddPetugas> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //Form Daftar
                             Container(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
@@ -207,101 +198,6 @@ class _AddPetugasState extends State<AddPetugas> {
                                         onChanged: (value) => pEmail = value,
                                       ),
                                       const SizedBox(height: 24),
-                                      //password
-                                      TextFormField(
-                                        controller: c.passwordPetugasC,
-                                        obscureText: _isHidePassword,
-                                        keyboardType: TextInputType.text,
-                                        style: appFontFormInput,
-                                        cursorColor: colorPrimary,
-                                        cursorHeight: 25,
-                                        decoration: InputDecoration(
-                                            filled: true,
-                                            enabled: true,
-                                            fillColor: colorSecondary,
-                                            suffixIcon: GestureDetector(
-                                              onTap: () {
-                                                _togglePasswordVisibility();
-                                              },
-                                              child: Icon(
-                                                _isHidePassword
-                                                    ? Icons.visibility_off
-                                                    : Icons.visibility,
-                                                color: colorPrimary,
-                                              ),
-                                            ),
-                                            label: const Text("Password"),
-                                            labelStyle: appFontLabelForm,
-                                            floatingLabelStyle:
-                                                appFontFormInput,
-                                            focusColor: colorSecondary,
-                                            enabledBorder: enableInputBorder,
-                                            focusedBorder: focusInputBorder,
-                                            errorBorder: errorInputBorder,
-                                            focusedErrorBorder:
-                                                errorInputBorder),
-                                        validator: (value) {
-                                          RegExp regex =
-                                              RegExp(r'[A-Za-z0-9]{6,16}$');
-                                          if (value!.isEmpty) {
-                                            return "Password tidak boleh kosong";
-                                          }
-                                          if (!regex.hasMatch(value)) {
-                                            return ("Password harus Huruf kapital, Angka, & Minimal 6 karakter");
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        onChanged: (value) => pPass = value,
-                                      ),
-                                      const SizedBox(height: 24),
-                                      //confirm password
-                                      TextFormField(
-                                        controller: c.confirmpasswordPetugasC,
-                                        obscureText: _isHidePassword,
-                                        keyboardType: TextInputType.text,
-                                        style: appFontFormInput,
-                                        cursorColor: colorPrimary,
-                                        cursorHeight: 25,
-                                        decoration: InputDecoration(
-                                            filled: true,
-                                            enabled: true,
-                                            fillColor: colorSecondary,
-                                            suffixIcon: GestureDetector(
-                                              onTap: () {
-                                                _togglePasswordVisibility();
-                                              },
-                                              child: Icon(
-                                                _isHidePassword
-                                                    ? Icons.visibility_off
-                                                    : Icons.visibility,
-                                                color: colorPrimary,
-                                              ),
-                                            ),
-                                            label:
-                                                const Text("Confirm Password"),
-                                            labelStyle: appFontLabelForm,
-                                            floatingLabelStyle:
-                                                appFontFormInput,
-                                            focusColor: colorSecondary,
-                                            enabledBorder: enableInputBorder,
-                                            focusedBorder: focusInputBorder,
-                                            errorBorder: errorInputBorder,
-                                            focusedErrorBorder:
-                                                errorInputBorder),
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Password tidak boleh kosong";
-                                          }
-                                          if (c.confirmpasswordPetugasC.text !=
-                                              c.passwordPetugasC.text) {
-                                            return "Password tidak sama";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        onChanged: (value) => pConfirm = value,
-                                      )
                                     ])),
                             const SizedBox(height: 32),
                             SizedBox(
@@ -321,18 +217,11 @@ class _AddPetugasState extends State<AddPetugas> {
                                                   c.emailpetugasC.text.trim(),
                                                   c.namapetugasC.text.trim(),
                                                   c.wapetugasC.text.trim(),
-                                                  c.passwordPetugasC.text
-                                                      .trim(),
-                                                  c.confirmpasswordPetugasC.text
-                                                      .trim(),
                                                 )
                                                   .whenComplete(() {
                                                   c.emailpetugasC.clear();
                                                   c.namapetugasC.clear();
                                                   c.wapetugasC.clear();
-                                                  c.passwordPetugasC.clear();
-                                                  c.confirmpasswordPetugasC
-                                                      .clear();
                                                 })
                                               : null;
                                     },

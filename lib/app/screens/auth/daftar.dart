@@ -348,12 +348,13 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                             focusedErrorBorder:
                                                 errorInputBorder),
                                         validator: (value) {
-                                          RegExp regex = RegExp(r'^.{6,}$');
+                                          RegExp regex =
+                                              RegExp(r'[A-Za-z0-9]{6,16}$');
                                           if (value!.isEmpty) {
                                             return "Password tidak boleh kosong";
                                           }
                                           if (!regex.hasMatch(value)) {
-                                            return ("Masukkan password dengan benar min. 6 karakter");
+                                            return ("Password harus Huruf kapital, Angka, & Minimal 6 karakter");
                                           } else {
                                             return null;
                                           }

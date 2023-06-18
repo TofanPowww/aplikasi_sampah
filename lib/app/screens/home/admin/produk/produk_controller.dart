@@ -7,34 +7,32 @@ import 'package:aplikasi_sampah/routes/links.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:open_file/open_file.dart';
-// import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
 class ProdukController extends GetxController {
   var isLoading = false.obs;
-  //Form Controller Edit Produk//
+  //?Form Controller Edit Produk//
   TextEditingController namaProdukC = TextEditingController();
   TextEditingController desProdukC = TextEditingController();
   TextEditingController poinProdukC = TextEditingController();
 
-  //Form Controller Add Produk//
+  //?Form Controller Add Produk//
   TextEditingController namaProdukAdd = TextEditingController();
   TextEditingController desProdukAdd = TextEditingController();
   TextEditingController poinProdukAdd = TextEditingController();
 
-  //Firebase
+  //?Firebase
   final db = FirebaseFirestore.instance;
   CollectionReference transaksiDb =
       FirebaseFirestore.instance.collection('transaksiSampah');
 
-  //Route//
+  //?Route//
   toKelolaP() => Get.offAndToNamed(AppLinks.KELOLA_PRODUK);
   toTambahProduk() => Get.toNamed(AppLinks.TAMBAH_PRODUK);
 
-  //Function Add Produk//
+  //?Function Add Produk//
   Future<void> tambahProduk(
       String namaProduk, String desProduk, int poinProduk) async {
     isLoading.value = true;
@@ -63,7 +61,7 @@ class ProdukController extends GetxController {
     }
   }
 
-  //Update Data Produk//
+  //?Update Data Produk//
   Future<void> updateProduk(String id) async {
     isLoading.value = true;
     if (namaProdukC.text.isNotEmpty &&
@@ -86,7 +84,7 @@ class ProdukController extends GetxController {
     }
   }
 
-  //Function Delete Produk//
+  //?Function Delete Produk//
   Future<void> deleteProduk(String id) async {
     try {
       await db.collection('produk').doc(id).delete();
@@ -99,7 +97,7 @@ class ProdukController extends GetxController {
     }
   }
 
-  //Function Print Produk//
+  //?Function Print Produk//
   RxList<ProdukModel> allDataProduk = List<ProdukModel>.empty().obs;
   void downloadProduk() async {
     final pdf = pw.Document();

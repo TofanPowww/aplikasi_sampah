@@ -16,41 +16,27 @@ class ResetPasswordController extends GetxController {
   //?Function Reset Password
   Future<void> resetPass(
       String passLama, String passBaru, String passKonfir) async {
-    isLoading.value = true;    
-    if (passLamaC.text.isNotEmpty &&
-        passBaruC.text.isNotEmpty &&
-        passKonfirC.text.isNotEmpty) {
-      if (passBaru == passKonfir) {
-        try {
-          String emailUser = auth.currentUser!.email!;
-          await auth.signInWithEmailAndPassword(
-              email: emailUser, password: passLama);
-          await auth.currentUser!
-              .updatePassword(passBaru)
-              .then((value) => updateDb(passBaru));
-          isLoading.value = false;
-          Get.back();
-          Get.snackbar("Berhasil", "Password berhasil diperbarui",
-              backgroundColor: appSuccess, snackPosition: SnackPosition.TOP);
-        } on FirebaseAuthException catch (e) {
-          if (e.code == "wrong-password") {
-            isLoading.value = false;
-            Get.snackbar("Gagal", "Password lama yang dimasukkan salah.",
-                backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
-          }
-        } catch (e) {
-          isLoading.value = false;
-          Get.snackbar("Gagal", "Tidak dapat memperbarui password",
-              backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
-        }
-      } else {
+    isLoading.value = true;
+    try {
+      String emailUser = auth.currentUser!.email!;
+      await auth.signInWithEmailAndPassword(
+          email: emailUser, password: passLama);
+      await auth.currentUser!
+          .updatePassword(passBaru)
+          .then((value) => updateDb(passBaru));
+      isLoading.value = false;
+      Get.back();
+      Get.snackbar("Berhasil", "Password berhasil diperbarui",
+          backgroundColor: appSuccess, snackPosition: SnackPosition.TOP);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "wrong-password") {
         isLoading.value = false;
-        Get.snackbar("Gagal", "Konfirmasi password salah",
+        Get.snackbar("Gagal", "Password lama yang dimasukkan salah.",
             backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
       }
-    } else {
+    } catch (e) {
       isLoading.value = false;
-      Get.snackbar("Gagal", "Masukkan semua data",
+      Get.snackbar("Gagal", "Tidak dapat memperbarui password",
           backgroundColor: appDanger, snackPosition: SnackPosition.TOP);
     }
   }
