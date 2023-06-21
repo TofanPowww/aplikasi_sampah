@@ -44,3 +44,7 @@
 - Mencoba menambahkan 0.1 untuk setiap jumlah sampah organik dan anorganik pada firestore, digunakan untuk test cetak transaksi
 - Cetak transaksi poin Berhasil
 - Cetak transaksi sampah masih error (Tidak dapat menampilkan nilai int ke double dan tidak dapat mengambil data semua jenis transaksi dan dengan waktu transaksi bulan atau per hari ini)
+
+- Fix bagian tabel cetak transaksi sampah
+- Fix orderBy confirmTime pada halaman permintaan pengambilan, riwayat pengambilan, transaksi poin dan transaksi sampah
+- Create index pada firestore

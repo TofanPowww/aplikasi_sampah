@@ -25,8 +25,8 @@ class _RequestPengambilan extends State<RequestPengambilan> {
   final AuthController authC = Get.put(AuthController());
   final Stream<QuerySnapshot> _kirimSampahStream = FirebaseFirestore.instance
       .collection('transaksiSampah')
-      .where('status', isEqualTo: 'Menunggu')
-      // .orderBy('creationTime')
+      .where('status', whereIn: ['Menunggu'])
+      .orderBy('creationTime', descending: true)
       .snapshots();
 
   @override

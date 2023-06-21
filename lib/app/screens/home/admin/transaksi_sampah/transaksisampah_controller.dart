@@ -10,12 +10,12 @@ import 'package:printing/printing.dart';
 class TransaksiSampahController extends GetxController {
   FirebaseFirestore db = FirebaseFirestore.instance;
   final tSampahDb = FirebaseFirestore.instance.collection("transaksiSampah");
+  final tSampah = FirebaseFirestore.instance
+      .collection("transaksiSampah")
+      .where("status", whereIn: ['Diterima', 'Ditolak']);
 
   Stream<QuerySnapshot> transaksiSampahStream() {
-    return db
-        .collection("transaksiSampah")
-        .where("status", isNotEqualTo: "Menunggu")
-        .snapshots();
+    return tSampah.orderBy('confirmTime', descending: true).snapshots();
   }
 
   String hariIni =
@@ -256,18 +256,6 @@ class TransaksiSampahController extends GetxController {
           Fluttertoast.showToast(msg: "Tidak ada transaksi");
         } else {
           printPdf(value, "Diterima", "Mei");
-        }
-      });
-    }
-    if (v1 == 2 && v2 == 3 && v3 == 6) {
-      final tSemua = tSampahDb
-          .where("status", isEqualTo: "Diterima")
-          .where("bulan", isEqualTo: "Juni");
-      await tSemua.get().then((value) {
-        if (value.docs.isEmpty) {
-          Fluttertoast.showToast(msg: "Tidak ada transaksi");
-        } else {
-          printPdf(value, "Diterima", "Juni");
         }
       });
     }
@@ -537,60 +525,100 @@ class TransaksiSampahController extends GetxController {
             return pw.TableRow(
                 verticalAlignment: pw.TableCellVerticalAlignment.middle,
                 children: [
-                  pw.Padding(
-                      padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text("${index + 1}",
-                          style: pw.TextStyle(
-                              fontSize: 11, fontWeight: pw.FontWeight.normal),
-                          textAlign: pw.TextAlign.center)),
-                  pw.Padding(
-                      padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text(data.email,
-                          style: pw.TextStyle(
-                              fontSize: 11, fontWeight: pw.FontWeight.normal),
-                          textAlign: pw.TextAlign.center)),
-                  pw.Padding(
-                      padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text(data.nama,
-                          style: pw.TextStyle(
-                              fontSize: 11, fontWeight: pw.FontWeight.normal),
-                          textAlign: pw.TextAlign.center)),
-                  pw.Padding(
-                      padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text(data.petugas,
-                          style: pw.TextStyle(
-                              fontSize: 11, fontWeight: pw.FontWeight.normal),
-                          textAlign: pw.TextAlign.center)),
-                  pw.Padding(
-                      padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text(data.status,
-                          style: pw.TextStyle(
-                              fontSize: 11, fontWeight: pw.FontWeight.normal),
-                          textAlign: pw.TextAlign.center)),
-                  pw.Padding(
-                      padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text(data.status,
-                          style: pw.TextStyle(
-                              fontSize: 11, fontWeight: pw.FontWeight.normal),
-                          textAlign: pw.TextAlign.center)),
-                  pw.Padding(
-                      padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text((data.jumlahOrganik + 0.0).toString(),
-                          style: pw.TextStyle(
-                              fontSize: 11, fontWeight: pw.FontWeight.normal),
-                          textAlign: pw.TextAlign.center)),
-                  pw.Padding(
-                      padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text(data.poin.toString(),
-                          style: pw.TextStyle(
-                              fontSize: 11, fontWeight: pw.FontWeight.normal),
-                          textAlign: pw.TextAlign.center)),
-                  pw.Padding(
-                      padding: const pw.EdgeInsets.all(8),
-                      child: pw.Text(data.keterangan,
-                          style: pw.TextStyle(
-                              fontSize: 11, fontWeight: pw.FontWeight.normal),
-                          textAlign: pw.TextAlign.center)),
+                  pw.Expanded(
+                      flex: 1,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 4, bottom: 4, right: 8, left: 8),
+                          child: pw.Text("${index + 1}",
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
+                  pw.Expanded(
+                      flex: 3,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.all(4),
+                          child: pw.Text(data.nama,
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
+                  pw.Expanded(
+                      flex: 3,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.all(4),
+                          child: pw.Text(data.petugas,
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
+                  pw.Expanded(
+                      flex: 3,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.all(4),
+                          child: pw.Text(data.tanggalKonfirmasi,
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
+                  pw.Expanded(
+                      flex: 3,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 4, bottom: 4, right: 8, left: 8),
+                          child: pw.Text(data.status,
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
+                  pw.Expanded(
+                      flex: 3,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.all(4),
+                          child: pw.Text((data.jumlahOrganik + 0.0).toString(),
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
+                  pw.Expanded(
+                      flex: 3,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.all(4),
+                          child: pw.Text(
+                              (data.jumlahAnorganik + 0.0).toString(),
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
+                  pw.Expanded(
+                      flex: 3,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.all(4),
+                          child: pw.Text(data.jenisAnorganik,
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
+                  pw.Expanded(
+                      flex: 2,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 4, bottom: 4, right: 8, left: 8),
+                          child: pw.Text(data.poin.toString(),
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
+                  pw.Expanded(
+                      flex: 3,
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.all(4),
+                          child: pw.Text(data.keterangan,
+                              style: pw.TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: pw.FontWeight.normal),
+                              textAlign: pw.TextAlign.center))),
                 ]);
           });
           return [
@@ -619,66 +647,76 @@ class TransaksiSampahController extends GetxController {
                       verticalAlignment: pw.TableCellVerticalAlignment.middle,
                       children: [
                         pw.Padding(
-                            padding: const pw.EdgeInsets.all(4),
+                            padding: const pw.EdgeInsets.only(
+                                top: 4, bottom: 4, right: 8, left: 8),
                             child: pw.Text("No",
                                 style: pw.TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 11,
                                     fontWeight: pw.FontWeight.bold),
                                 textAlign: pw.TextAlign.center)),
                         pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
-                            child: pw.Text("Email Warga",
-                                style: pw.TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: pw.FontWeight.bold),
-                                textAlign: pw.TextAlign.center)),
-                        pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
+                            padding: const pw.EdgeInsets.all(4),
                             child: pw.Text("Nama Warga",
                                 style: pw.TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 11,
                                     fontWeight: pw.FontWeight.bold),
                                 textAlign: pw.TextAlign.center)),
                         pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
+                            padding: const pw.EdgeInsets.all(4),
                             child: pw.Text("Nama Petugas",
                                 style: pw.TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 11,
                                     fontWeight: pw.FontWeight.bold),
                                 textAlign: pw.TextAlign.center)),
                         pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
-                            child: pw.Text("Status",
-                                style: pw.TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: pw.FontWeight.bold),
-                                textAlign: pw.TextAlign.center)),
-                        pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
+                            padding: const pw.EdgeInsets.all(4),
                             child: pw.Text("Tanggal Konfirmasi",
                                 style: pw.TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 11,
                                     fontWeight: pw.FontWeight.bold),
                                 textAlign: pw.TextAlign.center)),
                         pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
-                            child: pw.Text("Jumlah Sampah",
+                            padding: const pw.EdgeInsets.only(
+                                top: 4, bottom: 4, right: 8, left: 8),
+                            child: pw.Text("Status",
                                 style: pw.TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 11,
                                     fontWeight: pw.FontWeight.bold),
                                 textAlign: pw.TextAlign.center)),
                         pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
-                            child: pw.Text("Jumlah Poin",
+                            padding: const pw.EdgeInsets.all(4),
+                            child: pw.Text("Jumlah Organik",
                                 style: pw.TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 11,
                                     fontWeight: pw.FontWeight.bold),
                                 textAlign: pw.TextAlign.center)),
                         pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
+                            padding: const pw.EdgeInsets.all(4),
+                            child: pw.Text("Jumlah Anorganik",
+                                style: pw.TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(4),
+                            child: pw.Text("Jenis Anorganik",
+                                style: pw.TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 4, bottom: 4, right: 8, left: 8),
+                            child: pw.Text("Poin",
+                                style: pw.TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: pw.FontWeight.bold),
+                                textAlign: pw.TextAlign.center)),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(4),
                             child: pw.Text("Keterangan",
                                 style: pw.TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 11,
                                     fontWeight: pw.FontWeight.bold),
                                 textAlign: pw.TextAlign.center)),
                       ]),
