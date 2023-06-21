@@ -22,24 +22,25 @@
 🟢 Done
     - Konfirmasi Pengambilan Sampah
     - Model Transaksi Sampah
+    - Cetak Transaksi Poin
 
 
 
 ==========================================
 🟡 Done Without Test
-    - Cetak Transaksi Sampah & Poin
+    
 
 
 
 ==========================================
 🔴 Error
+    - Cetak Transaksi Sampah
+        - Error saat mengambil data dengan jenis transaksi diterima dan ditolak dengan waktu bulan
+        - Tidak dapat menampilkan data double
 
 
-
-
-==========================================
-Kebutuhan Laporan
-    - SS Halaman Detail Pengambilan 
-    - SS Halaman Detail Permintaan Petugas Status Diterima dan Ditolak 
-    - SS Halaman Cetak Transaksi
-    - SS Snackbar Berhasil Daftar
+22 Juni 2023
+- Menambahkan + 0.0 untuk data jumlah sampah organik dan anorganik
+- Mencoba menambahkan 0.1 untuk setiap jumlah sampah organik dan anorganik pada firestore, digunakan untuk test cetak transaksi
+- Cetak transaksi poin Berhasil
+- Cetak transaksi sampah masih error (Tidak dapat menampilkan nilai int ke double dan tidak dapat mengambil data semua jenis transaksi dan dengan waktu transaksi bulan atau per hari ini)

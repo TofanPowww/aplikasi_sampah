@@ -39,12 +39,10 @@ class TransaksiPoinController extends GetxController {
         await tPoinDb.doc(id).update({
           "status": "Selesai",
           "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM yyyy', "id_ID")
-                  .format(DateTime.now()),
+              DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
-          "bulan": DateFormat('MMMM', "id_ID")
-                  .format(DateTime.now())
+          "bulan": DateFormat('MMMM', "id_ID").format(DateTime.now())
         });
 
         //*Mengambil Email Warga
@@ -57,8 +55,7 @@ class TransaksiPoinController extends GetxController {
         await usersDb.doc(emailWarga).collection("tukar").doc(id).update({
           "status": "Selesai",
           "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM yyyy', "id_ID")
-                  .format(DateTime.now()),
+              DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
           "confirmTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
         });
