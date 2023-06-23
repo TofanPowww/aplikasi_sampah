@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'package:aplikasi_sampah/app/constant/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -17,10 +20,18 @@ class DetailPenukaranView extends StatefulWidget {
 
 class _DetailPenukaranViewState extends State<DetailPenukaranView> {
   final TukarController control = Get.put(TukarController());
+
   @override
   Widget build(BuildContext context) {
     final tukar =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    final endTime =
+        DateTime.parse(tukar['creationTime']).add(const Duration(days: 3));
+
+    final endTimeFormat =
+        DateFormat('dd MMMM yyyy - HH:mm:ss', "id_ID").format(endTime);
+
     return Scaffold(
       backgroundColor: colorBackground,
       appBar: AppBar(
@@ -74,12 +85,13 @@ class _DetailPenukaranViewState extends State<DetailPenukaranView> {
                           decoration: boxDecorationInputActive,
                           padding: const EdgeInsets.all(16),
                           width: double.infinity,
-                          child: const Column(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Batas Waktu", style: appFontFormInput),
-                              SizedBox(height: 4),
-                              Text("23 Mei 2023 (2 Hari)",
+                              const Text("Batas Waktu",
+                                  style: appFontFormInput),
+                              const SizedBox(height: 4),
+                              Text(endTimeFormat.toString(),
                                   style: appFontHeding2),
                             ],
                           ))

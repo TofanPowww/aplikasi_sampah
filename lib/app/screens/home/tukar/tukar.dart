@@ -1,5 +1,6 @@
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
+import 'package:aplikasi_sampah/app/screens/home/tukar/tukar_controller.dart';
 import 'package:aplikasi_sampah/app/screens/index.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,8 +28,8 @@ class _TukarPoinView extends State<TukarPoinView> {
   Widget build(BuildContext context) {
     // final Stream<DocumentSnapshot> userStream =
     //     users.doc(auth.currentUser!.email).snapshots();
-    // final TukarController  tukarC = Get.put(TukarController());
     // final AuthController authC = Get.put(AuthController());
+    final TukarController tukarC = Get.put(TukarController());
     final poin =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
@@ -46,11 +47,7 @@ class _TukarPoinView extends State<TukarPoinView> {
             actions: [
               IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RiwayatTukarView(),
-                        ));
+                    tukarC.toTukarRiwayat();
                   },
                   icon: const Icon(Icons.history_rounded))
             ]),

@@ -2,7 +2,6 @@
 
  ==========================================
 🔵 Create
-    - Batas Waktu Penukaran
     - Notifikasi Permintaan Pengambilan (Optional)
     - Lupa Password (Optional)
     - Verifikasi Email (Optional)
@@ -15,6 +14,7 @@
 
 ==========================================
 🟣 Progress
+    - Batas Waktu Penukaran
 
 
 
@@ -48,3 +48,8 @@
 - Fix bagian tabel cetak transaksi sampah
 - Fix orderBy confirmTime pada halaman permintaan pengambilan, riwayat pengambilan, transaksi poin dan transaksi sampah
 - Create index pada firestore
+
+23 Juni 2023
+- Menambahkan fitur batas waktu
+- Menambahkan fungsi status transaksi auto batal jika batas melewati batas waktu
+- Mengganti routing dari halaman tukar ke riwayat tukar
