@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
@@ -66,7 +68,7 @@ class TukarController extends GetxController {
               DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
           "creationTime":
               DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
-        });
+        }).then((value) => batasWaktu(doc.id));
 
         // Get.offAndToNamed(AppLinks.TUKAR_POIN);
         Get.back();
@@ -231,4 +233,21 @@ class TukarController extends GetxController {
         name: 'Bukti_Penukaran',
         onLayout: (PdfPageFormat format) async => pdf.save());
   }
+}
+
+void batasWaktu(String id) {
+  User? users = FirebaseAuth.instance.currentUser;
+  CollectionReference userDB = FirebaseFirestore.instance.collection("users");
+  CollectionReference transaksiTukarDB =
+      FirebaseFirestore.instance.collection("transaksiTukar");
+  final tukarUser = userDB.doc(users!.email).collection("tukar");
+
+  Future.delayed(const Duration(days: 3), () {
+    print('waktu habis');
+    tukarUser.doc(id).update({
+      "status": "Batal",
+    });
+
+    transaksiTukarDB.doc(id).update({"status": "Batal"});
+  });
 }

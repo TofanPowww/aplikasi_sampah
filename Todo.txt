@@ -9,17 +9,16 @@
 
 ==========================================
 ⚪ Modify
-    - Konfirmasi Penukaran Poin 
 
 
 ==========================================
 🟣 Progress
-    - Batas Waktu Penukaran
 
 
 
 ==========================================
 🟢 Done
+    - Batas Waktu Penukaran
     - Konfirmasi Pengambilan Sampah
     - Model Transaksi Sampah
     - Cetak Transaksi Poin
@@ -28,6 +27,7 @@
 
 ==========================================
 🟡 Done Without Test
+    - Konfirmasi Penukaran Poin 
     
 
 
@@ -53,3 +53,8 @@
 - Menambahkan fitur batas waktu
 - Menambahkan fungsi status transaksi auto batal jika batas melewati batas waktu
 - Mengganti routing dari halaman tukar ke riwayat tukar
+
+27 Juni 2023
+- Fix function batas waktu penukaran
+- Menambahkan proses validasi status transaksi poin
+- Menghapus beberapa line code yang tidak digunakan

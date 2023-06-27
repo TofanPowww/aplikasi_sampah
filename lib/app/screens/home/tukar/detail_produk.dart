@@ -27,7 +27,6 @@ class _DetailProdukViewState extends State<DetailProdukView> {
   final TukarController tukarC = Get.put(TukarController());
   @override
   Widget build(BuildContext context) {
-    // print("${authC.user.value.poin}");
     final produk = Get.arguments as Map<String, dynamic>;
     return Scaffold(
       backgroundColor: colorBackground,
@@ -96,43 +95,6 @@ class _DetailProdukViewState extends State<DetailProdukView> {
                           await tukarC.transaksiTukar(
                               produk['nama'].toString().trim(),
                               int.parse(produk['poin'].toString().trim()));
-                          // Get.defaultDialog(
-                          //     backgroundColor: colorBackground2,
-                          //     barrierDismissible: false,
-                          //     title: "Konfirmasi Penukaran",
-                          //     content: const Text(
-                          //       "Apakah yakin ingin menukar?",
-                          //       style: appFontFormInput,
-                          //     ),
-                          //     titleStyle: appFontFormInputa,
-                          //     titlePadding:
-                          //         const EdgeInsets.only(top: 16, bottom: 8),
-                          //     contentPadding: const EdgeInsets.only(bottom: 16),
-                          //     actions: [
-                          //       TextButton(
-                          //           onPressed: () {
-                          //             Navigator.of(context).pop();
-                          //           },
-                          //           child: const Text("Tidak",
-                          //               style: appFontFormInput)),
-                          //       ElevatedButton(
-                          //           style: const ButtonStyle(
-                          //             backgroundColor:
-                          //                 MaterialStatePropertyAll(colorAccent),
-                          //           ),
-                          //           onPressed: () {
-                          //             setState(() {
-                          //               tukarC.transaksiTukar(
-                          //                   produk['nama'].toString().trim(),
-                          //                   int.parse(produk['poin']
-                          //                       .toString()
-                          //                       .trim()));
-                          //             });
-                          //           },
-                          //           child:
-                          //               const Text("Ya", style: appFontButtonb))
-                          //     ]);
-                          // });
                         },
                         style: btnStylePrimary,
                         child: const Text(

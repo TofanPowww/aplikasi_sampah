@@ -35,43 +35,59 @@ class TransaksiPoinController extends GetxController {
     try {
       var hasil = await db.collection("transaksiTukar").doc(id).get();
       if (hasil.data() != null) {
-        //*Mengupdate Status Transaksi Pada Collection Transaksi Sampah
-        await tPoinDb.doc(id).update({
-          "status": "Selesai",
-          "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
-          "confirmTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
-          "bulan": DateFormat('MMMM', "id_ID").format(DateTime.now())
-        });
+        if (hasil.data()!['status'] == 'Proses') {
+          //*Mengupdate Status Transaksi Pada Collection Transaksi Sampah
+          await tPoinDb.doc(id).update({
+            "status": "Selesai",
+            "tanggalKonfirmasi": DateFormat('EEEE, dd MMMM yyyy', "id_ID")
+                .format(DateTime.now()),
+            "confirmTime":
+                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+            "bulan": DateFormat('MMMM', "id_ID").format(DateTime.now())
+          });
 
-        //*Mengambil Email Warga
-        String emailWarga = hasil.get("email");
+          //*Mengambil Email Warga
+          String emailWarga = hasil.get("email");
 
-        //*Mengambil Poin Produk
-        int poinP = hasil.get("poin_produk");
+          //*Mengambil Poin Produk
+          int poinP = hasil.get("poin_produk");
 
-        //*Mengupdate Status Transaksi Tukar Pada Warga
-        await usersDb.doc(emailWarga).collection("tukar").doc(id).update({
-          "status": "Selesai",
-          "tanggalKonfirmasi":
-              DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
-          "confirmTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
-        });
+          //*Mengupdate Status Transaksi Tukar Pada Warga
+          await usersDb.doc(emailWarga).collection("tukar").doc(id).update({
+            "status": "Selesai",
+            "tanggalKonfirmasi": DateFormat('EEEE, dd MMMM yyyy', "id_ID")
+                .format(DateTime.now()),
+            "confirmTime":
+                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+          });
 
-        //*Mengupdate Jumlah Poin Warga
-        await usersDb
-            .doc(emailWarga)
-            .update({"poin": FieldValue.increment(-poinP)});
+          //*Mengupdate Jumlah Poin Warga
+          await usersDb
+              .doc(emailWarga)
+              .update({"poin": FieldValue.increment(-poinP)});
 
-        Get.back(closeOverlays: true);
-        Get.snackbar(
-          "Berhasil",
-          "Transaksi Penukaran Poin Berhasil",
-          backgroundColor: appSuccess,
-          snackPosition: SnackPosition.TOP,
-        );
+          Get.back(closeOverlays: true);
+          Get.snackbar(
+            "Berhasil",
+            "Transaksi Penukaran Poin Berhasil",
+            backgroundColor: appSuccess,
+            snackPosition: SnackPosition.TOP,
+          );
+        } else if (hasil.data()!['status'] == 'Selesai') {
+          Get.snackbar(
+            "Gagal",
+            "Kode Penukaran Telah Digunakan",
+            backgroundColor: appDanger,
+            snackPosition: SnackPosition.TOP,
+          );
+        } else if (hasil.data()!['status'] == 'Batal') {
+          Get.snackbar(
+            "Gagal",
+            "Kode Penukaran Sudah Tidak Berlaku",
+            backgroundColor: appDanger,
+            snackPosition: SnackPosition.TOP,
+          );
+        }
       }
       if (hasil.data() == null) {
         Get.snackbar(

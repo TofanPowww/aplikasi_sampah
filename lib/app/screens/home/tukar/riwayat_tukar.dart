@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 import '../../../constant/fontStyle.dart';
 import '../../../constant/style.dart';
@@ -69,31 +68,6 @@ class _RiwayatTukarViewState extends State<RiwayatTukarView> {
                     children: snapshot.data!.docs.map((DocumentSnapshot doc) {
                       Map<String, dynamic> data =
                           doc.data()! as Map<String, dynamic>;
-
-                      Future<void> batasWaktu() async {
-                        final endTime = DateTime.parse(data['creationTime'])
-                            .add(const Duration(days: 3));
-                        final endTimeFormat =
-                            DateFormat('dd MMMM yyyy - HH:mm:ss', "id_ID")
-                                .format(endTime);
-                        final today =
-                            DateFormat('dd MMMM yyyy - HH:mm:ss', "id_ID")
-                                .format(endTime);
-                        if (endTimeFormat == today) {
-                          User? users = auth.currentUser;
-                          CollectionReference userDB = db.collection("users");
-                          final tukarUser = userDB
-                              .doc(users!.email)
-                              .collection("tukar")
-                              .doc(data['kode']);
-                          try {
-                            await tukarUser.update({'status': "Batal"});
-                          } catch (e) {
-                            print(e);
-                          }
-                        }
-                      }
-
                       return GestureDetector(
                           onTap: () {
                             Navigator.push(
