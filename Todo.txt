@@ -61,3 +61,6 @@
 
 28 Juni 2023
 - Merapikan code pada file add_petugas_controller.dart
+
+29 Juni 2023
+- Merapikan code pada file kirim.dart

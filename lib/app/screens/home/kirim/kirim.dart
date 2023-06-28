@@ -34,7 +34,6 @@ class _KirimSampahViewState extends State<KirimSampahView> {
 
   Widget bottomSheet(BuildContext context) {
     final picker = ImagePicker();
-    //Kamera//
     Future kamera() async {
       try {
         final pick = await picker.pickImage(source: ImageSource.camera);
@@ -46,7 +45,6 @@ class _KirimSampahViewState extends State<KirimSampahView> {
       }
     }
 
-    //Gallery//
     Future gallery() async {
       try {
         final pick = await picker.pickImage(source: ImageSource.gallery);
@@ -74,10 +72,7 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                 child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.image_search_rounded,
-                      color: colorPrimary,
-                    ),
+                    Icon(Icons.image_search_rounded, color: colorPrimary),
                     SizedBox(height: 16),
                     Text("Gallery", style: appFontFormInput)
                   ],
@@ -134,7 +129,6 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                       key: kirimC.formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        //form alamat pengambilan
                         children: [
                           const Text("Nama", style: appFontHeding3a),
                           const SizedBox(height: 8),
@@ -264,9 +258,7 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                               )
                             ],
                           ),
-                          //end form alamat pengambilan
                           const SizedBox(height: 24),
-                          //form tanggal pengambilan
                           const Text("Tanggal Pengambilan",
                               style: appFontHeding3a),
                           const SizedBox(height: 8),
@@ -304,10 +296,7 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                                 enabledBorder: enableInputBorder,
                                 focusedBorder: focusInputBorder),
                           ),
-                          //end form tanggal pengambilan
                           const SizedBox(height: 24),
-
-                          //container tambah foto
                           const Text("Tambahkan foto", style: appFontHeding3a),
                           const SizedBox(height: 8),
                           Container(
@@ -354,9 +343,7 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                                   ],
                                 ),
                               )),
-                          //end container tambah foto
                           const SizedBox(height: 24),
-                          //tombol kirim request
                           SizedBox(
                             width: double.infinity,
                             height: 56,
