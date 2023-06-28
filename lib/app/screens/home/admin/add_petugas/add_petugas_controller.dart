@@ -14,17 +14,17 @@ class AddPetugasController extends GetxController {
 
   var isLoading = false.obs;
 
-  //Firebase
+  //? Firebase //
   final db = FirebaseFirestore.instance;
 
-  //Form Controller
+  //? Form Controller //
   TextEditingController emailpetugasC = TextEditingController();
   TextEditingController namapetugasC = TextEditingController();
   TextEditingController wapetugasC = TextEditingController();
   TextEditingController passwordPetugasC = TextEditingController();
   TextEditingController confirmpasswordPetugasC = TextEditingController();
 
-  //Dropdown Button//
+  //? Dropdown Button //
   var option = ['Petugas'];
   var currentItemSelected = "Petugas";
   var rool = "Petugas";
@@ -32,7 +32,7 @@ class AddPetugasController extends GetxController {
   //Route//
   toKelolaPetugas() => Get.offAndToNamed(AppLinks.KELOLA_PETUGAS);
 
-  //Function Add Petugas//
+  //? Function Add Petugas //
   Future<void> tambahPetugas(
       String rool, String email, String nama, String wa) async {
     isLoading.value = true;
@@ -75,7 +75,7 @@ class AddPetugasController extends GetxController {
     }
   }
 
-  //Function Delete Petugas//
+  //? Function Delete Petugas //
   Future<void> deletePetugas(String email) async {
     try {
       await FirebaseFirestore.instance.collection('users').doc(email).delete();
@@ -88,24 +88,24 @@ class AddPetugasController extends GetxController {
     }
   }
 
-  //Function Print PDF//
+  //? Function Print PDF //
   RxList<PetugasModel> allDataPetugas = List<PetugasModel>.empty().obs;
   void downloadPetugas() async {
     final pdf = pw.Document();
 
-    //Mengambil Data dari firebase
+    //* Mengambil Data dari firebase
     var getDataPetugas =
         await db.collection('users').where('rool', isEqualTo: 'Petugas').get();
 
-    //reset all produk -> untuk mengatasi duplikat
+    //* reset all produk -> untuk mengatasi duplikat
     allDataPetugas([]);
 
-    //Memasukkan data ke Model
+    //* Memasukkan data ke Model
     for (var element in getDataPetugas.docs) {
       allDataPetugas.add(PetugasModel.fromJson(element.data()));
     }
 
-    //Function Create PDF
+    //* Function Create PDF
     pdf.addPage(pw.MultiPage(
       pageFormat: PdfPageFormat.a4,
       build: (pw.Context context) {
@@ -189,20 +189,10 @@ class AddPetugasController extends GetxController {
       },
     ));
 
-    //Print PDF
+    //* Print PDF
     await Printing.layoutPdf(
         name: 'Daftar_Petugas',
         onLayout: (PdfPageFormat format) async => pdf.save());
   }
-  // Future<void> postToFirestore(String rool, String email, String nama,
-  //     String wa, String password) async {
-  //   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  //   await users.doc(email).set({
-  //     'rool': rool,
-  //     'email': emailpetugasC.text,
-  //     'nama_lengkap': namapetugasC.text,
-  //     'no_wa': wapetugasC.text,
-  //     'password': passwordPetugasC.text,
-  //   });
-  // }
+
 }
