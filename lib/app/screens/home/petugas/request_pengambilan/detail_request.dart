@@ -44,8 +44,8 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController jmlhOrganik = TextEditingController(text: "0");
-    TextEditingController jmlhAnorganik = TextEditingController(text: "0");
+    TextEditingController jmlhOrganik = TextEditingController(text: "0.0");
+    TextEditingController jmlhAnorganik = TextEditingController(text: "0.0");
     TextEditingController ket = TextEditingController(text: "-");
     final request =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
