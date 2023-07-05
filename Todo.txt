@@ -8,8 +8,8 @@
 
 
 ==========================================
-⚪ Modify
-
+⚪ Modify & Cek
+    - Menambahkan fungsi logout saat admin menambahkan akun petugas
 
 ==========================================
 🟣 Progress
@@ -64,3 +64,6 @@
 
 29 Juni 2023
 - Merapikan code pada file kirim.dart
+
+05 Juli 2023
+- Merapikan halaman tambah petugas

@@ -196,8 +196,7 @@ class _AddPetugasState extends State<AddPetugas> {
                                           }
                                         },
                                         onChanged: (value) => pEmail = value,
-                                      ),
-                                      const SizedBox(height: 24),
+                                      )
                                     ])),
                             const SizedBox(height: 32),
                             SizedBox(
