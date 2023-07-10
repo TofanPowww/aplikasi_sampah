@@ -59,7 +59,7 @@ class RequestPengambilanController extends GetxController {
         //* Update Jumlah Poin Warga //
         await usersDb.doc(email).update({
           "poin": FieldValue.increment(
-              (jumlahOrganik * 150) + (jumlahAnorganik * 200))
+              (jumlahOrganik * 150) + (jumlahAnorganik * 200) as int)
         });
         //* Update Transaksi Sampah pada Collection transaksiSampah //
         await transaksiDb.doc(id).update({
@@ -96,7 +96,7 @@ class RequestPengambilanController extends GetxController {
         //* Update Jumlah Poin Warga //
         await usersDb.doc(email).update({
           "poin": FieldValue.increment(
-              (jumlahOrganik * 150) + (jumlahAnorganik * 200))
+              (jumlahOrganik * 150) + (jumlahAnorganik * 200) as int)
         });
         //* Update Transaksi Sampah pada Collection transaksiSampah //
         await transaksiDb.doc(id).update({
@@ -133,7 +133,7 @@ class RequestPengambilanController extends GetxController {
         //* Update Jumlah Poin Warga //
         await usersDb.doc(email).update({
           "poin": FieldValue.increment(
-              (jumlahOrganik * 150) + (jumlahAnorganik * 200))
+              (jumlahOrganik * 150) + (jumlahAnorganik * 200) as int)
         });
         //* Update Transaksi Sampah pada Collection transaksiSampah //
         await transaksiDb.doc(id).update({
@@ -170,7 +170,7 @@ class RequestPengambilanController extends GetxController {
         //* Update Jumlah Poin Warga //
         await usersDb.doc(email).update({
           "poin": FieldValue.increment(
-              (jumlahOrganik * 150) + (jumlahAnorganik * 300))
+              (jumlahOrganik * 150) + (jumlahAnorganik * 300) as int)
         });
         //* Update Transaksi Sampah pada Collection transaksiSampah //
         await transaksiDb.doc(id).update({
@@ -207,7 +207,7 @@ class RequestPengambilanController extends GetxController {
         //* Update Jumlah Poin Warga //
         await usersDb.doc(email).update({
           "poin": FieldValue.increment(
-              (jumlahOrganik * 150) + (jumlahAnorganik * 320))
+              (jumlahOrganik * 150) + (jumlahAnorganik * 320) as int)
         });
         //* Update Transaksi Sampah pada Collection transaksiSampah //
         await transaksiDb.doc(id).update({
@@ -244,7 +244,7 @@ class RequestPengambilanController extends GetxController {
         //* Update Jumlah Poin Warga //
         await usersDb.doc(email).update({
           "poin": FieldValue.increment(
-              (jumlahOrganik * 150) + (jumlahAnorganik * 220))
+              (jumlahOrganik * 150) + (jumlahAnorganik * 220) as int)
         });
         //* Update Transaksi Sampah pada Collection transaksiSampah //
         await transaksiDb.doc(id).update({

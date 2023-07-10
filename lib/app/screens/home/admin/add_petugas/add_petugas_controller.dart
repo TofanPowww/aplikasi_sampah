@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/data/petugasModel.dart';
 import 'package:aplikasi_sampah/routes/links.dart';
@@ -16,13 +18,13 @@ class AddPetugasController extends GetxController {
 
   //? Firebase //
   final db = FirebaseFirestore.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  CollectionReference usersDb = FirebaseFirestore.instance.collection('users');
 
   //? Form Controller //
   TextEditingController emailpetugasC = TextEditingController();
   TextEditingController namapetugasC = TextEditingController();
   TextEditingController wapetugasC = TextEditingController();
-  TextEditingController passwordPetugasC = TextEditingController();
-  TextEditingController confirmpasswordPetugasC = TextEditingController();
 
   //? Dropdown Button //
   var option = ['Petugas'];
@@ -35,6 +37,8 @@ class AddPetugasController extends GetxController {
   //? Function Add Petugas //
   Future<void> tambahPetugas(
       String rool, String email, String nama, String wa) async {
+    String emailAdmin = auth.currentUser!.email!;
+    final dbAdmin = await usersDb.doc(auth.currentUser!.email).get();
     isLoading.value = true;
     try {
       UserCredential userCredential = await FirebaseAuth.instance
@@ -50,6 +54,12 @@ class AddPetugasController extends GetxController {
           'password': "petugas",
           'uid': uid,
         });
+
+        await auth.signOut();
+        print("${dbAdmin.get("password")}");
+
+        await auth.signInWithEmailAndPassword(
+            email: emailAdmin, password: dbAdmin.get("password"));
       }
       isLoading.value = false;
       Get.snackbar(
@@ -194,5 +204,4 @@ class AddPetugasController extends GetxController {
         name: 'Daftar_Petugas',
         onLayout: (PdfPageFormat format) async => pdf.save());
   }
-
 }

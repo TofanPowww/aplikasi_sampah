@@ -67,3 +67,7 @@
 
 05 Juli 2023
 - Merapikan halaman tambah petugas
+
+10 Juli 2023
+- Fix cetak transaksi
+- Menambahkan fungsi logout untuk akun petugas yang berhasil ditambahkan, dan login ulang untuk admin (Belum test)
