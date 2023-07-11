@@ -23,6 +23,7 @@ class _AddPetugasState extends State<AddPetugas> {
   String pWa = '';
   @override
   Widget build(BuildContext context) {
+    final pass = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
         backgroundColor: colorBackground,
         appBar: AppBar(
@@ -212,11 +213,13 @@ class _AddPetugasState extends State<AddPetugas> {
                                           : isValid == true
                                               ? AddPetugasController.instance
                                                   .tambahPetugas(
-                                                  c.rool.trim(),
-                                                  c.emailpetugasC.text.trim(),
-                                                  c.namapetugasC.text.trim(),
-                                                  c.wapetugasC.text.trim(),
-                                                )
+                                                      c.rool.trim(),
+                                                      c.emailpetugasC.text
+                                                          .trim(),
+                                                      c.namapetugasC.text
+                                                          .trim(),
+                                                      c.wapetugasC.text.trim(),
+                                                      pass.toString())
                                                   .whenComplete(() {
                                                   c.emailpetugasC.clear();
                                                   c.namapetugasC.clear();

@@ -35,8 +35,8 @@ class AddPetugasController extends GetxController {
   toKelolaPetugas() => Get.offAndToNamed(AppLinks.KELOLA_PETUGAS);
 
   //? Function Add Petugas //
-  Future<void> tambahPetugas(
-      String rool, String email, String nama, String wa) async {
+  Future<void> tambahPetugas(String rool, String email, String nama, String wa,
+      String passwordAdmin) async {
     String emailAdmin = auth.currentUser!.email!;
     final dbAdmin = await usersDb.doc(auth.currentUser!.email).get();
     isLoading.value = true;
@@ -59,7 +59,7 @@ class AddPetugasController extends GetxController {
         print("${dbAdmin.get("password")}");
 
         await auth.signInWithEmailAndPassword(
-            email: emailAdmin, password: dbAdmin.get("password"));
+            email: emailAdmin, password: passwordAdmin);
       }
       isLoading.value = false;
       Get.snackbar(

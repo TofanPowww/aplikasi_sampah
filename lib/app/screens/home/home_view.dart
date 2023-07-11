@@ -10,6 +10,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constant/style.dart';
+import 'admin/add_petugas/kelola_petugas.dart';
 import 'home_controller.dart';
 import 'tukar/tukar.dart';
 
@@ -281,8 +282,16 @@ class _HomeViewState extends State<HomeView> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           GestureDetector(
-                                            onTap: () =>
-                                                homeC.toKelolaPetugas(),
+                                            onTap: () {
+                                              Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const KelolaPetugas(),
+                                                settings: RouteSettings(
+                                                    arguments: dataUser['password'])),
+                                          );
+                                            },
                                             child: Container(
                                               height: 100,
                                               width: double.infinity,

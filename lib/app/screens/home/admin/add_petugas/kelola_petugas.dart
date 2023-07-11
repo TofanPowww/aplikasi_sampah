@@ -1,10 +1,9 @@
 import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
+import 'package:aplikasi_sampah/app/screens/home/admin/add_petugas/add_petugas.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'add_petugas.dart';
 import 'add_petugas_controller.dart';
 
 class KelolaPetugas extends StatefulWidget {
@@ -22,6 +21,7 @@ class _KelolaPetugasState extends State<KelolaPetugas> {
       .snapshots();
   @override
   Widget build(BuildContext context) {
+    final dataPass = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       backgroundColor: colorBackground,
       appBar: AppBar(
@@ -44,9 +44,11 @@ class _KelolaPetugasState extends State<KelolaPetugas> {
           IconButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddPetugas()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AddPetugas(),
+                      settings: RouteSettings(arguments: dataPass)),
+                );
               },
               icon:
                   const Icon(Icons.person_add_rounded, color: colorBackground))

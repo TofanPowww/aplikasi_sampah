@@ -9,7 +9,8 @@
 
 ==========================================
 ⚪ Modify & Cek
-    - Menambahkan fungsi logout saat admin menambahkan akun petugas
+
+
 
 ==========================================
 🟣 Progress
@@ -18,6 +19,7 @@
 
 ==========================================
 🟢 Done
+    - Menambahkan fungsi logout saat admin menambahkan akun petugas
     - Batas Waktu Penukaran
     - Konfirmasi Pengambilan Sampah
     - Model Transaksi Sampah
@@ -31,12 +33,8 @@
     
 
 
-
 ==========================================
 🔴 Error
-    - Cetak Transaksi Sampah
-        - Error saat mengambil data dengan jenis transaksi diterima dan ditolak dengan waktu bulan
-        - Tidak dapat menampilkan data double
 
 
 22 Juni 2023
@@ -71,3 +69,6 @@
 10 Juli 2023
 - Fix cetak transaksi
 - Menambahkan fungsi logout untuk akun petugas yang berhasil ditambahkan, dan login ulang untuk admin (Belum test)
+
+12 Juli 2023
+- Fix pendaftaran akun petugas
