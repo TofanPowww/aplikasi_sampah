@@ -72,3 +72,7 @@
 
 12 Juli 2023
 - Fix pendaftaran akun petugas
+
+14 Juli 2023
+- Menambahkan file firebase_api.dart, untuk menghandle Notifikasi
+- Notifikasi background

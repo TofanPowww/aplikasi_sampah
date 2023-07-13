@@ -4,10 +4,12 @@
 import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/screens/auth/auth_controller.dart';
+import 'package:aplikasi_sampah/app/screens/firebase_api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import '../../constant/style.dart';
 import 'admin/add_petugas/kelola_petugas.dart';
@@ -28,13 +30,16 @@ class _HomeViewState extends State<HomeView> {
   final auth = FirebaseAuth.instance;
   final AuthController authC = Get.put(AuthController());
   final HomeController homeC = Get.put(HomeController());
+  final FirebaseApi _firebaseApi = Get.put(FirebaseApi());
 
   late String role;
   @override
   void initState() {
     super.initState();
-    requestPermission();
-    getToken();
+    _firebaseApi.initNotifcations();
+    // requestPermission();
+    // getToken();
+    // initInfo();
     authC.user.refresh();
   }
 
@@ -284,13 +289,14 @@ class _HomeViewState extends State<HomeView> {
                                           GestureDetector(
                                             onTap: () {
                                               Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const KelolaPetugas(),
-                                                settings: RouteSettings(
-                                                    arguments: dataUser['password'])),
-                                          );
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const KelolaPetugas(),
+                                                    settings: RouteSettings(
+                                                        arguments: dataUser[
+                                                            'password'])),
+                                              );
                                             },
                                             child: Container(
                                               height: 100,
@@ -509,43 +515,88 @@ class _HomeViewState extends State<HomeView> {
         ));
   }
 
-  FirebaseMessaging message = FirebaseMessaging.instance;
-  String? mToken = "";
-  void requestPermission() async {
-    NotificationSettings settings = await message.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
+  // FirebaseMessaging message = FirebaseMessaging.instance;
+  // String? mToken = "";
+  // late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  //     FlutterLocalNotificationsPlugin();
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
-    } else if (settings.authorizationStatus ==
-        AuthorizationStatus.provisional) {
-      print('User granted provisional permission');
-    } else {
-      print('User decline or has not accepted permissions');
-    }
-  }
+  // initInfo() {
+  //   var androidInitialize =
+  //       const AndroidInitializationSettings('@mipmap/ic_launcher');
+  //   var initializationsSettings =
+  //       InitializationSettings(android: androidInitialize);
+  //   flutterLocalNotificationsPlugin.initialize(initializationsSettings,
+  //       onDidReceiveNotificationResponse: (NotificationResponse payload) async {
+  //     try {
+  //       if (payload != null) {
+  //       } else {}
+  //     } catch (e) {
+  //       print(e);
+  //     }
+  //     return;
+  //   });
 
-  //Get Users Token//
-  void getToken() async {
-    await message.getToken().then((token) {
-      setState(() {
-        mToken = token;
-        print("My Token is $mToken");
-      });
-      saveToken(token!);
-    });
-  }
+  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+  //     print(
+  //         "onMessage: ${message.notification?.title} / ${message.notification?.body}");
 
-  void saveToken(String token) async {
-    await db.collection("users").doc(auth.currentUser!.email).update({
-      "token": token,
-    });
-  }
+  //     BigTextStyleInformation bigTextStyleInfo = BigTextStyleInformation(
+  //       message.notification!.body.toString(),
+  //       htmlFormatBigText: true,
+  //       contentTitle: message.notification!.title.toString(),
+  //       htmlFormatContentTitle: true,
+  //     );
+  //     AndroidNotificationDetails androidPlatformChannelSpecifics =
+  //         AndroidNotificationDetails(
+  //       'dbfood',
+  //       'dbfood',
+  //       importance: Importance.high,
+  //       styleInformation: bigTextStyleInfo,
+  //       priority: Priority.high,
+  //       playSound: true,
+  //     );
+  //     NotificationDetails platformChannelSpesifics =
+  //         NotificationDetails(android: androidPlatformChannelSpecifics);
+  //     await flutterLocalNotificationsPlugin.show(0, message.notification?.title,
+  //         message.notification?.body, platformChannelSpesifics,
+  //         payload: message.data['body']);
+  //   });
+  // }
+
+  // void requestPermission() async {
+  //   NotificationSettings settings = await message.requestPermission(
+  //     alert: true,
+  //     announcement: false,
+  //     badge: true,
+  //     carPlay: false,
+  //     criticalAlert: false,
+  //     provisional: false,
+  //     sound: true,
+  //   );
+
+  //   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+  //     print('User granted permission');
+  //   } else if (settings.authorizationStatus ==
+  //       AuthorizationStatus.provisional) {
+  //     print('User granted provisional permission');
+  //   } else {
+  //     print('User decline or has not accepted permissions');
+  //   }
+  // }
+
+  // void getToken() async {
+  //   await message.getToken().then((token) {
+  //     setState(() {
+  //       mToken = token;
+  //       print("My Token is $mToken");
+  //     });
+  //     saveToken(token!);
+  //   });
+  // }
+
+  // void saveToken(String token) async {
+  //   await db.collection("users").doc(auth.currentUser!.email).update({
+  //     "token": token,
+  //   });
+  // }
 }

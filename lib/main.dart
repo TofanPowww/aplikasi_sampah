@@ -11,11 +11,16 @@ import 'package:get/get.dart';
 import 'package:aplikasi_sampah/routes/routes.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+Future<void> handleBackgroundMessage(RemoteMessage message) async {
+  print('Handling a background message: ${message.messageId}');
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.remove();
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();
+  FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
   await initializeDateFormatting('id_ID', null)
       .then((_) => runApp(const MyApp()));
 }
