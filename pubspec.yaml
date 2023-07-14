@@ -18,7 +18,7 @@ dependencies:
   flutter_countdown_timer: ^4.1.0
   flutter_image_compress: ^2.0.2
   flutter_launcher_icons: ^0.13.1
-  flutter_local_notifications: ^13.0.0
+  flutter_local_notifications: ^9.8.0+1
   flutter_native_splash: ^2.3.0
   fluttertoast: ^8.2.2
   get: ^4.6.5

@@ -17,9 +17,7 @@ import 'home_controller.dart';
 import 'tukar/tukar.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({
-    super.key,
-  });
+  const HomeView({Key? key}) : super(key : key);
 
   @override
   State<HomeView> createState() => _HomeViewState();

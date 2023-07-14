@@ -40,6 +40,13 @@ class KirimController extends GetxController {
     yield* db.collection('users').doc(email).snapshots();
   }
 
+  Future<QuerySnapshot> petugas() async {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .where('rool', isEqualTo: 'Petugas')
+        .get();
+  }
+
   //? Menyimpan Transaksi Kirim Sampah //
   Future<void> addNewKirim(
       String nama, String rt, String rw, String tgl) async {

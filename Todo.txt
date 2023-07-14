@@ -76,3 +76,11 @@
 14 Juli 2023
 - Menambahkan file firebase_api.dart, untuk menghandle Notifikasi
 - Notifikasi background
+
+15 Juli 2023
+- Membuat fungsi untuk handle local notifications
+- Menambahkan platform channel id pada file AndroidManifest.xml
+- Menambahkan icon aplikasi pada folder drawabel dan drawabel-v21, digunakan untuk icon notifikasi
+- Membuat fungsi untuk handle send notifications to spesific users (Petugas)
+- Membuat fungsi untuk mengambil data token dari collection users (Petugas)
+- Membuat fungsi get data dari fungsi mengambil data token petugas

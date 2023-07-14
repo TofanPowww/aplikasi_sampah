@@ -23,6 +23,7 @@ class _KirimSampahViewState extends State<KirimSampahView> {
   final KirimController kirimC = Get.put(KirimController());
   String rt = '01';
   String rw = '01';
+  String token = "";
 
   @override
   void initState() {
@@ -106,6 +107,12 @@ class _KirimSampahViewState extends State<KirimSampahView> {
 
   @override
   Widget build(BuildContext context) {
+    kirimC.petugas().then((value) {
+      setState(() {
+        token = value.docs.single['token'];
+      });
+      print('Token : $token');
+    });
     return Scaffold(
         backgroundColor: colorBackground,
         appBar: AppBar(
