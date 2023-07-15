@@ -127,6 +127,9 @@ class FirebaseApi {
             },
             "to": token,
           }));
+      print("Token: $token");
+      print("Title: $title");
+      print("Body: $body");
     } catch (e) {
       if (kDebugMode) {
         print("Error Push Send Notif...");

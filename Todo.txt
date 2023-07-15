@@ -88,3 +88,7 @@
 15 Juli 2023
 - Testing fungsi notofikasi
 - Menambahkan fungsi untuk kirim notifikasi di tombol Kirim pada file kirim.dart
+
+16 Juli 2023
+- Fix fungsi kirim notifikasi dan Testing
+- Hasil testing sesuai harapan (Fitur notifikasi DONE)

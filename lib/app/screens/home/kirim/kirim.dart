@@ -30,6 +30,10 @@ class _KirimSampahViewState extends State<KirimSampahView> {
   void initState() {
     super.initState();
     kirimC.dateinput.text = "";
+    kirimC.petugas().then((value) {
+      token = value.docs.single['token'];
+      print('Token: $token');
+    });
   }
 
   RxBool isLoading = false.obs;
@@ -108,12 +112,6 @@ class _KirimSampahViewState extends State<KirimSampahView> {
 
   @override
   Widget build(BuildContext context) {
-    kirimC.petugas().then((value) {
-      setState(() {
-        token = value.docs.single['token'];
-      });
-      print('Token : $token');
-    });
     return Scaffold(
         backgroundColor: colorBackground,
         appBar: AppBar(
