@@ -4,6 +4,7 @@ import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
 import 'package:aplikasi_sampah/app/screens/auth/auth_controller.dart';
+import 'package:aplikasi_sampah/app/screens/firebase_api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -358,12 +359,19 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                                 onPressed: () {
                                   kirimC.isLoading.value
                                       ? null
-                                      : kirimC.addNewKirim(
+                                      : kirimC
+                                          .addNewKirim(
                                           kirimC.nama.text.trim(),
                                           rt.trim(),
                                           rw.trim(),
                                           kirimC.dateinput.text.trim(),
-                                        );
+                                        )
+                                          .then((value) {
+                                          FirebaseApi().sendPushMessage(
+                                              token,
+                                              "Permintaan Masuk",
+                                              "Permintaan pengambilan sampah masuk");
+                                        });
                                 },
                                 style: btnStylePrimary,
                                 child: kirimC.isLoading.value

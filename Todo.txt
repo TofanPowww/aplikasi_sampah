@@ -84,3 +84,7 @@
 - Membuat fungsi untuk handle send notifications to spesific users (Petugas)
 - Membuat fungsi untuk mengambil data token dari collection users (Petugas)
 - Membuat fungsi get data dari fungsi mengambil data token petugas
+
+15 Juli 2023
+- Testing fungsi notofikasi
+- Menambahkan fungsi untuk kirim notifikasi di tombol Kirim pada file kirim.dart
