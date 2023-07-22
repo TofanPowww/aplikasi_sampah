@@ -2,7 +2,7 @@
 
 import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
-import 'package:aplikasi_sampah/app/screens/auth/auth_controller.dart';
+import 'package:aplikasi_sampah/service/authentication.dart';
 import 'package:aplikasi_sampah/app/screens/home/petugas/request_pengambilan/request_pengambilan_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

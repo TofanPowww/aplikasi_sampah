@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:aplikasi_sampah/app/constant/color.dart';
-import 'package:aplikasi_sampah/app/screens/auth/auth_controller.dart';
+import 'package:aplikasi_sampah/service/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -21,9 +21,6 @@ class KirimController extends GetxController {
   final AuthController authC = Get.put(AuthController());
   TextEditingController nama = TextEditingController();
   TextEditingController dateinput = TextEditingController();
-
-  //? Model //
-  // var kirim = UsersKirimModel().obs;
 
   //? Image Picker Controller //
   File? foto;
@@ -57,7 +54,6 @@ class KirimController extends GetxController {
       CollectionReference transaksiDB = db.collection("transaksiSampah");
 
       final kirimU = usersDB.doc(auth.currentUser!.email).collection("kirim");
-      // final docUser = await usersDB.doc(users!.email).get();
 
       //* Menyimpan Foto Sampah ke Firebase Storage //
       final ref = FirebaseStorage.instance
@@ -93,25 +89,12 @@ class KirimController extends GetxController {
         "status": status,
         "creationTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
       });
-
-      // //* Update Users Kirim Model //
-      // kirim(UsersKirimModel(
-      //     tanggal: tgl,
-      //     fotoSampah: imageUrl,
-      //     jumlah: 0,
-      //     poin: 0,
-      //     status: status,
-      //     creationTime:
-      //         DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())));
-
       isLoading.value = false;
       Get.snackbar(
           "Berhasil", "Request terkirim, tunggu konfirmasi dari petugas",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
-
-      // kirim.refresh();
     } catch (e) {
       isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",

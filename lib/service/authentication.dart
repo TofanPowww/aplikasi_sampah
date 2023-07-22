@@ -7,7 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:aplikasi_sampah/routes/links.dart';
-import 'signup/daftar_controller.dart';
+import '../app/screens/auth/daftar/daftar_controller.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -118,12 +118,12 @@ class AuthController extends GetxController {
     await users.doc(email).set({
       'uid': auth.currentUser!.uid,
       'rool': rool,
-      'email': c.emailsignupC.text,
-      'nama_lengkap': c.namasignupC.text,
-      'rt': c.rtsignupC.text,
-      'rw': c.rwsignupC.text,
-      'no_wa': c.wasignupC.text,
-      'password': c.passwordsignupC.text,
+      'email': email,
+      'nama_lengkap': nama,
+      'rt': rt,
+      'rw': rw,
+      'no_wa': wa,
+      'password': password,
       'foto_profil': imageProfilUrl,
       'poin': 0
     });
@@ -146,7 +146,7 @@ class AuthController extends GetxController {
         password: currUserData["password"]));
 
     await auth.signOut();
-    Get.offNamed(AppLinks.LOGIN);
+    Get.until((route) => Get.currentRoute == AppLinks.LOGIN);
   }
 
   //?Direct to Home Page//

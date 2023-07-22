@@ -94,8 +94,12 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                                               : Icons.visibility,
                                           color: colorPrimary),
                                     ),
+                                    focusColor: colorSecondary,
                                     enabledBorder: enableInputBorder,
-                                    focusedBorder: focusInputBorder),
+                                    focusedBorder: focusInputBorder,
+                                    floatingLabelStyle: appFontFormInput,
+                                    errorBorder: errorInputBorder,
+                                    focusedErrorBorder: errorInputBorder),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return "Password Lama tidak boleh kosong";
@@ -134,7 +138,11 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                                           color: colorPrimary),
                                     ),
                                     enabledBorder: enableInputBorder,
-                                    focusedBorder: focusInputBorder),
+                                    focusedBorder: focusInputBorder,
+                                    focusColor: colorSecondary,
+                                    floatingLabelStyle: appFontFormInput,
+                                    focusedErrorBorder: errorInputBorder,
+                                    errorBorder: errorInputBorder),
                                 validator: (value) {
                                   RegExp regex = RegExp(r'[A-Za-z0-9]{6,16}$');
                                   if (value!.isEmpty) {
@@ -177,7 +185,11 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                                           color: colorPrimary),
                                     ),
                                     enabledBorder: enableInputBorder,
-                                    focusedBorder: focusInputBorder),
+                                    focusedBorder: focusInputBorder,
+                                    focusColor: colorSecondary,
+                                    floatingLabelStyle: appFontFormInput,
+                                    errorBorder: errorInputBorder,
+                                    focusedErrorBorder: errorInputBorder),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return "Konfirmasi Password tidak boleh kosong";

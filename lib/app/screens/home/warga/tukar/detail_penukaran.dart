@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-import '../../../constant/color.dart';
-import '../../../constant/fontStyle.dart';
+import '../../../../constant/color.dart';
+import '../../../../constant/fontStyle.dart';
 import 'tukar_controller.dart';
 
 class DetailPenukaranView extends StatefulWidget {

@@ -418,7 +418,7 @@ class TransaksiPoinController extends GetxController {
     for (var element in getData.docs) {
       allDataTransaksi.add(TransaksiTukarModel.fromJson(element.data()));
     }
-    final pdf = pw.Document();
+    final pdf = pw.Document(); //FIXME: Ubah Tabel Bukti Transaksi Sampah
     pdf.addPage(pw.MultiPage(
         pageFormat: PdfPageFormat.letter,
         orientation: pw.PageOrientation.landscape,

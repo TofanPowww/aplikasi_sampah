@@ -1,6 +1,7 @@
 import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
-import 'package:aplikasi_sampah/app/screens/home/admin/add_petugas/add_petugas.dart';
+import 'package:aplikasi_sampah/app/screens/home/admin/petugas/add_petugas.dart';
+import 'package:aplikasi_sampah/routes/links.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -157,6 +158,10 @@ class _KelolaPetugasState extends State<KelolaPetugas> {
                                                               colorAccent),
                                                     ),
                                                     onPressed: () {
+                                                      Get.until((route) =>
+                                                          Get.currentRoute ==
+                                                          AppLinks
+                                                              .KELOLA_PETUGAS);
                                                       petugasC.deletePetugas(
                                                           ds['email']
                                                               .toString()

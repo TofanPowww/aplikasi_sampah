@@ -55,9 +55,13 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                 cursorHeight: 25,
                 decoration: const InputDecoration(
                     filled: true,
+                    floatingLabelStyle: appFontFormInput,
                     fillColor: colorSecondary,
+                    focusColor: colorSecondary,
                     enabledBorder: enableInputBorder,
-                    focusedBorder: focusInputBorder),
+                    focusedBorder: focusInputBorder,
+                    errorBorder: errorInputBorder,
+                    focusedErrorBorder: errorInputBorder),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "Masukkan nama produk";
@@ -79,9 +83,13 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                 cursorHeight: 25,
                 decoration: const InputDecoration(
                     filled: true,
+                    floatingLabelStyle: appFontFormInput,
                     fillColor: colorSecondary,
+                    focusColor: colorSecondary,
                     enabledBorder: enableInputBorder,
-                    focusedBorder: focusInputBorder),
+                    focusedBorder: focusInputBorder,
+                    errorBorder: errorInputBorder,
+                    focusedErrorBorder: errorInputBorder),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "Masukkan poin produk";
@@ -104,9 +112,13 @@ class _TambahProdukViewState extends State<TambahProdukView> {
                 cursorHeight: 25,
                 decoration: const InputDecoration(
                     filled: true,
+                    floatingLabelStyle: appFontFormInput,
                     fillColor: colorSecondary,
+                    focusColor: colorSecondary,
                     enabledBorder: enableInputBorder,
-                    focusedBorder: focusInputBorder),
+                    focusedBorder: focusInputBorder,
+                    errorBorder: errorInputBorder,
+                    focusedErrorBorder: errorInputBorder),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "Masukkan deskripsi produk";

@@ -131,6 +131,7 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                     onChanged: (String? newValue) {
                       setState(() {
                         status = newValue ?? "";
+                        value = 7;
                       });
                     },
                     items: <String>['Menunggu', 'Diterima', 'Ditolak']

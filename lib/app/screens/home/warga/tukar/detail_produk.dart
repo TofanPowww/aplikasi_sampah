@@ -1,7 +1,7 @@
 import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
-import 'package:aplikasi_sampah/app/screens/auth/auth_controller.dart';
+import 'package:aplikasi_sampah/service/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -92,7 +92,7 @@ class _DetailProdukViewState extends State<DetailProdukView> {
                 child: widget.poinW >= produk['poin']
                     ? ElevatedButton(
                         onPressed: () async {
-                          await tukarC.transaksiTukar(
+                          tukarC.transaksiTukar(
                               produk['nama'].toString().trim(),
                               int.parse(produk['poin'].toString().trim()));
                         },

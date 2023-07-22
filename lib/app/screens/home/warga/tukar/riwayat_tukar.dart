@@ -1,15 +1,15 @@
 // ignore_for_file: sized_box_for_whitespace, avoid_print
 
 import 'package:aplikasi_sampah/app/constant/color.dart';
-import 'package:aplikasi_sampah/app/screens/auth/auth_controller.dart';
+import 'package:aplikasi_sampah/service/authentication.dart';
 import 'package:aplikasi_sampah/app/screens/index.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../constant/fontStyle.dart';
-import '../../../constant/style.dart';
+import '../../../../constant/fontStyle.dart';
+import '../../../../constant/style.dart';
 import 'tukar_controller.dart';
 
 class RiwayatTukarView extends StatefulWidget {

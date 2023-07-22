@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../constant/color.dart';
-import '../../../constant/fontStyle.dart';
-import '../../../constant/style.dart';
+import '../../../../constant/color.dart';
+import '../../../../constant/fontStyle.dart';
+import '../../../../constant/style.dart';
 
 class DetailRiwayatView extends StatefulWidget {
   const DetailRiwayatView({super.key});

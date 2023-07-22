@@ -1,12 +1,12 @@
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
-import 'package:aplikasi_sampah/app/screens/home/tukar/tukar_controller.dart';
+import 'package:aplikasi_sampah/app/screens/home/warga/tukar/tukar_controller.dart';
 import 'package:aplikasi_sampah/app/screens/index.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import '../../../../routes/links.dart';
-import '../../../constant/color.dart';
+import '../../../../constant/color.dart';
 import 'package:get/get.dart';
 // import 'detail_produk.dart';
 

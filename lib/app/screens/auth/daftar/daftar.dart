@@ -5,9 +5,9 @@ import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../constant/style.dart';
-import 'auth_controller.dart';
-import 'signup/daftar_controller.dart';
+import '../../../constant/style.dart';
+import '../../../../service/authentication.dart';
+import 'daftar_controller.dart';
 
 class DaftarScreen extends StatefulWidget {
   const DaftarScreen({Key? key}) : super(key: key);
@@ -423,16 +423,24 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                   AuthController.instance.isLoading.value
                                       ? null
                                       : isValid == true
-                                          ? AuthController.instance.daftar(
-                                              daftarC.rool.trim(),
-                                              c.emailsignupC.text.trim(),
-                                              c.namasignupC.text.trim(),
-                                              c.rtsignupC.text.trim(),
-                                              c.rwsignupC.text.trim(),
-                                              c.wasignupC.text.trim(),
-                                              c.passwordsignupC.text.trim(),
-                                              c.confirmpasswordsignupC.text
-                                                  .trim())
+                                          ? daftarC.imageProfil == null
+                                              ? Get.snackbar(
+                                                  "Foto Profil Kosong",
+                                                  "Masukkan Foto Profil Anda!",
+                                                  backgroundColor: appDanger,
+                                                  snackPosition:
+                                                      SnackPosition.TOP,
+                                                )
+                                              : AuthController.instance.daftar(
+                                                  daftarC.rool.trim(),
+                                                  c.emailsignupC.text.trim(),
+                                                  c.namasignupC.text.trim(),
+                                                  c.rtsignupC.text.trim(),
+                                                  c.rwsignupC.text.trim(),
+                                                  c.wasignupC.text.trim(),
+                                                  c.passwordsignupC.text.trim(),
+                                                  c.confirmpasswordsignupC.text
+                                                      .trim())
                                           : null;
                                 },
                                 style: btnStylePrimary,

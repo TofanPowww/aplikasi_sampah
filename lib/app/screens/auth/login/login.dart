@@ -4,10 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../constant/color.dart';
-import '../../constant/style.dart';
-import 'auth_controller.dart';
-import 'login/login_controller.dart';
+import '../../../constant/color.dart';
+import '../../../constant/style.dart';
+import '../../../../service/authentication.dart';
+import 'login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -178,6 +178,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   style: appFontButton)))
                                     ]),
                               )),
+                          const SizedBox(height: 16),
+                          Center(
+                            child: InkWell(
+                              onTap: () {},
+                              child: const Text("Lupa Password?",
+                                  style: appFontButtonText),
+                            ),
+                          ),
                           const SizedBox(height: 16),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

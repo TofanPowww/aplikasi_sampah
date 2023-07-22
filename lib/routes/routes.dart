@@ -25,7 +25,7 @@ class AppRoutes {
         binding: ProfilBinding()),
     GetPage(
       name: AppLinks.PROFIL_SAYA,
-      page: () => const ProfilSayaView(),
+      page: () => const ProfilWargaView(),
     ),
     GetPage(
       name: AppLinks.PROFIL_RESET,

@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart' as s;
 
-class ProfilSayaController extends GetxController {
+class ProfilWargaController extends GetxController {
   var isLoading = false.obs;
   TextEditingController emailC = TextEditingController();
   TextEditingController namaC = TextEditingController();

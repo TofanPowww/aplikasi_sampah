@@ -12,13 +12,13 @@ class DaftarController extends GetxController {
 
   @override
   void onClose() {
-    emailsignupC.dispose();
-    namasignupC.dispose();
-    rtsignupC.dispose();
-    rwsignupC.dispose();
-    wasignupC.dispose();
-    passwordsignupC.dispose();
-    confirmpasswordsignupC.dispose();
+    // emailsignupC.dispose();
+    // namasignupC.dispose();
+    // rtsignupC.dispose();
+    // rwsignupC.dispose();
+    // wasignupC.dispose();
+    // passwordsignupC.dispose();
+    // confirmpasswordsignupC.dispose();
     super.onClose();
   }
 }

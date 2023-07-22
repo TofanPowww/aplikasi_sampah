@@ -89,7 +89,7 @@ class AddPetugasController extends GetxController {
   Future<void> deletePetugas(String email) async {
     try {
       await FirebaseFirestore.instance.collection('users').doc(email).delete();
-      toKelolaPetugas();
+      // toKelolaPetugas();
       Get.snackbar("Berhasil", "Petugas berhasil dihapus",
           backgroundColor: appSuccess, snackPosition: SnackPosition.TOP);
     } catch (e) {

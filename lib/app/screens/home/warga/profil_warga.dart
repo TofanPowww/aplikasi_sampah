@@ -7,16 +7,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'profilsaya_controller.dart';
+import 'profilwarga_controller.dart';
 
-class ProfilSayaView extends StatefulWidget {
-  const ProfilSayaView({super.key});
+class ProfilWargaView extends StatefulWidget {
+  const ProfilWargaView({super.key});
   @override
-  State<ProfilSayaView> createState() => _ProfilSayaViewState();
+  State<ProfilWargaView> createState() => _ProfilWargaViewState();
 }
 
-class _ProfilSayaViewState extends State<ProfilSayaView> {
-  final ProfilSayaController profilsayaC = Get.put(ProfilSayaController());
+class _ProfilWargaViewState extends State<ProfilWargaView> {
+  final ProfilWargaController profilsayaC = Get.put(ProfilWargaController());
   RxBool isLoading = false.obs;
   @override
   Widget build(BuildContext context) {

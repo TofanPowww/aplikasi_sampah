@@ -4,6 +4,7 @@ import 'package:aplikasi_sampah/app/constant/color.dart';
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
 import 'package:aplikasi_sampah/app/screens/home/admin/produk/produk_controller.dart';
+import 'package:aplikasi_sampah/routes/links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -147,6 +148,9 @@ class _EditProdukViewState extends State<EditProdukView> {
                                           MaterialStatePropertyAll(colorAccent),
                                     ),
                                     onPressed: () async {
+                                      Get.until((route) =>
+                                          Get.currentRoute ==
+                                          AppLinks.KELOLA_PRODUK);
                                       produkC.deleteProduk(
                                           produkData['produk_id']
                                               .toString()

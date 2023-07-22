@@ -1,6 +1,6 @@
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
-import 'package:aplikasi_sampah/app/screens/auth/auth_controller.dart';
+import 'package:aplikasi_sampah/service/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -132,6 +132,12 @@ class ProfilView extends GetView<ProfilController> {
                   ),
                 ),
               ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                  onPressed: () async {
+                    profilController.test1();
+                  },
+                  child: const Text("Test Workmanager"))
             ],
           ),
         ),

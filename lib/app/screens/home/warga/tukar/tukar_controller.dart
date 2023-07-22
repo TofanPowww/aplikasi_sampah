@@ -9,8 +9,10 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:workmanager/workmanager.dart';
 
-import '../../../constant/color.dart';
+import '../../../../../service/workmanager.dart';
+import '../../../../constant/color.dart';
 
 class TukarController extends GetxController {
   //? Routing //
@@ -39,51 +41,50 @@ class TukarController extends GetxController {
 
   //? Membuat Transaksi Tukar Poin //
   Future<void> transaksiTukar(String namaProduk, int poinProduk) async {
-    User? users = auth.currentUser;
+    String? email = auth.currentUser!.email;
     CollectionReference userDB = db.collection("users");
     CollectionReference transaksiTukarDB = db.collection("transaksiTukar");
-    final tukarUser = userDB.doc(users!.email).collection("tukar");
+    final tukarUser = userDB.doc(email).collection("tukar");
 
-    try {
-      //* Menyimpan Data Tukar Poin ke Nested Collection User //
-      await tukarUser.add({
+    // try {
+    //* Menyimpan Data Tukar Poin ke Nested Collection User //
+    await tukarUser.add({
+      "nama_produk": namaProduk,
+      "poin_produk": poinProduk,
+      "status": status,
+      "tanggal":
+          DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
+      "creationTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+    }).then((DocumentReference doc) async {
+      tukarUser.doc(doc.id).update({"kode": doc.id});
+
+      //* Menyimpan Data Transaksi Tukar Poin ke Collection transaksiTukar //
+      await transaksiTukarDB.doc(doc.id).set({
+        "id": doc.id,
+        "kode": doc.id,
+        "email": email,
         "nama_produk": namaProduk,
         "poin_produk": poinProduk,
         "status": status,
         "tanggal":
             DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
         "creationTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
-      }).then((DocumentReference doc) async {
-        tukarUser.doc(doc.id).update({"kode": doc.id});
+      }).then((value) => batasWaktu(email!, doc.id));
 
-        //* Menyimpan Data Transaksi Tukar Poin ke Collection transaksiTukar //
-        await transaksiTukarDB.doc(doc.id).set({
-          "id": doc.id,
-          "kode": doc.id,
-          "email": users.email,
-          "nama_produk": namaProduk,
-          "poin_produk": poinProduk,
-          "status": status,
-          "tanggal":
-              DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
-          "creationTime":
-              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
-        }).then((value) => batasWaktu(doc.id));
-
-        // Get.offAndToNamed(AppLinks.TUKAR_POIN);
-        Get.back();
-        Get.snackbar(
-            "Penukaran Berhasil", "Silahkan cek di halaman Riwayat Penukaran",
-            backgroundColor: appSuccess,
-            snackPosition: SnackPosition.TOP,
-            margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
-      });
-    } catch (e) {
-      Get.snackbar("Gagal Menukar", "Proses penukaran gagal",
-          backgroundColor: appDanger,
-          snackPosition: SnackPosition.TOP,
-          margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
-    }
+      // Get.offAndToNamed(AppLinks.TUKAR_POIN);
+      // Get.back();
+      // Get.snackbar(
+      //     "Penukaran Berhasil", "Silahkan cek di halaman Riwayat Penukaran",
+      //     backgroundColor: appSuccess,
+      //     snackPosition: SnackPosition.TOP,
+      //     margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
+    });
+    // } catch (e) {
+    //   Get.snackbar("Gagal Menukar", "Proses penukaran gagal",
+    //       backgroundColor: appDanger,
+    //       snackPosition: SnackPosition.TOP,
+    //       margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
+    // }
   }
 
   //? Stream Riwayat Transaksi Poin User(Warga) //
@@ -233,21 +234,37 @@ class TukarController extends GetxController {
         name: 'Bukti_Penukaran',
         onLayout: (PdfPageFormat format) async => pdf.save());
   }
-}
 
-void batasWaktu(String id) {
-  User? users = FirebaseAuth.instance.currentUser;
-  CollectionReference userDB = FirebaseFirestore.instance.collection("users");
-  CollectionReference transaksiTukarDB =
-      FirebaseFirestore.instance.collection("transaksiTukar");
-  final tukarUser = userDB.doc(users!.email).collection("tukar");
+  void batasWaktu(String email, String id) {
+    try {
+      Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+      Workmanager().registerOneOffTask(taskActive, taskActive,
+          inputData: <String, dynamic>{'email': email, 'idTransaksi': id},
+          initialDelay: const Duration(seconds: 20),
+          constraints: Constraints(networkType: NetworkType.connected),
+          existingWorkPolicy: ExistingWorkPolicy.append
+          ); //FIXME: Pemilihan Jenis Register Task
 
-  Future.delayed(const Duration(days: 3), () {
-    print('waktu habis');
-    tukarUser.doc(id).update({
+      Get.back();
+      Get.snackbar(
+          "Penukaran Berhasil", "Silahkan cek di halaman Riwayat Penukaran",
+          backgroundColor: appSuccess,
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
+    } catch (e) {
+      Get.snackbar("Gagal Menukar", "Proses penukaran gagal",
+          backgroundColor: appDanger,
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
+    }
+  }
+
+  Future<void> updateData(String id) async {
+    CollectionReference transaksiTukarDB = db.collection("transaksiTukar");
+
+    await transaksiTukarDB.doc(id).update({
       "status": "Batal",
+      "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
     });
-
-    transaksiTukarDB.doc(id).update({"status": "Batal"});
-  });
+  }
 }

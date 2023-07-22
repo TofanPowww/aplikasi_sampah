@@ -1,7 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:aplikasi_sampah/app/constant/style.dart';
-import 'package:aplikasi_sampah/app/screens/auth/auth_controller.dart';
+import 'package:aplikasi_sampah/service/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -1,40 +1,5 @@
-🔥 TODO LIST 🔥
-
- ==========================================
-🔵 Create
-    - Notifikasi Permintaan Pengambilan (Optional)
-    - Lupa Password (Optional)
-    - Verifikasi Email (Optional)
-
 
 ==========================================
-⚪ Modify & Cek
-
-
-
-==========================================
-🟣 Progress
-
-
-
-==========================================
-🟢 Done
-    - Menambahkan fungsi logout saat admin menambahkan akun petugas
-    - Batas Waktu Penukaran
-    - Konfirmasi Pengambilan Sampah
-    - Model Transaksi Sampah
-    - Cetak Transaksi Poin
-
-
-
-==========================================
-🟡 Done Without Test
-    - Konfirmasi Penukaran Poin 
-    
-
-
-==========================================
-🔴 Error
 
 
 22 Juni 2023
