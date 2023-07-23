@@ -67,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           style: appFontLabelForm,
                                           cursorColor: colorPrimary,
                                           cursorHeight: 25,
+                                          autocorrect: false,
                                           decoration: const InputDecoration(
                                               filled: true,
                                               fillColor: colorSecondary,
@@ -103,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         keyboardType: TextInputType.text,
                                         style: appFontLabelForm,
                                         cursorColor: colorPrimary,
+                                        autocorrect: false,
                                         cursorHeight: 25,
                                         decoration: InputDecoration(
                                             filled: true,

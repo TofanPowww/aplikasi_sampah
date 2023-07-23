@@ -168,6 +168,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                         style: appFontFormInput,
                                         cursorColor: colorPrimary,
                                         cursorHeight: 25,
+                                        autocorrect: false,
                                         decoration: const InputDecoration(
                                             filled: true,
                                             enabled: true,
@@ -201,7 +202,9 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                         controller: c.namasignupC,
                                         style: appFontFormInput,
                                         cursorColor: colorPrimary,
+                                        keyboardType: TextInputType.name,
                                         cursorHeight: 25,
+                                        autocorrect: false,
                                         decoration: const InputDecoration(
                                             filled: true,
                                             fillColor: colorSecondary,
@@ -230,6 +233,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                         style: appFontFormInput,
                                         cursorColor: colorPrimary,
                                         cursorHeight: 25,
+                                        autocorrect: false,
                                         keyboardType: TextInputType.number,
                                         decoration: const InputDecoration(
                                             filled: true,
@@ -260,6 +264,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                         style: appFontFormInput,
                                         cursorColor: colorPrimary,
                                         cursorHeight: 25,
+                                        autocorrect: false,
                                         keyboardType: TextInputType.number,
                                         decoration: const InputDecoration(
                                             filled: true,
@@ -290,6 +295,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                         style: appFontFormInput,
                                         cursorColor: colorPrimary,
                                         cursorHeight: 25,
+                                        autocorrect: false,
                                         keyboardType: TextInputType.phone,
                                         decoration: const InputDecoration(
                                             filled: true,
@@ -318,6 +324,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                       TextFormField(
                                         controller: c.passwordsignupC,
                                         obscureText: _isHidePassword,
+                                        autocorrect: false,
                                         keyboardType: TextInputType.text,
                                         style: appFontFormInput,
                                         cursorColor: colorPrimary,
@@ -368,6 +375,7 @@ class _DaftarScreenState extends State<DaftarScreen> {
                                         obscureText: _isHideConfirmPass,
                                         keyboardType: TextInputType.text,
                                         style: appFontFormInput,
+                                        autocorrect: false,
                                         cursorColor: colorPrimary,
                                         cursorHeight: 25,
                                         decoration: InputDecoration(

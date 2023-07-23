@@ -113,6 +113,7 @@ class _AddPetugasState extends State<AddPetugas> {
                                         style: appFontFormInput,
                                         cursorColor: colorPrimary,
                                         cursorHeight: 25,
+                                        autocorrect: false,
                                         decoration: const InputDecoration(
                                             filled: true,
                                             enabled: true,
@@ -147,6 +148,7 @@ class _AddPetugasState extends State<AddPetugas> {
                                         style: appFontFormInput,
                                         cursorColor: colorPrimary,
                                         cursorHeight: 25,
+                                        autocorrect: false,
                                         decoration: const InputDecoration(
                                             filled: true,
                                             fillColor: colorSecondary,
@@ -175,6 +177,7 @@ class _AddPetugasState extends State<AddPetugas> {
                                         style: appFontFormInput,
                                         cursorColor: colorPrimary,
                                         cursorHeight: 25,
+                                        autocorrect: false,
                                         keyboardType: TextInputType.number,
                                         decoration: const InputDecoration(
                                             filled: true,
