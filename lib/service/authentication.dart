@@ -130,21 +130,7 @@ class AuthController extends GetxController {
 
     final currUser = await users.doc(auth.currentUser!.email).get();
     final currUserData = currUser.data() as Map<String, dynamic>;
-
-    user(UsersModel.fromJson(currUserData));
-
-    user(UsersModel(
-        uid: currUser.id,
-        email: currUserData["email"],
-        namaLengkap: currUserData["nama_lengkap"],
-        rt: currUserData["rt"],
-        rw: currUserData["rw"],
-        wa: currUserData["no_wa"],
-        poin: currUserData['poin'],
-        fotoProfil: currUserData["foto_profil"],
-        rool: currUserData["rool"],
-        password: currUserData["password"]));
-
+    print(currUserData);
     await auth.signOut();
     Get.until((route) => Get.currentRoute == AppLinks.LOGIN);
   }

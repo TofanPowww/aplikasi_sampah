@@ -17,7 +17,7 @@ import 'home_controller.dart';
 import 'warga/tukar/tukar.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key : key);
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -35,9 +35,6 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     _firebaseApi.initNotifcations();
-    // requestPermission();
-    // getToken();
-    // initInfo();
     authC.user.refresh();
   }
 
