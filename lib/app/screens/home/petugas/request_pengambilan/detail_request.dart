@@ -214,17 +214,16 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                       : Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Expanded(
-                                flex: 1, child: customRadioButton("Besi", 4)),
+                            Expanded(child: customRadioButton("Besi", 4)),
                             const SizedBox(width: 4),
-                            Expanded(
-                                flex: 2,
-                                child: customRadioButton("Botol Kaca", 5))
+                            Expanded(child: customRadioButton("Botol Kaca", 5)),
+                            const SizedBox(width: 4),
+                            Expanded(child: customRadioButton("Tidak Ada", 6))
                           ],
                         ),
                   const SizedBox(height: 4),
                   Expanded(
-                      child: status == "Ditolak"
+                      child: status == "Ditolak" && value == 6
                           ? TextFormField(
                               readOnly: true,
                               controller: jmlhAnorganik,
@@ -331,39 +330,43 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                     onPressed: () {
                       kirimC.isLoading.value
                           ? null
-                          : status == "Ditolak"
-                              ? kirimC.updateTransaksi(
-                                  request['id'].toString(),
-                                  request['email'].toString(),
-                                  request['tgl'].toString(),
-                                  double.parse(jmlhOrganik.text.trim()),
-                                  double.parse(jmlhAnorganik.text.trim()),
-                                  status!.trim(),
-                                  kirimC.keteranganC.text.trim(),
-                                  0)
+                          : status == ""
+                              ? Get.snackbar("Gagal", "Tentukan status transaksi",
+                                  backgroundColor: appDanger,
+                                  snackPosition: SnackPosition.TOP,
+                                  margin: const EdgeInsets.only(
+                                      bottom: 10, right: 10, left: 10))
                               : value == 0
-                                  ? kirimC.updateTransaksi(
-                                      request['id'].toString(),
-                                      request['email'].toString(),
-                                      request['tgl'].toString(),
-                                      double.parse(
-                                          kirimC.jumlahOrganikC.text.trim()),
-                                      double.parse(
-                                          kirimC.jumlahAnorganikC.text.trim()),
-                                      status!.trim(),
-                                      ket.text.trim(),
-                                      0)
-                                  : kirimC.updateTransaksi(
-                                      request['id'].toString(),
-                                      request['email'].toString(),
-                                      request['tgl'].toString(),
-                                      double.parse(
-                                          kirimC.jumlahOrganikC.text.trim()),
-                                      double.parse(
-                                          kirimC.jumlahAnorganikC.text.trim()),
-                                      status!.trim(),
-                                      ket.text.trim(),
-                                      value);
+                                  ? Get.snackbar(
+                                      "Gagal", "Tentukan jenis sampah Anorganik",
+                                      backgroundColor: appDanger,
+                                      snackPosition: SnackPosition.TOP,
+                                      margin: const EdgeInsets.only(
+                                          bottom: 10, right: 10, left: 10))
+                                  : value == 7
+                                      ? kirimC.updateTransaksi(
+                                          request['id'].toString(),
+                                          request['email'].toString(),
+                                          request['tgl'].toString(),
+                                          double.parse(jmlhOrganik.text.trim()),
+                                          double.parse(
+                                              jmlhAnorganik.text.trim()),
+                                          status!.trim(),
+                                          kirimC.keteranganC.text.trim(),
+                                          value)
+                                      : value == 6
+                                          ? kirimC.updateTransaksi(
+                                              request['id'].toString(),
+                                              request['email'].toString(),
+                                              request['tgl'].toString(),
+                                              double.parse(kirimC
+                                                  .jumlahOrganikC.text
+                                                  .trim()),
+                                              double.parse(kirimC.jumlahAnorganikC.text.trim()),
+                                              status!.trim(),
+                                              ket.text.trim(),
+                                              0)
+                                          : kirimC.updateTransaksi(request['id'].toString(), request['email'].toString(), request['tgl'].toString(), double.parse(kirimC.jumlahOrganikC.text.trim()), double.parse(kirimC.jumlahAnorganikC.text.trim()), status!.trim(), ket.text.trim(), value);
                     },
                     style: btnStylePrimary,
                     child: status == "Ditolak"

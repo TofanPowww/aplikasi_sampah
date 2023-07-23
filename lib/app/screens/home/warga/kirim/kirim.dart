@@ -373,8 +373,8 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                                       : isValid == true
                                           ? kirimC.foto == null
                                               ? Get.snackbar(
-                                                  "Foto Profil Kosong",
-                                                  "Masukkan Foto Profil Anda!",
+                                                  "Foto bukti Kosong",
+                                                  "Masukkan foto bukti sampah Anda!",
                                                   backgroundColor: appDanger,
                                                   snackPosition:
                                                       SnackPosition.TOP,

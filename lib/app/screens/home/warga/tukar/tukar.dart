@@ -5,10 +5,8 @@ import 'package:aplikasi_sampah/app/screens/index.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import '../../../../routes/links.dart';
 import '../../../../constant/color.dart';
 import 'package:get/get.dart';
-// import 'detail_produk.dart';
 
 class TukarPoinView extends StatefulWidget {
   const TukarPoinView({super.key});
@@ -26,9 +24,6 @@ class _TukarPoinView extends State<TukarPoinView> {
 
   @override
   Widget build(BuildContext context) {
-    // final Stream<DocumentSnapshot> userStream =
-    //     users.doc(auth.currentUser!.email).snapshots();
-    // final AuthController authC = Get.put(AuthController());
     final TukarController tukarC = Get.put(TukarController());
     final poin =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
@@ -81,7 +76,6 @@ class _TukarPoinView extends State<TukarPoinView> {
                                       fontWeight: FontWeight.w500,
                                       color: colorPrimary)),
                               Text(
-                                  // "${authC.user.value.poin}",
                                   poin["poin"].toString(),
                                   style: const TextStyle(
                                       fontSize: 24,

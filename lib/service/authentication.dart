@@ -169,7 +169,7 @@ class AuthController extends GetxController {
             rt: currUserData["rt"],
             rw: currUserData["rw"],
             wa: currUserData["no_wa"],
-            poin: currUserData['poin'],
+            poin: currUserData['poin'] as int,
             fotoProfil: currUserData["foto_profil"],
             rool: currUserData["rool"],
             password: currUserData["password"]));

@@ -23,16 +23,28 @@ class ProfilController extends GetxController {
   }
 
   Future<void> test1() async {
-    User? users = auth.currentUser;
+    String? email = auth.currentUser!.email;
     CollectionReference userDB = firestore.collection("users");
-    await userDB.doc(users!.email).update({'rt': "02"}).then(
-        (value) => nextStep("this_email", "this_id"));
+    await userDB
+        .doc(email)
+        .update({'rt': "02"}).then((value) => nextStep(email!, "this_id"));
   }
 
   void nextStep(String email, String id) {
     Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
-    Workmanager().registerOneOffTask(simpleDelayedTask, simpleDelayedTask,
-        inputData: <String, dynamic>{'email': email, 'idTransaksi': id},
-        initialDelay: const Duration(seconds: 45));
+    Workmanager().registerOneOffTask(testTask, testTask,
+        tag: "test",
+        constraints: Constraints(networkType: NetworkType.connected),
+        inputData: <String, dynamic>{'email': email, 'idTest': id},
+        initialDelay: const Duration(minutes: 3));
+  }
+
+  Future<void> coba(String email) async {
+    CollectionReference userDB = db.collection("users");
+    await userDB.doc(email).update({"rt": "04"});
+  }
+
+  Future<void> cancelTask() async {
+    await Workmanager().cancelByTag("test");
   }
 }

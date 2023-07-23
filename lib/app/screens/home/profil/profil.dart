@@ -137,7 +137,13 @@ class ProfilView extends GetView<ProfilController> {
                   onPressed: () async {
                     profilController.test1();
                   },
-                  child: const Text("Test Workmanager"))
+                  child: const Text("Test Workmanager")),
+              const SizedBox(height: 16),
+              TextButton(
+                  onPressed: () {
+                    profilController.cancelTask();
+                  },
+                  child: const Text("Cancel Task"))
             ],
           ),
         ),

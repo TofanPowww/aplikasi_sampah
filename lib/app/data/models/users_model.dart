@@ -33,7 +33,7 @@ class UsersModel {
   String? rw;
   String? wa;
   String? rool;
-  String? poin;
+  int? poin;
   String? password;
   String? fotoProfil;
   String? token;

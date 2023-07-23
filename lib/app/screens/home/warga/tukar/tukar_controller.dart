@@ -17,7 +17,6 @@ import '../../../../constant/color.dart';
 class TukarController extends GetxController {
   //? Routing //
   toTukarRiwayat() => Get.toNamed(AppLinks.TUKAR_POIN_HISTORY);
-  toDetailProduk() => Get.toNamed(AppLinks.TUKAR_POIN_PRODUK);
 
   //? Firebase //
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -46,7 +45,6 @@ class TukarController extends GetxController {
     CollectionReference transaksiTukarDB = db.collection("transaksiTukar");
     final tukarUser = userDB.doc(email).collection("tukar");
 
-    // try {
     //* Menyimpan Data Tukar Poin ke Nested Collection User //
     await tukarUser.add({
       "nama_produk": namaProduk,
@@ -70,21 +68,7 @@ class TukarController extends GetxController {
             DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
         "creationTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
       }).then((value) => batasWaktu(email!, doc.id));
-
-      // Get.offAndToNamed(AppLinks.TUKAR_POIN);
-      // Get.back();
-      // Get.snackbar(
-      //     "Penukaran Berhasil", "Silahkan cek di halaman Riwayat Penukaran",
-      //     backgroundColor: appSuccess,
-      //     snackPosition: SnackPosition.TOP,
-      //     margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     });
-    // } catch (e) {
-    //   Get.snackbar("Gagal Menukar", "Proses penukaran gagal",
-    //       backgroundColor: appDanger,
-    //       snackPosition: SnackPosition.TOP,
-    //       margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
-    // }
   }
 
   //? Stream Riwayat Transaksi Poin User(Warga) //
@@ -235,15 +219,16 @@ class TukarController extends GetxController {
         onLayout: (PdfPageFormat format) async => pdf.save());
   }
 
+  //NEED TO TEST: Fungsi batas waktu penukaran
   void batasWaktu(String email, String id) {
     try {
       Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
       Workmanager().registerOneOffTask(taskActive, taskActive,
+          tag: "kodeAktif",
           inputData: <String, dynamic>{'email': email, 'idTransaksi': id},
           initialDelay: const Duration(seconds: 20),
           constraints: Constraints(networkType: NetworkType.connected),
-          existingWorkPolicy: ExistingWorkPolicy.append
-          ); //FIXME: Pemilihan Jenis Register Task
+          existingWorkPolicy: ExistingWorkPolicy.append);
 
       Get.back();
       Get.snackbar(
@@ -259,12 +244,25 @@ class TukarController extends GetxController {
     }
   }
 
-  Future<void> updateData(String id) async {
+  Future<void> updateData(String id, String email) async {
     CollectionReference transaksiTukarDB = db.collection("transaksiTukar");
+    CollectionReference userDB = db.collection("users");
+    final tukarUser = userDB.doc(email).collection("tukar");
 
     await transaksiTukarDB.doc(id).update({
       "status": "Batal",
-      "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now())
+      "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+      "tanggalKonfirmasi":
+          DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
+      "bulan": DateFormat('MMMM', "id_ID").format(DateTime.now())
+    });
+
+    await tukarUser.doc(id).update({
+      "status": "Batal",
+      "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+      "tanggalKonfirmasi":
+          DateFormat('EEEE, dd MMMM yyyy', "id_ID").format(DateTime.now()),
+      "bulan": DateFormat('MMMM', "id_ID").format(DateTime.now())
     });
   }
 }

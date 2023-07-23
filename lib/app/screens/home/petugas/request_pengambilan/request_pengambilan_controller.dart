@@ -30,7 +30,6 @@ class RequestPengambilanController extends GetxController {
   var modelUser = UsersModel().obs;
 
   //? Update Transaksi Sampah //
-  // NEED TO TEST : Konfirmasi Transaksi Sampah
   Future<void> updateTransaksi(
       String id,
       String email,
@@ -44,46 +43,43 @@ class RequestPengambilanController extends GetxController {
     final petugas = await usersDb.doc(auth.currentUser!.email).get();
     String namaPetugas = petugas.get("nama_lengkap");
     //? Transaksi ditolak
-    if (status == "Ditolak" && v == 0) {
+    if (status == "Ditolak") {
       print(status);
       ditolak(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
           keterangan, v, namaPetugas);
     }
     //? Jumlah Anorganik 0
-    else if (v == 0 && status == "Diterima") {
-      print("Anorganik 0");
-      organikSaja(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
-          keterangan, v, namaPetugas);
-    }
-    //? Sampah Jenis Plastik
-    else if (v == 1) {
-      print("Plastik");
-      plastik(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
-          keterangan, v, namaPetugas);
-    }
-    //? Sampah Jenis Kertas
-    else if (v == 2) {
-      print("Kertas");
-      plastik(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
-          keterangan, v, namaPetugas);
-    }
-    //? Sampah Jenis Logam
-    else if (v == 3) {
-      print("Logam");
-      plastik(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
-          keterangan, v, namaPetugas);
-    }
-    //? Sampah Jenis Besi
-    else if (v == 4) {
-      print("Besi");
-      plastik(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
-          keterangan, v, namaPetugas);
-    }
-    //? Sampah Jenis Botol Kaca
-    else if (v == 5) {
-      print("Botol Kaca");
-      plastik(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
-          keterangan, v, namaPetugas);
+    if (status == "Diterima") {
+      if (v == 0) {
+        print("Anorganik 0");
+        organikSaja(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
+            keterangan, v, namaPetugas);
+      }
+      if (v == 1) {
+        print("Plastik");
+        plastik(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
+            keterangan, v, namaPetugas);
+      }
+      if (v == 2) {
+        print("Kertas");
+        kertas(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
+            keterangan, v, namaPetugas);
+      }
+      if (v == 3) {
+        print("Logam");
+        logam(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
+            keterangan, v, namaPetugas);
+      }
+      if (v == 4) {
+        print("Besi");
+        besi(id, email, tgl, jumlahOrganik, jumlahAnorganik, status, keterangan,
+            v, namaPetugas);
+      }
+      if (v == 5) {
+        print("Botol Kaca");
+        botolKaca(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
+            keterangan, v, namaPetugas);
+      }
     }
   }
 
@@ -167,7 +163,7 @@ class RequestPengambilanController extends GetxController {
       //* Update Jumlah Poin Warga //
       await usersDb
           .doc(email)
-          .update({"poin": FieldValue.increment(jumlahOrganik * 150 as int)});
+          .update({"poin": FieldValue.increment(jumlahOrganik * 150)});
       //* Update Transaksi Sampah pada Collection transaksiSampah //
       await transaksiDb.doc(id).update({
         "petugas": petugas,
@@ -224,7 +220,7 @@ class RequestPengambilanController extends GetxController {
       //* Update Jumlah Poin Warga //
       await usersDb.doc(email).update({
         "poin": FieldValue.increment(
-            (jumlahOrganik * 150) + (jumlahAnorganik * 200) as int)
+            (jumlahOrganik * 150) + (jumlahAnorganik * 200))
       });
       //* Update Transaksi Sampah pada Collection transaksiSampah //
       await transaksiDb.doc(id).update({
@@ -282,7 +278,7 @@ class RequestPengambilanController extends GetxController {
       //* Update Jumlah Poin Warga //
       await usersDb.doc(email).update({
         "poin": FieldValue.increment(
-            (jumlahOrganik * 150) + (jumlahAnorganik * 200) as int)
+            (jumlahOrganik * 150) + (jumlahAnorganik * 200))
       });
       //* Update Transaksi Sampah pada Collection transaksiSampah //
       await transaksiDb.doc(id).update({
@@ -340,7 +336,7 @@ class RequestPengambilanController extends GetxController {
       //* Update Jumlah Poin Warga //
       await usersDb.doc(email).update({
         "poin": FieldValue.increment(
-            (jumlahOrganik * 150) + (jumlahAnorganik * 300) as int)
+            (jumlahOrganik * 150) + (jumlahAnorganik * 300))
       });
       //* Update Transaksi Sampah pada Collection transaksiSampah //
       await transaksiDb.doc(id).update({
@@ -398,7 +394,7 @@ class RequestPengambilanController extends GetxController {
       //* Update Jumlah Poin Warga //
       await usersDb.doc(email).update({
         "poin": FieldValue.increment(
-            (jumlahOrganik * 150) + (jumlahAnorganik * 320) as int)
+            (jumlahOrganik * 150) + (jumlahAnorganik * 320))
       });
       //* Update Transaksi Sampah pada Collection transaksiSampah //
       await transaksiDb.doc(id).update({
@@ -456,7 +452,7 @@ class RequestPengambilanController extends GetxController {
       //* Update Jumlah Poin Warga //
       await usersDb.doc(email).update({
         "poin": FieldValue.increment(
-            (jumlahOrganik * 150) + (jumlahAnorganik * 220) as int)
+            (jumlahOrganik * 150) + (jumlahAnorganik * 220))
       });
       //* Update Transaksi Sampah pada Collection transaksiSampah //
       await transaksiDb.doc(id).update({
