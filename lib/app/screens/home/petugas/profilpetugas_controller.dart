@@ -11,7 +11,6 @@ class ProfilPetugasController extends GetxController {
   //? Text Field Controller //
   TextEditingController emailPetugasC = TextEditingController();
   TextEditingController namaPetugasC = TextEditingController();
-  TextEditingController waPetugasC = TextEditingController();
 
   //? Stream Petugas //
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamPetugas() async* {

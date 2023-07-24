@@ -44,7 +44,6 @@ class _ProfilPetugasState extends State<ProfilPetugas> {
                 Map<String, dynamic> data = snap.data!.data()!;
                 profilPetugasC.emailPetugasC.text = data['email'];
                 profilPetugasC.namaPetugasC.text = data['nama_lengkap'];
-                profilPetugasC.waPetugasC.text = data['no_wa'];
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -91,23 +90,7 @@ class _ProfilPetugasState extends State<ProfilPetugas> {
                           fillColor: colorSecondary,
                           enabledBorder: enableInputBorder,
                           focusedBorder: focusInputBorder),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text("No. WhatsApp", style: appFontHeding3a),
-                    const SizedBox(height: 8),
-                    TextFormField(
-                      controller: profilPetugasC.waPetugasC,
-                      autocorrect: false,
-                      readOnly: true,
-                      style: appFontLabelForm,
-                      cursorColor: colorPrimary,
-                      cursorHeight: 25,
-                      decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: colorSecondary,
-                          enabledBorder: enableInputBorder,
-                          focusedBorder: focusInputBorder),
-                    ),
+                    )
                   ],
                 );
               } else {

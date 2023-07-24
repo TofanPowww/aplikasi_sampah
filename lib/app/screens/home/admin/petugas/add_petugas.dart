@@ -20,7 +20,6 @@ class _AddPetugasState extends State<AddPetugas> {
 
   String pEmail = '';
   String pNama = '';
-  String pWa = '';
   @override
   Widget build(BuildContext context) {
     final pass = ModalRoute.of(context)!.settings.arguments;
@@ -171,36 +170,6 @@ class _AddPetugasState extends State<AddPetugas> {
                                         },
                                         onChanged: (value) => pNama = value,
                                       ),
-                                      const SizedBox(height: 24),
-                                      TextFormField(
-                                        controller: c.wapetugasC,
-                                        style: appFontFormInput,
-                                        cursorColor: colorPrimary,
-                                        cursorHeight: 25,
-                                        autocorrect: false,
-                                        keyboardType: TextInputType.number,
-                                        decoration: const InputDecoration(
-                                            filled: true,
-                                            fillColor: colorSecondary,
-                                            label: Text("No. WhatsApp"),
-                                            labelStyle: appFontLabelForm,
-                                            floatingLabelStyle:
-                                                appFontFormInput,
-                                            focusColor: colorSecondary,
-                                            enabledBorder: enableInputBorder,
-                                            focusedBorder: focusInputBorder,
-                                            errorBorder: errorInputBorder,
-                                            focusedErrorBorder:
-                                                errorInputBorder),
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "No. WhatsApp tidak boleh kosong";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        onChanged: (value) => pEmail = value,
-                                      )
                                     ])),
                             const SizedBox(height: 32),
                             SizedBox(
@@ -221,12 +190,10 @@ class _AddPetugasState extends State<AddPetugas> {
                                                           .trim(),
                                                       c.namapetugasC.text
                                                           .trim(),
-                                                      c.wapetugasC.text.trim(),
                                                       pass.toString())
                                                   .whenComplete(() {
                                                   c.emailpetugasC.clear();
                                                   c.namapetugasC.clear();
-                                                  c.wapetugasC.clear();
                                                 })
                                               : null;
                                     },

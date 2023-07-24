@@ -24,7 +24,6 @@ class AddPetugasController extends GetxController {
   //? Form Controller //
   TextEditingController emailpetugasC = TextEditingController();
   TextEditingController namapetugasC = TextEditingController();
-  TextEditingController wapetugasC = TextEditingController();
 
   //? Dropdown Button //
   var option = ['Petugas'];
@@ -35,7 +34,7 @@ class AddPetugasController extends GetxController {
   toKelolaPetugas() => Get.offAndToNamed(AppLinks.KELOLA_PETUGAS);
 
   //? Function Add Petugas //
-  Future<void> tambahPetugas(String rool, String email, String nama, String wa,
+  Future<void> tambahPetugas(String rool, String email, String nama,
       String passwordAdmin) async {
     String emailAdmin = auth.currentUser!.email!;
     final dbAdmin = await usersDb.doc(auth.currentUser!.email).get();
@@ -50,7 +49,6 @@ class AddPetugasController extends GetxController {
           'rool': rool,
           'email': emailpetugasC.text,
           'nama_lengkap': namapetugasC.text,
-          'no_wa': wapetugasC.text,
           'password': "petugas",
           'uid': uid,
         });
@@ -143,12 +141,6 @@ class AddPetugasController extends GetxController {
                         style: pw.TextStyle(
                             fontSize: 11, fontWeight: pw.FontWeight.normal),
                         textAlign: pw.TextAlign.center)),
-                pw.Padding(
-                    padding: const pw.EdgeInsets.all(8),
-                    child: pw.Text(data.noWa,
-                        style: pw.TextStyle(
-                            fontSize: 11, fontWeight: pw.FontWeight.normal),
-                        textAlign: pw.TextAlign.center)),
               ]);
         });
         return [
@@ -185,13 +177,7 @@ class AddPetugasController extends GetxController {
                           child: pw.Text("Nama Lengkap",
                               style: pw.TextStyle(
                                   fontSize: 12, fontWeight: pw.FontWeight.bold),
-                              textAlign: pw.TextAlign.center)),
-                      pw.Padding(
-                          padding: const pw.EdgeInsets.all(8),
-                          child: pw.Text("No. WhatsApp",
-                              style: pw.TextStyle(
-                                  fontSize: 12, fontWeight: pw.FontWeight.bold),
-                              textAlign: pw.TextAlign.center)),
+                              textAlign: pw.TextAlign.center))
                     ]),
                 ...allPetugas
               ])

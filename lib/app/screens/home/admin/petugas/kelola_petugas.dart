@@ -114,13 +114,7 @@ class _KelolaPetugasState extends State<KelolaPetugas> {
                                             style: appFontFormInput),
                                         const SizedBox(height: 4),
                                         Text(ds['email'],
-                                            style: appFontHeding3b),
-                                        const SizedBox(height: 8),
-                                        const Text("No. WhatsApp",
-                                            style: appFontFormInput),
-                                        const SizedBox(height: 3),
-                                        Text(ds['no_wa'],
-                                            style: appFontHeding3b),
+                                            style: appFontHeding3b)
                                       ],
                                     ),
                                     IconButton(
