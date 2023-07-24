@@ -536,7 +536,7 @@ class TransaksiSampahController extends GetxController {
                                   fontWeight: pw.FontWeight.normal),
                               textAlign: pw.TextAlign.center))),
                   pw.Expanded(
-                      flex: 3,
+                      flex: 4,
                       child: pw.Padding(
                           padding: const pw.EdgeInsets.all(4),
                           child: pw.Text(data.nama,
@@ -554,7 +554,7 @@ class TransaksiSampahController extends GetxController {
                                   fontWeight: pw.FontWeight.normal),
                               textAlign: pw.TextAlign.center))),
                   pw.Expanded(
-                      flex: 3,
+                      flex: 5,
                       child: pw.Padding(
                           padding: const pw.EdgeInsets.all(4),
                           child: pw.Text(data.tanggalKonfirmasi,
@@ -611,7 +611,7 @@ class TransaksiSampahController extends GetxController {
                                   fontWeight: pw.FontWeight.normal),
                               textAlign: pw.TextAlign.center))),
                   pw.Expanded(
-                      flex: 3,
+                      flex: 5,
                       child: pw.Padding(
                           padding: const pw.EdgeInsets.all(4),
                           child: pw.Text(data.keterangan,
@@ -622,9 +622,16 @@ class TransaksiSampahController extends GetxController {
                 ]);
           });
           return [
-            pw.Text("Aplikasi Pickup Sampah Digital",
-                style:
-                    pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)),
+            pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                children: [
+                  pw.Text("Aplikasi Pickup Sampah Digital",
+                      style: pw.TextStyle(
+                          fontSize: 24, fontWeight: pw.FontWeight.bold)),
+                  pw.Text("Tanggal: $hariIni",
+                      style: pw.TextStyle(
+                          fontSize: 12, fontWeight: pw.FontWeight.bold))
+                ]),
             pw.SizedBox(height: 8),
             pw.Text("Daftar Transaksi Sampah",
                 style: pw.TextStyle(
@@ -726,7 +733,27 @@ class TransaksiSampahController extends GetxController {
         }));
     //*Print PDF
     await Printing.layoutPdf(
-        name: 'Transaksi_Sampah',
+        name: status == "Semua" && waktu == "Semua"
+            ? 'Transaksi_Sampah_Semua_Status'
+            : status == "Diterima" && waktu == "Semua"
+                ? 'Transaksi_Sampah_Diterima'
+                : status == "Ditolak" && waktu == "Semua"
+                    ? 'Transaksi_Sampah_Ditolak'
+                    : status == "Semua" && waktu == "Hari ini"
+                        ? 'Transaksi_Sampah_Hari_Ini'
+                        : status == "Diterima" && waktu == "Hari ini"
+                            ? 'Transaksi_Sampah_Diterima_Hari_Ini'
+                            : status == "Ditolak" && waktu == "Hari ini"
+                                ? 'Transaksi_Sampah_Ditolak_Hari_Ini'
+                                : status == "Semua" &&
+                                        (waktu != "Semua" ||
+                                            waktu != "Hari ini")
+                                    ? 'Transaksi_Sampah_Bulan_$waktu'
+                                    : status == "Diterima" &&
+                                            (waktu != "Semua" ||
+                                                waktu != "Hari ini")
+                                        ? 'Transaksi_Sampah_Diterima_Bulan_$waktu'
+                                        : 'Transaksi_Sampah_Ditolak_Bulan_$waktu',
         onLayout: (PdfPageFormat format) async => pdf.save());
   }
 }

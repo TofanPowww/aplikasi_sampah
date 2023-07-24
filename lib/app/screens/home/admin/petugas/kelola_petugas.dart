@@ -83,7 +83,7 @@ class _KelolaPetugasState extends State<KelolaPetugas> {
                           itemBuilder: (context, index) {
                             DocumentSnapshot ds = snapshot.data!.docs[index];
                             return Container(
-                              height: 200,
+                              height: 150,
                               width: Get.width,
                               margin: const EdgeInsets.only(bottom: 16),
                               decoration: BoxDecoration(

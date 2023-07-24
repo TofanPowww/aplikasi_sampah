@@ -7,6 +7,7 @@ import 'package:aplikasi_sampah/routes/links.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -31,6 +32,9 @@ class ProdukController extends GetxController {
   //?Route//
   toKelolaP() => Get.offAndToNamed(AppLinks.KELOLA_PRODUK);
   toTambahProduk() => Get.toNamed(AppLinks.TAMBAH_PRODUK);
+
+  String hariIni =
+      DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now());
 
   //?Function Add Produk//
   Future<void> tambahProduk(
@@ -102,13 +106,13 @@ class ProdukController extends GetxController {
   void downloadProduk() async {
     final pdf = pw.Document();
 
-    //Mengambil Data dari firebase
+    //*Mengambil Data dari firebase
     var getDataProduk = await db.collection('produk').get();
 
-    //reset all produk -> untuk mengatasi duplikat
+    //*reset all produk -> untuk mengatasi duplikat
     allDataProduk([]);
 
-    //Memasukkan data ke Model
+    //*Memasukkan data ke Model
     for (var element in getDataProduk.docs) {
       allDataProduk.add(ProdukModel.fromJson(element.data()));
     }
@@ -156,6 +160,10 @@ class ProdukController extends GetxController {
             pw.Text("Katalog Produk BumDes",
                 style: pw.TextStyle(
                     fontSize: 20, fontWeight: pw.FontWeight.normal)),
+            pw.SizedBox(height: 8),
+            pw.Text("Tanggal: $hariIni",
+                style: pw.TextStyle(
+                    fontSize: 12, fontWeight: pw.FontWeight.normal)),
             pw.SizedBox(height: 32),
             pw.Table(
                 border: pw.TableBorder.all(width: 1.5, color: PdfColors.black),
@@ -199,21 +207,7 @@ class ProdukController extends GetxController {
           ];
         }));
 
-    //Simpan
-    // Uint8List bytes = await pdf.save();
-
-    //Buat File Kosong
-    // final dir = await getTemporaryDirectory();
-    // final file = File('${dir.path}/mydocument.pdf');
-    // await file.writeAsBytes(await pdf.save());
-
-    //Memasukkan data PDF ke File
-    // await file.writeAsBytes(bytes);
-
-    //Open PDF
-    // await OpenFile.open(file.path);
-
-    //Print PDF
+    //*Print PDF
     await Printing.layoutPdf(
         name: 'Katalog_Produk',
         onLayout: (PdfPageFormat format) async => pdf.save());

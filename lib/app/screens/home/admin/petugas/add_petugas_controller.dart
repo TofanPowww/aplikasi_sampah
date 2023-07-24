@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -30,12 +31,15 @@ class AddPetugasController extends GetxController {
   var currentItemSelected = "Petugas";
   var rool = "Petugas";
 
-  //Route//
+  //?Route//
   toKelolaPetugas() => Get.offAndToNamed(AppLinks.KELOLA_PETUGAS);
 
+  String hariIni =
+      DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now());
+
   //? Function Add Petugas //
-  Future<void> tambahPetugas(String rool, String email, String nama,
-      String passwordAdmin) async {
+  Future<void> tambahPetugas(
+      String rool, String email, String nama, String passwordAdmin) async {
     String emailAdmin = auth.currentUser!.email!;
     final dbAdmin = await usersDb.doc(auth.currentUser!.email).get();
     isLoading.value = true;
@@ -151,6 +155,10 @@ class AddPetugasController extends GetxController {
           pw.Text("Daftar Petugas Sampah Aktif",
               style:
                   pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.normal)),
+          pw.SizedBox(height: 8),
+          pw.Text("Tanggal: $hariIni",
+              style:
+                  pw.TextStyle(fontSize: 12, fontWeight: pw.FontWeight.normal)),
           pw.SizedBox(height: 32),
           pw.Table(
               border: pw.TableBorder.all(width: 1.5, color: PdfColors.black),

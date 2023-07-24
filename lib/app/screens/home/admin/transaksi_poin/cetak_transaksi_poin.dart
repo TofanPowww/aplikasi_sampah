@@ -113,7 +113,7 @@ class _CetakTransaksiPoinState extends State<CetakTransaksiPoin> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Waktu Transaksi",
+                          const Text("Bulan Transaksi",
                               style: appFontLabelForm),
                           Row(
                               crossAxisAlignment: CrossAxisAlignment.start,

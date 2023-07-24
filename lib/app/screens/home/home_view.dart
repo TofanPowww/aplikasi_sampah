@@ -73,10 +73,7 @@ class _HomeViewState extends State<HomeView> {
                                   const Text("Selamat Datang,",
                                       style: appFontHeding3),
                                   Text(
-                                    // dataUser['nama_lengkap'],
-                                    // arg['nama_lengkap'],
                                     snapshot.data!.data()!['nama_lengkap'],
-                                    // "${authC.user.value.namaLengkap}",
                                     style: appFontHeding1,
                                   ),
                                   const SizedBox(height: 24),

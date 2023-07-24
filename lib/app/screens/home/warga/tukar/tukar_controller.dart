@@ -227,9 +227,7 @@ class TukarController extends GetxController {
           tag: "kodeAktif",
           inputData: <String, dynamic>{'email': email, 'idTransaksi': id},
           initialDelay: const Duration(seconds: 20),
-          constraints: Constraints(networkType: NetworkType.connected),
-          existingWorkPolicy: ExistingWorkPolicy.append);
-
+          constraints: Constraints(networkType: NetworkType.connected));
       Get.back();
       Get.snackbar(
           "Penukaran Berhasil", "Silahkan cek di halaman Riwayat Penukaran",
