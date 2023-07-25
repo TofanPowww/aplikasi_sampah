@@ -16,6 +16,7 @@ class DetailRequestView extends StatefulWidget {
 class _DetailRequestVieqState extends State<DetailRequestView> {
   RxBool isLoading = false.obs;
   int value = 0;
+  int value2 = 0;
   String? status;
   final RequestPengambilanController kirimC =
       Get.put(RequestPengambilanController());
@@ -39,6 +40,29 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
               fontFamily: "Satoshi",
               fontWeight:
                   (value == index) ? FontWeight.w700 : FontWeight.w500)),
+    );
+  }
+
+  Widget customRadioButton2(String text, int index) {
+    return OutlinedButton(
+      style: ButtonStyle(
+          shape: MaterialStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+          side: MaterialStatePropertyAll(BorderSide(
+            color: (value2 == index) ? colorPrimary : colorGray,
+            width: (value2 == index) ? 1.7 : 1,
+          ))),
+      onPressed: () {
+        setState(() {
+          value2 = index;
+        });
+      },
+      child: Text(text,
+          style: TextStyle(
+              color: (value2 == index) ? colorPrimary : colorGray,
+              fontFamily: "Satoshi",
+              fontWeight:
+                  (value2 == index) ? FontWeight.w700 : FontWeight.w500)),
     );
   }
 
@@ -148,7 +172,11 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
               decoration: boxDecorationInput,
               padding: const EdgeInsets.all(16),
               width: double.infinity,
-              height: status == "Ditolak" ? 250 : 330,
+              height: status == "Ditolak"
+                  ? 250
+                  : value == 1 || value == 2 || value == 3 || value == 4
+                      ? 520
+                      : 400,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -205,8 +233,6 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                             Expanded(child: customRadioButton("Plastik", 1)),
                             const SizedBox(width: 4),
                             Expanded(child: customRadioButton("Kertas", 2)),
-                            const SizedBox(width: 4),
-                            Expanded(child: customRadioButton("Logam", 3)),
                           ],
                         ),
                   status == "Ditolak"
@@ -214,16 +240,130 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                       : Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Expanded(child: customRadioButton("Besi", 4)),
+                            Expanded(child: customRadioButton("Logam", 3)),
                             const SizedBox(width: 4),
-                            Expanded(child: customRadioButton("Botol Kaca", 5)),
+                            Expanded(child: customRadioButton("Kaca", 4)),
+                          ],
+                        ),
+                  status == "Ditolak"
+                      ? const SizedBox()
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(child: customRadioButton("Campuran", 5)),
                             const SizedBox(width: 4),
-                            Expanded(child: customRadioButton("Tidak Ada", 6))
+                            Expanded(child: customRadioButton("Tidak Ada", 6)),
                           ],
                         ),
                   const SizedBox(height: 4),
+                  value == 1
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Jenis Plastik",
+                                style: appFontFormInput),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
+                                    child: customRadioButton2(
+                                        "Plastik Kemasan", 1)),
+                                const SizedBox(width: 4),
+                                Expanded(
+                                    child:
+                                        customRadioButton2("Plastik Kresek", 2))
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
+                                    flex: 1,
+                                    child:
+                                        customRadioButton2("Gelas/Botol", 3)),
+                                const SizedBox(width: 4),
+                                Expanded(
+                                    flex: 1,
+                                    child:
+                                        customRadioButton2("Plastik Minum", 4)),
+                              ],
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
+                  value == 2
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Jenis Kertas", style: appFontFormInput),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(child: customRadioButton2("Arsip", 5)),
+                                const SizedBox(width: 4),
+                                Expanded(child: customRadioButton2("Koran", 6))
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
+                                    child: customRadioButton2("Kardus", 7)),
+                                const SizedBox(width: 4),
+                                Expanded(
+                                    child:
+                                        customRadioButton2("Kertas Campur", 8)),
+                              ],
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
+                  value == 3
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Jenis Logam", style: appFontFormInput),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(child: customRadioButton2("Seng", 9)),
+                                const SizedBox(width: 4),
+                                Expanded(child: customRadioButton2("Besi", 10))
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
+                                    child: customRadioButton2("Aluminium", 11)),
+                                const SizedBox(width: 4),
+                                Expanded(
+                                    child: customRadioButton2("Tembaga", 12)),
+                              ],
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
+                  value == 4
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Jenis Kaca", style: appFontFormInput),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
+                                    child: customRadioButton2("Beling", 13)),
+                                const SizedBox(width: 4),
+                                Expanded(
+                                    child: customRadioButton2("Botol Kaca", 14))
+                              ],
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
                   Expanded(
-                      child: status == "Ditolak" && value == 6
+                      child: value == 6 || status == "Ditolak"
                           ? TextFormField(
                               readOnly: true,
                               controller: jmlhAnorganik,
@@ -330,20 +470,20 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                     onPressed: () {
                       kirimC.isLoading.value
                           ? null
-                          : status == ""
+                          : status == "" || status == "Menunggu"
                               ? Get.snackbar("Gagal", "Tentukan status transaksi",
                                   backgroundColor: appDanger,
                                   snackPosition: SnackPosition.TOP,
                                   margin: const EdgeInsets.only(
                                       bottom: 10, right: 10, left: 10))
-                              : value == 0
+                              : value == 7 && status == "Diterima"
                                   ? Get.snackbar(
                                       "Gagal", "Tentukan jenis sampah Anorganik",
                                       backgroundColor: appDanger,
                                       snackPosition: SnackPosition.TOP,
                                       margin: const EdgeInsets.only(
                                           bottom: 10, right: 10, left: 10))
-                                  : value == 7
+                                  : value == 7 && status == "Ditolak"
                                       ? kirimC.updateTransaksi(
                                           request['id'].toString(),
                                           request['email'].toString(),
@@ -362,11 +502,13 @@ class _DetailRequestVieqState extends State<DetailRequestView> {
                                               double.parse(kirimC
                                                   .jumlahOrganikC.text
                                                   .trim()),
-                                              double.parse(kirimC.jumlahAnorganikC.text.trim()),
+                                              double.parse(jmlhAnorganik.text.trim()),
                                               status!.trim(),
                                               ket.text.trim(),
                                               0)
-                                          : kirimC.updateTransaksi(request['id'].toString(), request['email'].toString(), request['tgl'].toString(), double.parse(kirimC.jumlahOrganikC.text.trim()), double.parse(kirimC.jumlahAnorganikC.text.trim()), status!.trim(), ket.text.trim(), value);
+                                          : value == 5
+                                              ? kirimC.updateTransaksi(request['id'].toString(), request['email'].toString(), request['tgl'].toString(), double.parse(kirimC.jumlahOrganikC.text.trim()), double.parse(kirimC.jumlahAnorganikC.text.trim()), status!.trim(), ket.text.trim(), 15)
+                                              : kirimC.updateTransaksi(request['id'].toString(), request['email'].toString(), request['tgl'].toString(), double.parse(kirimC.jumlahOrganikC.text.trim()), double.parse(kirimC.jumlahAnorganikC.text.trim()), status!.trim(), ket.text.trim(), value2);
                     },
                     style: btnStylePrimary,
                     child: status == "Ditolak"

@@ -115,9 +115,9 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
                       decoration: boxDecorationInput,
                       padding: const EdgeInsets.all(16),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text("Jumlah Organik", style: appFontFormInput),
+                          const Text("Organik", style: appFontFormInput),
                           const SizedBox(height: 4),
                           allData['jumlahOrganik'] == 0
                               ? const Text("-", style: appFontHeding2)
@@ -132,9 +132,9 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
                       decoration: boxDecorationInput,
                       padding: const EdgeInsets.all(16),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text("Jumlah Anorganik",
+                          const Text("Anorganik",
                               style: appFontFormInput),
                           const SizedBox(height: 4),
                           allData['jumlahAnorganik'] == 0
@@ -146,6 +146,22 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
                 ),
               ],
             ),
+            const SizedBox(height: 8),
+            Container(
+                decoration: boxDecorationInput,
+                padding: const EdgeInsets.all(16),
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Jenis Sampah Anorganik", style: appFontFormInput),
+                    const SizedBox(height: 4),
+                    allData['jenisAnorganik'] == "-"
+                        ? const Text("-", style: appFontHeding2)
+                        : Text(allData['jenisAnorganik'],
+                            style: appFontHeding2)
+                  ],
+                )),
             const SizedBox(height: 8),
             Container(
                 decoration: boxDecorationInput,
