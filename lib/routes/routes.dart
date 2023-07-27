@@ -45,10 +45,6 @@ class AppRoutes {
       name: AppLinks.TUKAR_POIN_HISTORY,
       page: () => const RiwayatTukarView(),
     ),
-    // GetPage(
-    //   name: AppLinks.TUKAR_POIN_PRODUK,
-    //   page: () => const DetailProdukView(poinW: null,),
-    // ),
     GetPage(
       name: AppLinks.TUKAR_POIN_DETAIL,
       page: () => const DetailPenukaranView(),

@@ -36,15 +36,6 @@ class ProfilWargaController extends GetxController {
         rwC.text.isNotEmpty &&
         waC.text.isNotEmpty) {
       try {
-        // if (imageProfil != null) {
-        //   File file = File(imageProfil!.path);
-        //   await media
-        //       .ref('foto_profil_user/imaegP_$email.$extImageProfil')
-        //       .putFile(file);
-        //   String imageUrl = await media
-        //       .ref('foto_profil_user/imageP_$email.$extImageProfil')
-        //       .getDownloadURL();
-        // }
         await db.collection('users').doc(email).update({
           'nama_lengkap': namaC.text,
           'rt': rtC.text,

@@ -14,21 +14,6 @@ const testTask = "Test";
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
-    // try {
-    //   if (task == testTask) {
-    //     print("$testTask was executed.");
-    //     String emailuy = inputData!['email'];
-    //     String iduy = inputData['idTest'];
-    //     print("Email = $emailuy");
-    //     print("ID = $iduy");
-    //     await Firebase.initializeApp();
-    //     await initializeDateFormatting('id_ID', null)
-    //         .then((_) => ProfilController().coba(emailuy));
-    //   }
-    // } catch (e) {
-    //   debugPrint('$callbackDispatcher error: $e');
-    // }
-    // return Future.value(true);
     switch (task) {
       case taskActive:
         print("$taskActive was executed. inputData = $inputData");
