@@ -75,8 +75,7 @@ class _TukarPoinView extends State<TukarPoinView> {
                                       fontFamily: "Satoshi",
                                       fontWeight: FontWeight.w500,
                                       color: colorPrimary)),
-                              Text(
-                                  poin["poin"].toString(),
+                              Text(poin["poin"].toStringAsFixed(0),
                                   style: const TextStyle(
                                       fontSize: 24,
                                       fontFamily: "Satoshi",
