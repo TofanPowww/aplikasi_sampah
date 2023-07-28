@@ -136,7 +136,7 @@ class _HomeViewState extends State<HomeView> {
                                                 Text(
                                                   snapshot.data!
                                                       .data()!['poin']
-                                                      .toString(),
+                                                      .toStringAsFixed(0),
                                                   style: appFontTitle,
                                                 ),
                                                 const SizedBox(height: 4),

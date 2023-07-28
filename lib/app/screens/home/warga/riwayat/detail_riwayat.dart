@@ -122,23 +122,27 @@ class _DetailRiwayatViewState extends State<DetailRiwayatView> {
                 ],
               ),
               const SizedBox(height: 8),
-              Container(
-                  decoration: boxDecorationInput,
-                  padding: const EdgeInsets.all(16),
-                  width: double.infinity,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text("Jenis Sampah Anorganik",
-                          style: appFontFormInput),
-                      const SizedBox(height: 4),
-                      allData['jenisAnorganik'] == "-"
-                          ? const Text("-", style: appFontHeding2)
-                          : Text(allData['jenisAnorganik'],
-                              style: appFontHeding2)
-                    ],
-                  )),
-              const SizedBox(height: 8),
+              allData['status'] == 'Menunggu'
+                  ? const SizedBox()
+                  : Container(
+                      decoration: boxDecorationInput,
+                      padding: const EdgeInsets.all(16),
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("Jenis Sampah Anorganik",
+                              style: appFontFormInput),
+                          const SizedBox(height: 4),
+                          allData['jenisAnorganik'] == "-"
+                              ? const Text("-", style: appFontHeding2)
+                              : Text(allData['jenisAnorganik'],
+                                  style: appFontHeding2)
+                        ],
+                      )),
+              allData['status'] == 'Menunggu'
+                  ? const SizedBox()
+                  : const SizedBox(height: 8),
               Container(
                   decoration: boxDecorationInput,
                   padding: const EdgeInsets.all(16),
