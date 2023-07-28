@@ -93,7 +93,8 @@ class _DetailRiwayatViewState extends State<DetailRiwayatView> {
                             const SizedBox(height: 4),
                             allData['jumlahOrganik'] == 0
                                 ? const Text("-", style: appFontHeding2)
-                                : Text(allData['jumlahOrganik'].toString(),
+                                : Text(
+                                    allData['jumlahOrganik'].toStringAsFixed(1),
                                     style: appFontHeding2)
                           ],
                         )),
@@ -111,7 +112,9 @@ class _DetailRiwayatViewState extends State<DetailRiwayatView> {
                             const SizedBox(height: 4),
                             allData['jumlahAnorganik'] == 0
                                 ? const Text("-", style: appFontHeding2)
-                                : Text(allData['jumlahAnorganik'].toString(),
+                                : Text(
+                                    allData['jumlahAnorganik']
+                                        .toStringAsFixed(1),
                                     style: appFontHeding2)
                           ],
                         )),

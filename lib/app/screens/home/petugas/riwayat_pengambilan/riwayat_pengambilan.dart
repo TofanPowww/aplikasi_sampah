@@ -128,7 +128,7 @@ class RiwayatPengambilan extends GetView<RiwayatPengambilanController> {
                                                             width: 8),
                                                         Text(
                                                             data['jumlahOrganik']
-                                                                .toString(),
+                                                                .toStringAsFixed(1),
                                                             style:
                                                                 appFontHeding3b),
                                                       ],
@@ -161,7 +161,7 @@ class RiwayatPengambilan extends GetView<RiwayatPengambilanController> {
                                                             width: 8),
                                                         Text(
                                                             data['jumlahAnorganik']
-                                                                .toString(),
+                                                                .toStringAsFixed(1),
                                                             style:
                                                                 appFontHeding3b),
                                                       ],

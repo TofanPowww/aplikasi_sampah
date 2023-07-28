@@ -121,7 +121,8 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
                           const SizedBox(height: 4),
                           allData['jumlahOrganik'] == 0
                               ? const Text("-", style: appFontHeding2)
-                              : Text(allData['jumlahOrganik'].toString(),
+                              : Text(
+                                  allData['jumlahOrganik'].toStringAsFixed(1),
                                   style: appFontHeding2)
                         ],
                       )),
@@ -134,12 +135,11 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text("Anorganik",
-                              style: appFontFormInput),
+                          const Text("Anorganik", style: appFontFormInput),
                           const SizedBox(height: 4),
                           allData['jumlahAnorganik'] == 0
                               ? const Text("-", style: appFontHeding2)
-                              : Text(allData['jumlahAnorganik'].toString(),
+                              : Text(allData['jumlahAnorganik'].toStringAsFixed(1),
                                   style: appFontHeding2)
                         ],
                       )),
@@ -154,12 +154,12 @@ class _DetailTransaksiSampahState extends State<DetailTransaksiSampah> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Jenis Sampah Anorganik", style: appFontFormInput),
+                    const Text("Jenis Sampah Anorganik",
+                        style: appFontFormInput),
                     const SizedBox(height: 4),
                     allData['jenisAnorganik'] == "-"
                         ? const Text("-", style: appFontHeding2)
-                        : Text(allData['jenisAnorganik'],
-                            style: appFontHeding2)
+                        : Text(allData['jenisAnorganik'], style: appFontHeding2)
                   ],
                 )),
             const SizedBox(height: 8),

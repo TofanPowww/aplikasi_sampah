@@ -156,7 +156,7 @@ class _TransaksiSampahViewState extends State<TransaksiSampahView> {
                                                   const SizedBox(height: 4),
                                                   Text(
                                                       data['jumlahOrganik']
-                                                          .toString(),
+                                                          .toStringAsFixed(1),
                                                       style: appFontHeding3b),
                                                 ],
                                               ),
@@ -172,7 +172,7 @@ class _TransaksiSampahViewState extends State<TransaksiSampahView> {
                                                   const SizedBox(height: 4),
                                                   Text(
                                                       data['jumlahAnorganik']
-                                                          .toString(),
+                                                          .toStringAsFixed(1),
                                                       style: appFontHeding3b),
                                                 ],
                                               )

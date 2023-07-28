@@ -576,7 +576,7 @@ class TransaksiSampahController extends GetxController {
                       flex: 3,
                       child: pw.Padding(
                           padding: const pw.EdgeInsets.all(4),
-                          child: pw.Text((data.jumlahOrganik + 0.0).toString(),
+                          child: pw.Text((data.jumlahOrganik).toStringAsFixed(1),
                               style: pw.TextStyle(
                                   fontSize: 11,
                                   fontWeight: pw.FontWeight.normal),
@@ -586,7 +586,7 @@ class TransaksiSampahController extends GetxController {
                       child: pw.Padding(
                           padding: const pw.EdgeInsets.all(4),
                           child: pw.Text(
-                              (data.jumlahAnorganik + 0.0).toString(),
+                              (data.jumlahAnorganik).toStringAsFixed(1),
                               style: pw.TextStyle(
                                   fontSize: 11,
                                   fontWeight: pw.FontWeight.normal),

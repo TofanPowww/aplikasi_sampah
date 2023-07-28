@@ -3,6 +3,7 @@ import 'package:aplikasi_sampah/app/constant/fontStyle.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../../constant/color.dart';
 import '../../../constant/style.dart';
@@ -183,7 +184,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 16),
                           Center(
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Fluttertoast.showToast(
+                                    msg: "Under Maintenance");
+                              },
                               child: const Text("Lupa Password?",
                                   style: appFontButtonText),
                             ),

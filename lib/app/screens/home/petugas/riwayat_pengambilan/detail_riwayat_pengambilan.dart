@@ -109,7 +109,7 @@ class _DetailPengambilanViewState extends State<DetailPengambilanView> {
                           const SizedBox(height: 4),
                           allData['jumlahOrganik'] == 0.0
                               ? const Text("-", style: appFontHeding2)
-                              : Text(allData['jumlahOrganik'].toString(),
+                              : Text(allData['jumlahOrganik'].toStringAsFixed(1),
                                   style: appFontHeding2)
                         ],
                       )),
@@ -127,7 +127,7 @@ class _DetailPengambilanViewState extends State<DetailPengambilanView> {
                           const SizedBox(height: 4),
                           allData['jumlahAnorganik'] == 0.0
                               ? const Text("-", style: appFontHeding2)
-                              : Text(allData['jumlahAnorganik'].toString(),
+                              : Text(allData['jumlahAnorganik'].toStringAsFixed(1),
                                   style: appFontHeding2)
                         ],
                       )),
