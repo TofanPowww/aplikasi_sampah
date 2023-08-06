@@ -203,7 +203,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": 0.0,
-        "poin": jumlahOrganik * 100,
+        "poin": (jumlahOrganik * 100).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "-",
         "tanggalKonfirmasi":
@@ -220,7 +220,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": 0.0,
-        "poin": jumlahOrganik * 100,
+        "poin": (jumlahOrganik * 100).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "-",
         "tanggalKonfirmasi":
@@ -260,7 +260,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 400),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 400)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Plastik Kemasan",
         "tanggalKonfirmasi":
@@ -279,7 +279,7 @@ class RequestPengambilanController extends GetxController {
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
         "jenisAnorganik": "Plastik Kemasan",
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 400),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 400)).toInt(),
         "keterangan": keterangan,
         "tanggalKonfirmasi":
             DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
@@ -318,7 +318,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 500),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 500)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Plastik Kresek",
         "tanggalKonfirmasi":
@@ -337,7 +337,7 @@ class RequestPengambilanController extends GetxController {
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
         "jenisAnorganik": "Plastik Kresek",
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 500),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 500)).toInt(),
         "keterangan": keterangan,
         "tanggalKonfirmasi":
             DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
@@ -376,7 +376,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 4000),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 4000)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Gelas/Botol",
         "tanggalKonfirmasi":
@@ -395,7 +395,7 @@ class RequestPengambilanController extends GetxController {
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
         "jenisAnorganik": "Gelas/Botol",
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 4000),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 4000)).toInt(),
         "keterangan": keterangan,
         "tanggalKonfirmasi":
             DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
@@ -434,7 +434,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1500),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1500)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Plastik Minuman Campur",
         "tanggalKonfirmasi":
@@ -453,7 +453,7 @@ class RequestPengambilanController extends GetxController {
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
         "jenisAnorganik": "Plastik Minuman Campur",
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1500),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1500)).toInt(),
         "keterangan": keterangan,
         "tanggalKonfirmasi":
             DateFormat("EEEE, dd MMMM yyyy", "id_ID").format(DateTime.now()),
@@ -492,7 +492,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1800),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1800)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Kertas Arsip",
         "tanggalKonfirmasi":
@@ -510,7 +510,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1800),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1800)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Kertas Arsip",
         "tanggalKonfirmasi":
@@ -550,7 +550,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1000),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1000)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Kertas Koran",
         "tanggalKonfirmasi":
@@ -568,7 +568,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1000),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1000)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Kertas Koran",
         "tanggalKonfirmasi":
@@ -608,7 +608,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1200),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1200)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Kardus",
         "tanggalKonfirmasi":
@@ -626,7 +626,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1200),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1200)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Kardus",
         "tanggalKonfirmasi":
@@ -666,7 +666,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 450),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 450)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Kertas Campur",
         "tanggalKonfirmasi":
@@ -684,7 +684,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 450),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 450)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Kertas Campur",
         "tanggalKonfirmasi":
@@ -724,7 +724,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1800),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1800)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Seng",
         "tanggalKonfirmasi":
@@ -742,7 +742,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 1800),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 1800)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Seng",
         "tanggalKonfirmasi":
@@ -782,7 +782,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 2500),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 2500)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Besi",
         "tanggalKonfirmasi":
@@ -800,7 +800,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 2500),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 2500)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Besi",
         "tanggalKonfirmasi":
@@ -840,7 +840,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 10000),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 10000)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Aluminium",
         "tanggalKonfirmasi":
@@ -858,7 +858,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 10000),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 10000)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Aluminium",
         "tanggalKonfirmasi":
@@ -898,7 +898,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 40000),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 40000)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Tembaga",
         "tanggalKonfirmasi":
@@ -916,7 +916,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 40000),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 40000)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Tembaga",
         "tanggalKonfirmasi":
@@ -956,7 +956,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 500),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 500)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Botol Kaca",
         "tanggalKonfirmasi":
@@ -974,7 +974,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 500),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 500)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Botol Kaca",
         "tanggalKonfirmasi":
@@ -1014,7 +1014,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 250),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 250)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Beling",
         "tanggalKonfirmasi":
@@ -1032,7 +1032,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 250),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 250)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Beling",
         "tanggalKonfirmasi":
@@ -1072,7 +1072,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 250),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 250)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Sampah Campuran",
         "tanggalKonfirmasi":
@@ -1090,7 +1090,7 @@ class RequestPengambilanController extends GetxController {
         "status": status,
         "jumlahOrganik": jumlahOrganik + 0.0,
         "jumlahAnorganik": jumlahAnorganik + 0.0,
-        "poin": (jumlahOrganik * 100) + (jumlahAnorganik * 250),
+        "poin": ((jumlahOrganik * 100) + (jumlahAnorganik * 250)).toInt(),
         "keterangan": keterangan,
         "jenisAnorganik": "Sampah Campuran",
         "tanggalKonfirmasi":
