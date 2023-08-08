@@ -14,7 +14,7 @@ import 'package:printing/printing.dart';
 
 class ProdukController extends GetxController {
   var isLoading = false.obs;
-  //?Form Controller Edit Produk//
+
   TextEditingController namaProdukC = TextEditingController();
   TextEditingController desProdukC = TextEditingController();
   TextEditingController poinProdukC = TextEditingController();

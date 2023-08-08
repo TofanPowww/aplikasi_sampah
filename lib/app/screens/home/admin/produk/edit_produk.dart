@@ -18,6 +18,7 @@ class EditProdukView extends StatefulWidget {
 class _EditProdukViewState extends State<EditProdukView> {
   RxBool isLoading = false.obs;
   final ProdukController produkC = Get.put(ProdukController());
+
   @override
   Widget build(BuildContext context) {
     final produkData = Get.arguments as Map<String, dynamic>;
@@ -97,10 +98,8 @@ class _EditProdukViewState extends State<EditProdukView> {
                       onPressed: () {
                         produkC.isLoading.value
                             ? null
-                            : produkC
-                                .updateProduk(produkData['produk_id'])
-                                .toString()
-                                .trim();
+                            : produkC.updateProduk(
+                                produkData['produk_id'].toString().trim());
                       },
                       style: btnStylePrimary,
                       child: produkC.isLoading.value
