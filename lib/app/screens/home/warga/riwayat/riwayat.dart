@@ -171,8 +171,10 @@ class _RiwayatViewState extends State<RiwayatView> {
                                 data['status'] == 'Ditolak'
                                     ? Text(data['status'],
                                         style: appFontHeding3c)
-                                    : Text(data['status'],
-                                        style: appFontHeding3b)
+                                    : data['status'] == 'Diterima'
+                                        ? Text(data['status'],
+                                            style: appFontHeding3b)
+                                        : const SizedBox()
                               ],
                             ),
                           ),
