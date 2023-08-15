@@ -275,8 +275,9 @@ class _KirimSampahViewState extends State<KirimSampahView> {
                               DateTime? pickedDate = await showDatePicker(
                                 context: context,
                                 initialDate: DateTime.now(),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2050),
+                                firstDate: DateTime.now(),
+                                lastDate:
+                                    DateTime.now().add(const Duration(days: 3)),
                               );
                               if (pickedDate != null) {
                                 String formattedDate =

@@ -37,6 +37,13 @@ final btnStyleAccent = ButtonStyle(
     shape: MaterialStatePropertyAll(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))));
 
+final btnStyleOutline = ButtonStyle(
+    backgroundColor: const MaterialStatePropertyAll(colorBackground),
+    side: const MaterialStatePropertyAll(
+        BorderSide(width: 1.5, color: colorPrimary)),
+    shape: MaterialStatePropertyAll(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))));
+
 final boxDecoration = BoxDecoration(
   boxShadow: [
     BoxShadow(

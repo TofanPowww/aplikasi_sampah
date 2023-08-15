@@ -16,6 +16,8 @@ class KirimController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
 
+  
+
   //? TextField Controller //
   final formKey = GlobalKey<FormState>();
   final AuthController authC = Get.put(AuthController());

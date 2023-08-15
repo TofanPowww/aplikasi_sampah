@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../service/notification.dart';
 import '../../../../constant/color.dart';
 import '../../../../data/models/users_model.dart';
 import '../../../../../service/authentication.dart';
@@ -39,101 +40,106 @@ class RequestPengambilanController extends GetxController {
       String status,
       String keterangan,
       int v) async {
-    isLoading.value = true;
+    // isLoading.value = true;
     final petugas = await usersDb.doc(auth.currentUser!.email).get();
+    final warga = await usersDb.doc(email).get();
+
     String namaPetugas = petugas.get("nama_lengkap");
+    String tokenWarga = warga.get('token');
     //? Transaksi ditolak
-    if (status == "Ditolak") {
-      print(status);
-      ditolak(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
+    if (status == "Ditolak" && v == 16) {
+      print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
+      await ditolak(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
           keterangan, v, namaPetugas);
+      FirebaseApi().sendPushMessage(tokenWarga, 'Permintaan Ditolak',
+          'Maaf petugas tidak bisa mengambil sampah');
     }
     //? Jumlah Anorganik 0
     if (status == "Diterima") {
       if (v == 0) {
-        print("Anorganik 0");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         organikSaja(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 1) {
-        print("Plastik Kemasan");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         plastikKemasan(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 2) {
-        print("Plastik Kresek ");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         plastikKresek(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 3) {
-        print("Gelas/Botol");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         gelasBotol(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 4) {
-        print("Plastik Minuman Campur");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         plastikMinum(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 5) {
-        print("Arsip");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         arsip(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 6) {
-        print("Koran");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         koran(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 7) {
-        print("Kardus");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         kardus(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 8) {
-        print("Kertas Campur");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         kertasCampur(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 9) {
-        print("Seng");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         seng(id, email, tgl, jumlahOrganik, jumlahAnorganik, status, keterangan,
             v, namaPetugas);
       }
       if (v == 10) {
-        print("Besi");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         besi(id, email, tgl, jumlahOrganik, jumlahAnorganik, status, keterangan,
             v, namaPetugas);
       }
       if (v == 11) {
-        print("Aluminium");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         alumini(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 12) {
-        print("Tembaga");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         tembaga(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 13) {
-        print("Beling");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         beling(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 14) {
-        print("Botol Kaca");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         botolKaca(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
       if (v == 15) {
-        print("Campuran");
+        print("Data: $status, $keterangan, $jumlahOrganik, $jumlahAnorganik");
         campuran(id, email, tgl, jumlahOrganik, jumlahAnorganik, status,
             keterangan, v, namaPetugas);
       }
     }
   }
 
-  void ditolak(
+  Future<void> ditolak(
       String id,
       String email,
       String tgl,
@@ -171,14 +177,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -228,14 +234,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -286,14 +292,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -344,14 +350,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -402,14 +408,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -460,14 +466,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -518,14 +524,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -576,14 +582,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -634,14 +640,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -692,14 +698,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -750,14 +756,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -808,14 +814,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -866,14 +872,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -924,14 +930,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -982,14 +988,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -1040,14 +1046,14 @@ class RequestPengambilanController extends GetxController {
         "confirmTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
         "bulan": DateFormat("MMMM", "id_ID").format(DateTime.now())
       });
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.back();
       Get.snackbar("Berhasil", "Transaksi Selesai",
           backgroundColor: appSuccess,
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
@@ -1105,7 +1111,7 @@ class RequestPengambilanController extends GetxController {
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10));
     } catch (e) {
-      isLoading.value = false;
+      // isLoading.value = false;
       Get.snackbar("Gagal", "Request gagal terkirim",
           backgroundColor: appDanger,
           snackPosition: SnackPosition.TOP,
